@@ -1,0 +1,14 @@
+.tests:
+  script:
+    - echo 'coucou'
+  stage: test
+
+test_de_plaiplai:
+  extends: .tests
+  script:
+    - echo 'bonjour'
+  after_script:
+    - echo 're bonjour
+
+test_de_plaiplai_2:
+  extends: .tests
