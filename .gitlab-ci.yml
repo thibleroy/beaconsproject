@@ -10,7 +10,7 @@ test_de_plaiplai:
   script:
     - echo 'bonjour'
   after_script:
-    - echo 're bonjour
+    - echo 're bonjour'
 
 test_de_plaiplai_2:
   extends: .tests
