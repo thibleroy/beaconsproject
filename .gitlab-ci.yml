@@ -11,6 +11,8 @@ test_de_plaiplai:
     - echo 'bonjour'
   after_script:
     - echo 're bonjour'
+  only:
+    - dev
 
 test_de_plaiplai_2:
   extends: .tests
