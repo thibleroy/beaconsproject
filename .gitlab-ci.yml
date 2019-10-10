@@ -14,3 +14,8 @@ test_de_plaiplai:
 
 test_de_plaiplai_2:
   extends: .tests
+
+test_cool:
+  stage: build
+  script:
+    - echo 'hello'
