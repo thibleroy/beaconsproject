@@ -19,3 +19,5 @@ test_cool:
   stage: build
   script:
     - echo 'hello'
+  tags:
+    - activiot-mac
