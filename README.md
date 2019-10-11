@@ -11,9 +11,10 @@
 
 ### Technologies utilisées
 
-#### Géoloc
+#### Géoloc sans GPS (pas assez précis pour notre cas d'usage)
 
-- 
+1. Par triangulation WiFi
+2. par iBeacon
 
 #### front
 
