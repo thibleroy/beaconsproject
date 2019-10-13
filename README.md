@@ -1,4 +1,4 @@
 # ActivIoT
 
-- tag runner mac thibault : activiot-mac
+- tag runner global : activiot-mac
 
