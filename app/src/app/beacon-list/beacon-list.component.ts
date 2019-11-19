@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {BeaconScannerService} from "../../services/beacon-scanner.service";
+import {BeaconScannerService} from "../services/beacon-scanner.service";
+import {BeaconStoreService} from "../services/beacon-store.service";
 
 @Component({
   selector: 'app-beacon-list',
@@ -8,10 +9,14 @@ import {BeaconScannerService} from "../../services/beacon-scanner.service";
 })
 export class BeaconListComponent implements OnInit {
 
-  constructor(beaconScanner: BeaconScannerService) { }
+  constructor(private beaconScanner: BeaconScannerService, private beaconStore: BeaconStoreService) { }
 
   ngOnInit() {
 
+  }
+
+  startRecording() {
+    this.beaconScanner.startExploring();
   }
 
 }

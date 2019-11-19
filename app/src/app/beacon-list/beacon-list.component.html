@@ -1,3 +1,49 @@
-<p>
-  beacon-list works!
-</p>
+<ion-card>
+
+    <ion-card-header>
+
+        <ion-label color="primary">iBeacon Scanner</ion-label>
+
+    </ion-card-header>
+
+
+    <ion-card-content>
+
+        <ion-label>Push button to start recording</ion-label>
+        <ion-button (click)="startRecording()"> Start</ion-button>
+
+        <ion-list>
+            <ion-item>
+                <ion-label>didRangeBeaconsInRegion</ion-label>
+                <ion-list *ngFor="let beacon of beaconStore.beaconsInRegion">
+                    <ion-item>
+                        {{beacon.uuid}}
+                    </ion-item>
+                </ion-list>
+
+            </ion-item>
+
+            <ion-item>
+                <ion-label>didStartMonitoringForRegion</ion-label>
+                <ion-list *ngFor="let beacon of beaconStore.beaconsForRegion">
+                    <ion-item>
+                        {{beacon.uuid}}
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>didEnterRegion</ion-label>
+                <ion-list *ngFor="let beacon of beaconStore.beaconsEnterRegion">
+                    <ion-item>
+                        {{beacon.uuid}}
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+
+
+        </ion-list>
+
+    </ion-card-content>
+
+</ion-card>
