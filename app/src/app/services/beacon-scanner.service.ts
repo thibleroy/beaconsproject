@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import {IBeacon} from '@ionic-native/ibeacon/ngx';
 import  {BeaconStoreService} from "./beacon-store.service";
+import {Toast} from "@ionic-native/toast/ngx";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeaconScannerService {
 
-  constructor(private ibeacon: IBeacon, private beaconStore: BeaconStoreService) {
+  constructor(private ibeacon: IBeacon, private beaconStore: BeaconStoreService, private toast: Toast) {
 
 
   }
-
    startExploring (){
 
       // Request permission to use location on iOS
@@ -23,6 +23,7 @@ export class BeaconScannerService {
       delegate.didRangeBeaconsInRegion()
           .subscribe(
               data => {
+                  this.toast.show('detected', '5', '');
                   console.log('didRangeBeaconsInRegion: ', data);
                   this.beaconStore.beaconsInRegion = data.beacons;
               },
@@ -32,6 +33,7 @@ export class BeaconScannerService {
       delegate.didStartMonitoringForRegion()
           .subscribe(
               data => {
+                  this.toast.show('detected', '5', '');
                   console.log('didStartMonitoringForRegion: ', data);
                   this.beaconStore.beaconsForRegion = data.beacons;
               },
@@ -40,6 +42,7 @@ export class BeaconScannerService {
       delegate.didEnterRegion()
           .subscribe(
               data => {
+                  this.toast.show('detected', '5', '');
                   console.log('didEnterRegion: ', data);
                   this.beaconStore.beaconsEnterRegion = data.beacons;
               }

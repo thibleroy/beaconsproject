@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {IBeacon} from "@ionic-native/ibeacon/ngx";
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
