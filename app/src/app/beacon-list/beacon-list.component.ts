@@ -9,8 +9,9 @@ import { IBeacon } from "@ionic-native/ibeacon/ngx";
 })
 export class BeaconListComponent implements OnInit {
 
-  delegate: any;
+      delegate: any;
       region: any;
+      
       constructor(
         public platform: Platform,
         public events: Events,
@@ -21,40 +22,6 @@ export class BeaconListComponent implements OnInit {
 
   ngOnInit() {
     //this.startExploring()
-  }
-
-  startExploring (){
-  
-    // Request permission to use location on iOS
-this.iBeacon.requestAlwaysAuthorization();
-// create a new delegate and register it with the native layer
-let delegate = this.iBeacon.Delegate();
-
-// Subscribe to some of the delegate's event handlers
-delegate.didRangeBeaconsInRegion()
-.subscribe(
-data => console.log('didRangeBeaconsInRegion: ', data),
-error => console.error()
-);
-delegate.didStartMonitoringForRegion()
-.subscribe(
-data => console.log('didStartMonitoringForRegion: ', data),
-error => console.error()
-);
-delegate.didEnterRegion()
-.subscribe(
-data => {
-  console.log('didEnterRegion: ', data);
-}
-);
-
-let beaconRegion = this.iBeacon.BeaconRegion('deskBeacon','F7826DA6-ASDF-ASDF-8024-BC5B71E0893E');
-
-this.iBeacon.startMonitoringForRegion(beaconRegion)
-.then(
-() => console.log('Native layer received the request to monitoring'),
-error => console.error('Native layer failed to begin monitoring: ', error)
-);
   }
 
   initialise(): any {
