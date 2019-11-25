@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {IBeacon} from '@ionic-native/ibeacon/ngx';
+import {BeaconScannerService} from '../services/beacon-scanner.service'
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import {IBeacon} from '@ionic-native/ibeacon/ngx';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    IBeacon
+    IBeacon,
+    BeaconScannerService
   ],
   bootstrap: [AppComponent]
 })
