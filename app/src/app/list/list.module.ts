@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { ListPage } from './list.page';
+import {BeaconListComponent} from '../beacon-list/beacon-list.component'
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ListPage } from './list.page';
       }
     ])
   ],
-  declarations: [ListPage]
+  declarations: [ListPage,BeaconListComponent]
 })
 export class ListPageModule {}

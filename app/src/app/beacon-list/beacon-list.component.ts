@@ -8,10 +8,16 @@ import {BeaconScannerService} from "../../services/beacon-scanner.service";
 })
 export class BeaconListComponent implements OnInit {
 
-  constructor(beaconScanner: BeaconScannerService) { }
+      constructor(private beaconScanner: BeaconScannerService) {
+        
+      }
 
-  ngOnInit() {
+      startScanning(){
+      this.beaconScanner.initialise()
+      }
 
-  }
+      ngOnInit() {
+    //this.startExploring()
+      }
 
 }
