@@ -4,17 +4,9 @@
 
 ## Idées générales
 
-- Dédié à l'analyse de l'exercice sportif 
-- adapté aux sports de compétition
-- Limitation géographique
-- accroché au user
+Applications de gestion de beacons
 
 ### Technologies utilisées
-
-#### Géoloc sans GPS (pas assez précis pour notre cas d'usage)
-
-1. Par triangulation WiFi
-2. par iBeacon
 
 #### front
 
