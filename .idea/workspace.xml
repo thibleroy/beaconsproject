@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3cada8e-13cb-4556-94c3-80d4116ca443" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/back/src/express.helper.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back/src/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back/src/mongo.helper.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="347">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+              <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -87,7 +83,6 @@
       <list>
         <option value="$PROJECT_DIR$/.gitlab-runner.yml" />
         <option value="$PROJECT_DIR$/.gitlab-ci.yml" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/back/README.md" />
         <option value="$PROJECT_DIR$/back/package.json" />
         <option value="$PROJECT_DIR$/back/index.js" />
@@ -96,6 +91,7 @@
         <option value="$PROJECT_DIR$/back/src/mongo.helper.ts" />
         <option value="$PROJECT_DIR$/back/src/express.helper.ts" />
         <option value="$PROJECT_DIR$/back/src/index.ts" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -121,12 +117,6 @@
               <item name="front" type="b2602c69:ProjectViewProjectNode" />
               <item name="front" type="462c0819:PsiDirectoryNode" />
               <item name="back" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front" type="462c0819:PsiDirectoryNode" />
-              <item name="back" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -172,12 +162,12 @@
       <updated>1570538042772</updated>
       <workItem from="1570538044882" duration="406000" />
       <workItem from="1570538787752" duration="872000" />
-      <workItem from="1575551415500" duration="4198000" />
+      <workItem from="1575551415500" duration="4247000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5489000" />
+    <option name="totallyTimeSpent" value="5538000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -337,7 +327,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
         </state>
       </provider>
     </entry>
