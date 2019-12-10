@@ -2,7 +2,7 @@ import {MongoHelper} from './mongo.helper.js';
 import http from 'http';
 import {app} from "./express.helper";
 export const port = 3000;
-app.use(function (req, res, next) {
+app.use(function (req: any, res: any, next: any) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -10,7 +10,6 @@ app.use(function (req, res, next) {
     next();
 });
 const server = http.createServer(app);
-
 server.listen(port);
 server.on('listening', async () => {
     try {

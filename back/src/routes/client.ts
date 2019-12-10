@@ -1,8 +1,8 @@
-import {router} from "../express.helper";
+import express, {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
-
-router.get('/client/:id', (req: Request, res: Response) => {
+const r: Router = express.Router();
+r.get('/client/:id', (req: Request, res: Response) => {
     const collection: any = getCollection('clients');
     collection.find({}).toArray((err: any, items: any) => {
         if (err) {
@@ -16,7 +16,7 @@ router.get('/client/:id', (req: Request, res: Response) => {
     });
 });
 
-router.get('clients', (req: Request, res: Response) => {
+r.get('clients', (req: Request, res: Response) => {
     const collection: any = getCollection('clients');
     collection.find({}).toArray((err: any, items: any) => {
         if (err) {
@@ -29,3 +29,4 @@ router.get('clients', (req: Request, res: Response) => {
         }
     });
 });
+exports.router = r;

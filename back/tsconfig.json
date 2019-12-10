@@ -4,9 +4,11 @@
     "esModuleInterop": true,
     "outDir": "dist",
     "target": "esnext",
-    "strict": true
+    "strict": true,
+    "types": ["cypress"]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "cypress/**/*"
   ]
 }
