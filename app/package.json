@@ -10,7 +10,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cypress-dashboard": "cypress open"
+    "ionic-start": "ionic serve",
+    "cypress-test": "cypress run",
+    "cypress-test-ui": "cypress open",
+    "ci": "node_modules/.bin/start-server-and-test ionic-start http://localhost:8100/ cypress-test"
   },
   "private": true,
   "dependencies": {
@@ -64,7 +67,12 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "typescript": "~3.4.3",
+    "@cypress/webpack-preprocessor": "^4.1.1",
+    "cypress-watch-and-reload": "^1.2.12",
+    "ts-loader": "^6.2.1",
+    "webpack": "^4.41.2",
+    "start-server-and-test": "^1.10.6"
   },
   "description": "An Ionic project",
   "cordova": {
