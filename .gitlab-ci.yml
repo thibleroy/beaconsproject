@@ -18,12 +18,9 @@ test_api:
   extends: .test
   script:
     - npm run ci
-  only:
-    - dev
+
 
 build_api:
   extends: .build
   script:
     - tsc
-  only:
-    - dev
