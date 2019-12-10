@@ -16,3 +16,13 @@ export const getBeacons: any = () => {
         method: 'GET'
     });
 };
+export const deleteBeacon: any = (id: string) => {
+    return cy.request({
+        url: 'localhost:3000/beacon/'+ id,
+        method: 'DELETE',
+        headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        }
+    });
+};

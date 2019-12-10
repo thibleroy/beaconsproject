@@ -1,4 +1,5 @@
 export interface Beacon {
+    id?: string;
     uuid: string;
     minor: number;
     major: number;
@@ -9,3 +10,4 @@ export interface Client {
     id: string;
     name: string;
 }
+

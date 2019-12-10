@@ -1,27 +1,40 @@
 import express, {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
-import {Beacon} from "../entities/beacon";
-import {timeLog} from "../functions/express.functions";
+import {Collection} from "mongodb";
+import {messages} from "../constants/wording";
 const router: Router = express.Router();
-router.use(timeLog);
+
 
 router.get('/:id', (req: Request, res: Response) => {
-    const collection: any = getCollection('beacons');
+    const collection: Collection = getCollection('beacons');
     console.log(req.baseUrl);
-    collection.find({}).toArray((err: any, items: any) => {
+    collection.find({_id: req.body._id}).toArray((err: any, items: any) => {
         if (err) {
             res.status(500);
             res.end();
             console.error('Caught error', err);
         } else {
-            items = items.map((item: any) => { return { id: item._id, description: item.description}});
-            res.json(items);
+            items = items.map((item: any) => { return { id: item._id, client_id: item.client_id, uuid: item.uuid, major: item.major, minor: item.minor, name: item.name}});
+            res.json(items[0]);
         }
     });
 });
 
 router.delete('/:id', (req: Request, res: Response) => {
+    const collection: Collection = getCollection('beacons');
+    console.log(req.url);
+    const id = req.url.split('/')[1];
+    console.log('id', id);
+    collection.deleteOne({id: id}, ((error, result) => {
+        console.log('error', error);
+        console.log('result', result)
+        if (result.deletedCount === 1) {
+            res.json({status: true, id: id});
+        } else {
+            res.json({status: false, reason: messages.beacon_not_existing});
+        }
+    }))
 
 });
 
