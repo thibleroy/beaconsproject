@@ -20,23 +20,6 @@ describe('add beacon', function() {
     });
 });
 
-describe('delete beacon', () => {
-    before(() => {
-        addBeacon(testBeacon);
-    });
-    it('deletes beacon', () => {
-        getBeacons().then((resp: Cypress.Response) => {
-            resp.body.beacons.forEach((beacon: any) => {
-                if (beacon.name === 'nametest'){
-                    deleteBeacon(beacon.id).then((resp: Cypress.Response) => {
-                        expect(resp.body.status).to.eq(true);
-                    });
-                }
-            });
-        })
-
-    })
-});
 describe('get beacons', function() {
     before(() => {
         addBeacon(testBeacon);

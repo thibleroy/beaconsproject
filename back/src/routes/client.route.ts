@@ -1,33 +1,40 @@
 import express, {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
-import {timeLog} from "../functions/express.functions";
+import {Collection} from "mongodb";
+import {messages} from "../constants/wording";
 const router: Router = express.Router();
 
 router.get('/:id', (req: Request, res: Response) => {
-    const collection: any = getCollection('clients');
-    collection.find({}).toArray((err: any, items: any) => {
+    const collection: Collection = getCollection('clients');
+    console.log(req.baseUrl);
+    collection.find({_id: req.body._id}).toArray((err: any, items: any) => {
         if (err) {
             res.status(500);
             res.end();
             console.error('Caught error', err);
         } else {
-            items = items.map((item: any) => { return { id: item._id, description: item.description}});
-            res.json(items);
+            items = items.map((item: any) => { return { id: item._id, name: item.name}});
+            res.json(items[0]);
         }
     });
 });
+
 router.delete('/:id', (req: Request, res: Response) => {
-    const collection: any = getCollection('clients');
-    collection.find({}).toArray((err: any, items: any) => {
-        if (err) {
-            res.status(500);
-            res.end();
-            console.error('Caught error', err);
+    const collection: Collection = getCollection('clients');
+    console.log(req.url);
+    const id = req.url.split('/')[1];
+    console.log('id', id);
+    collection.deleteOne({id: id}, ((error, result) => {
+        console.log('error', error);
+        console.log('result', result);
+        if (result.deletedCount === 1) {
+            res.json({status: true, id: id});
         } else {
-            items = items.map((item: any) => { return { id: item._id, description: item.description}});
-            res.json(items);
+            res.json({status: false, reason: messages.client_not_existing});
         }
-    });
+    }))
+
 });
+
 exports.clientRouter = router;

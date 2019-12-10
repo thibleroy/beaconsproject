@@ -7,7 +7,7 @@ export interface Beacon {
     id_client: string;
 }
 export interface Client {
-    id: string;
+    id?: string;
     name: string;
 }
 
