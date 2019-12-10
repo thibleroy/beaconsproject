@@ -60,7 +60,7 @@ GET `api/beacons`.
 
 | Champ     |     Type   |   Description |
 | ------------- | ------------- | --------- |
-| beacons     |        array        |      Array of beacons |
+| beacons     |        array        |      Array of beacons ID |
 
 
 ## Read

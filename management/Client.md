@@ -45,7 +45,7 @@ GET `api/clients`.
 
 | Champ     |     Type   |   Description |
 | ------------- | ------------- | --------- |
-| clients     |        array        |      Array of clients |
+| clients     |        array        |      Array of clients ID |
 
 
 ## Read

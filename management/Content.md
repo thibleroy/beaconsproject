@@ -2,6 +2,8 @@
 
 ## Spécification
 
-**message** : `string`
+**id** : `string`,
+
+**content** : `string`,
 
 ## Features
