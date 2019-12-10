@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3cada8e-13cb-4556-94c3-80d4116ca443" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/back/src/constants/wording.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/cypress/integration/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/cypress/requests/beacon.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/cypress/requests/beacon.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/entities/interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/entities/interfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/beacon.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/beacon.route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/beacons.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/beacons.route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/client.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/client.route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/clients.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/clients.route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/src/routes/beacon.route.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="329">
@@ -77,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="48" lean-forward="true" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+            <state relative-caret-position="229">
+              <caret line="57" column="30" lean-forward="true" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
@@ -101,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/cypress/requests/beacon.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+            <state relative-caret-position="138">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -172,13 +163,13 @@
         <option value="$PROJECT_DIR$/back/src/routes/clients.route.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/index.ts" />
         <option value="$PROJECT_DIR$/back/src/functions/express.functions.ts" />
-        <option value="$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts" />
         <option value="$PROJECT_DIR$/back/cypress/requests/beacon.ts" />
         <option value="$PROJECT_DIR$/back/src/entities/beacon.ts" />
         <option value="$PROJECT_DIR$/back/src/entities/interfaces.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/beacons.route.ts" />
         <option value="$PROJECT_DIR$/back/src/constants/wording.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/beacon.route.ts" />
+        <option value="$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts" />
       </list>
     </option>
   </component>
@@ -313,12 +304,12 @@
       <workItem from="1575979456938" duration="2388000" />
       <workItem from="1575983450130" duration="9759000" />
       <workItem from="1575997111493" duration="2505000" />
-      <workItem from="1576000432441" duration="4908000" />
+      <workItem from="1576000432441" duration="5274000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34263000" />
+    <option name="totallyTimeSpent" value="34629000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -628,34 +619,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back/cypress/requests/beacon.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="48" lean-forward="true" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/back/src/entities/beacon.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back/src/entities/interfaces.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -682,6 +649,30 @@
           <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back/src/entities/interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back/cypress/requests/beacon.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back/cypress/integration/beacons-spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="57" column="30" lean-forward="true" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
