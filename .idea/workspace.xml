@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3cada8e-13cb-4556-94c3-80d4116ca443" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/cypress/integration/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/cypress/integration/test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/dist/src/express.helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/dist/src/express.helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/dist/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/dist/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/dist/src/routes/beacon.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/dist/src/routes/beacon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/dist/src/routes/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/dist/src/routes/client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/dist/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/dist/src/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/back/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/back/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/express.helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/express.helper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/beacon.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/beacon.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/client.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/routes/index.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,22 +21,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/back/src/express.helper.ts">
+        <entry file="file://$PROJECT_DIR$/back/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="36" lean-forward="true" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="150">
+              <caret line="10" column="79" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/back/package.json">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="119" selection-start-line="7" selection-start-column="119" selection-end-line="7" selection-end-column="119" />
+            <state relative-caret-position="324">
+              <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -53,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/src/index.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+            <state relative-caret-position="15">
+              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -74,7 +62,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/src/routes/beacon.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="540">
               <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
@@ -92,7 +80,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/cypress/integration/test.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -154,7 +142,6 @@
         <option value="$PROJECT_DIR$/back/index.js" />
         <option value="$PROJECT_DIR$/back/index.ts" />
         <option value="$PROJECT_DIR$/back/src/mongo.helper.ts" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/back/src/routes/get.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/post.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/delete.ts" />
@@ -168,13 +155,14 @@
         <option value="$PROJECT_DIR$/back/cypress/plugins/index.js" />
         <option value="$PROJECT_DIR$/back/src/express.helper.ts" />
         <option value="$PROJECT_DIR$/back/tsconfig.json" />
-        <option value="$PROJECT_DIR$/back/package.json" />
         <option value="$PROJECT_DIR$/back/src/index.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/client.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/index.ts" />
         <option value="$PROJECT_DIR$/back/cypress/requests/beacon.ts" />
         <option value="$PROJECT_DIR$/back/src/routes/beacon.ts" />
         <option value="$PROJECT_DIR$/back/cypress/integration/test.ts" />
+        <option value="$PROJECT_DIR$/back/package.json" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -191,7 +179,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -203,32 +190,6 @@
               <item name="front" type="b2602c69:ProjectViewProjectNode" />
               <item name="front" type="462c0819:PsiDirectoryNode" />
               <item name="back" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front" type="462c0819:PsiDirectoryNode" />
-              <item name="back" type="462c0819:PsiDirectoryNode" />
-              <item name="cypress" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front" type="462c0819:PsiDirectoryNode" />
-              <item name="back" type="462c0819:PsiDirectoryNode" />
-              <item name="cypress" type="462c0819:PsiDirectoryNode" />
-              <item name="integration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front" type="462c0819:PsiDirectoryNode" />
-              <item name="back" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front" type="462c0819:PsiDirectoryNode" />
-              <item name="back" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="front" type="b2602c69:ProjectViewProjectNode" />
@@ -252,6 +213,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -261,7 +223,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/app/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/back/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -295,12 +257,13 @@
       <workItem from="1570538787752" duration="872000" />
       <workItem from="1575551415500" duration="8254000" />
       <workItem from="1575972816112" duration="1979000" />
-      <workItem from="1575979456938" duration="2353000" />
+      <workItem from="1575979456938" duration="2388000" />
+      <workItem from="1575983450130" duration="514000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17056000" />
+    <option name="totallyTimeSpent" value="17605000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -312,10 +275,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1440" height="798" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="798" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29756796" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3018598" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -416,13 +379,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/back/index.js" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/back/src/routes/get.ts" />
     <entry file="file://$PROJECT_DIR$/back/src/routes/delete.ts" />
     <entry file="file://$PROJECT_DIR$/back/src/routes/post.ts" />
@@ -500,14 +456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/Beacon.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/back/dist/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-267" />
@@ -522,10 +470,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/back/src/express.helper.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="36" lean-forward="true" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        <state relative-caret-position="45">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back/src/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -537,10 +495,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back/package.json">
+    <entry file="file://$PROJECT_DIR$/back/src/routes/beacon.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="119" selection-start-line="7" selection-start-column="119" selection-end-line="7" selection-end-column="119" />
+        <state relative-caret-position="540">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -551,20 +512,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back/src/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back/src/routes/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="48" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
+    <entry file="file://$PROJECT_DIR$/management/Beacon.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -575,13 +527,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back/src/routes/beacon.ts">
+    <entry file="file://$PROJECT_DIR$/back/src/routes/index.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" column="48" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -592,6 +541,20 @@
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="79" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
         </state>
       </provider>
     </entry>
