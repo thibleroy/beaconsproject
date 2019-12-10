@@ -1,25 +1,27 @@
-.tests:
-  script:
-    - echo 'coucou'
+.test:
+  before_script:
+    - cd back
+    - npm install
   stage: test
   tags:
     - activiot-mac
 
-test_de_plaiplai:
-  extends: .tests
+.build:
+  before_script:
+    - cd back
+    - npm install
+  stage: build
+  tags:
+    - activiot-mac
+
+test_api:
+  extends: .test
   script:
-    - echo 'bonjour'
-  after_script:
-    - echo 're bonjour'
+    - npm run ci
   only:
     - dev
 
-test_de_plaiplai_2:
-  extends: .tests
-
 test_cool:
-  stage: build
+  extends: .build
   script:
-    - echo 'hello'
-  tags:
-    - activiot-mac
+    - tsc

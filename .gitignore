@@ -31,3 +31,4 @@ npm-debug.log*
 /www
 /back/node_modules
 /back/dist
+/back/.idea
