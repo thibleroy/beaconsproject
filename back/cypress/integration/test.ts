@@ -5,7 +5,7 @@ describe('My First Test', function() {
     it('Does not do much!', function() {
         const testBeacon: Beacon = new Beacon('uuidtest', 123, 456, 'idtest', 'nametest');
         addBeacon(testBeacon).then((resp: Cypress.Response) => {
-            expect(resp.body.hello).to.eq('cc');
+            expect(JSON.parse(resp.body).hello).to.eq('cc');
         })
     })
 });

@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongo_functions_1 = require("../functions/mongo.functions");
 const r = express_1.default.Router();
+r.use(function timeLog(req, res, next) {
+    console.log('Time: ', Date.now());
+    next();
+});
 r.get('/client/:id', (req, res) => {
     const collection = mongo_functions_1.getCollection('clients');
     collection.find({}).toArray((err, items) => {
@@ -34,4 +38,4 @@ r.get('clients', (req, res) => {
         }
     });
 });
-exports.router = r;
+exports.clientRouter = r;

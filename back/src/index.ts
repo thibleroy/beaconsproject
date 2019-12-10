@@ -1,7 +1,9 @@
-import {MongoHelper} from './mongo.helper.js';
+import {MongoHelper} from './mongo.helper';
 import http from 'http';
-import {app} from "./express.helper";
-export const port = 3000;
+import express from 'express';
+import * as bodyparser from 'body-parser';
+export const app = express();
+require('./routes/index')(app);
 app.use(function (req: any, res: any, next: any) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -9,6 +11,8 @@ app.use(function (req: any, res: any, next: any) {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     next();
 });
+app.use(bodyparser.json());
+export const port = 3000;
 const server = http.createServer(app);
 server.listen(port);
 server.on('listening', async () => {

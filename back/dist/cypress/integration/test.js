@@ -6,7 +6,7 @@ describe('My First Test', function () {
     it('Does not do much!', function () {
         const testBeacon = new beacon_2.Beacon('uuidtest', 123, 456, 'idtest', 'nametest');
         beacon_1.addBeacon(testBeacon).then((resp) => {
-            expect(resp.body.hello).to.eq('cc');
+            expect(JSON.parse(resp.body).hello).to.eq('cc');
         });
     });
 });

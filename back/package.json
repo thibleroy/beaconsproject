@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-ui": "node_modules/.bin/cypress open",
-    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"tsc --watch\" \"nodemon dist/index.js\"",
+    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"tsc --watch\" \"nodemon dist/src/index.js\"",
     "start": "tsc && node dist/index.js"
   },
   "keywords": [],
