@@ -6,3 +6,9 @@ export const addBeacon: any = (beacon: Beacon) => {
         body: beacon.toString()
     });
 };
+export const getBeacons: any = () => {
+    return cy.request({
+        url: 'localhost:3000/beacons/',
+        method: 'GET'
+    });
+};

@@ -2,13 +2,11 @@ import express, {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
 import {Beacon} from "../entities/beacon";
+import {timeLog} from "../functions/express.functions";
 const router: Router = express.Router();
-router.use(function timeLog(req, res, next) {
-    console.log('Time: ', Date.now());
-    next();
-});
+router.use(timeLog);
 router.get('', (req: Request, res: Response) => {
-    const collection: any = getCollection('beacons');
+    //const collection: any = getCollection('beacons');
     /*collection.find({}).toArray((err: any, items: any) => {
         if (err) {
             res.status(500);

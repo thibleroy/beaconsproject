@@ -1,11 +1,9 @@
 import express, {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
+import {timeLog} from "../functions/express.functions";
 const r: Router = express.Router();
-r.use(function timeLog(req, res, next) {
-    console.log('Time: ', Date.now());
-    next();
-});
+r.use(timeLog);
 r.get('/client/:id', (req: Request, res: Response) => {
     const collection: any = getCollection('clients');
     collection.find({}).toArray((err: any, items: any) => {

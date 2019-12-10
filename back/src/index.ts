@@ -1,7 +1,7 @@
-import {MongoHelper} from './mongo.helper';
+import {MongoHelper} from './helpers/mongo.helper';
 import http from 'http';
 import express from 'express';
-import * as bodyparser from 'body-parser';
+import bodyparser from 'body-parser';
 export const app = express();
 require('./routes/index')(app);
 app.use(function (req: any, res: any, next: any) {
@@ -18,7 +18,7 @@ server.listen(port);
 server.on('listening', async () => {
     try {
         await MongoHelper.connect(`mongodb://localhost:27017/`);
-        console.info(`Connected to Mongo!`);
+        console.info(`Connected to Mongo`);
     } catch (err) {
         console.error(`Unable to connect to Mongo!`, err);
     }
