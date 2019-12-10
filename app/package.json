@@ -13,7 +13,7 @@
     "ionic-start": "ionic serve",
     "cypress-test": "cypress run",
     "cypress-test-ui": "cypress open",
-    "ci": "node_modules/.bin/start-server-and-test ionic-start http://localhost:8100/ cypress-test"
+    "ci": "start-server-and-test ionic-start http://localhost:8100/ cypress-test"
   },
   "private": true,
   "dependencies": {
