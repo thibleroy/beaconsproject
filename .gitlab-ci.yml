@@ -25,3 +25,5 @@ test_cool:
   extends: .build
   script:
     - tsc
+  only:
+    - dev
