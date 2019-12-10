@@ -1,6 +1,7 @@
 import {Beacon} from '../../src/entities/beacon';
 export const addBeacon: any = (beacon: Beacon) => {
-    cy.request({
+    return cy.request({
+        url: 'localhost:3000/beacons',
         method: 'POST',
         body: beacon.toString()
     });
