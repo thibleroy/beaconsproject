@@ -11,9 +11,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic-start": "ionic serve",
-    "cypress-test": "cypress run",
-    "cypress-test-ui": "cypress open",
-    "ci": "start-server-and-test ionic-start http://localhost:8100/ cypress-test"
+    "cypress-test": "node_modules/.bin/cypress run",
+    "cypress-test-ui": "node_modules/.bin/cypress open",
+    "ci": "node_modules/.bin/start-server-and-test ionic-start http://localhost:8100/ cypress-test"
   },
   "private": true,
   "dependencies": {
