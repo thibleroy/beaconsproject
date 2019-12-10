@@ -21,7 +21,7 @@ test_api:
   only:
     - dev
 
-test_cool:
+build_api:
   extends: .build
   script:
     - tsc

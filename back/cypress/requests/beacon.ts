@@ -1,9 +1,13 @@
-import {Beacon} from '../../src/entities/beacon';
+import {Beacon} from "../../src/entities/interfaces";
 export const addBeacon: any = (beacon: Beacon) => {
     return cy.request({
-        url: 'localhost:3000/beacons',
+        url: 'localhost:3000/beacons/',
         method: 'POST',
-        body: beacon.toString()
+        body: beacon,
+        headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        }
     });
 };
 export const getBeacons: any = () => {

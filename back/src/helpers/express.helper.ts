@@ -1,5 +1,5 @@
 import express from 'express';
-import * as bodyparser from 'body-parser';
+import bodyparser from 'body-parser';
 export const app = express();
 app.use(function (req: any, res: any, next: any) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,5 +9,4 @@ app.use(function (req: any, res: any, next: any) {
     next();
 });
 app.use(bodyparser.json());
-app.use('beacons', require('./routes/beacon'));
-
+require('../routes/index')(app);

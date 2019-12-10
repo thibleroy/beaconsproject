@@ -1,5 +1,5 @@
 import {addBeacon, getBeacons} from "../requests/beacon";
-import {Beacon} from "../../src/entities/beacon";
+import {Beacon} from "../../src/entities/interfaces";
 
 describe('Beacons route', function() {
     it('gets beacons', function() {
@@ -9,7 +9,7 @@ describe('Beacons route', function() {
         })
     });
     it('adds a beacon', () => {
-        const testBeacon: Beacon = new Beacon('uuidtest', 123, 456, 'idtest', 'nametest');
+        const testBeacon: Beacon = {uuid: 'uuidtest',minor:  123,major: 456,id_client: 'idtest',name: 'nametest'};
         addBeacon(testBeacon).then((resp: Cypress.Response) => {
             console.log(resp.body);
             expect(resp.body.beacon_id).to.eq('test');

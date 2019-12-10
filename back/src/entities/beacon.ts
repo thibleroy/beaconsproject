@@ -12,6 +12,6 @@ export class Beacon {
         this.name = name;
     }
     toString () {
-        return JSON.stringify({uuid: this.uuid, minor: this.minor, major: this.major, name: this.name, id_client: this.id_client})
+        return JSON.stringify({uuid: this.uuid, minor: this.minor, major: this.major, id_client: this.id_client, name: this.name})
     }
 }

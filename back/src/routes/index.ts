@@ -9,6 +9,8 @@ def.get('/', (req: Request, res: Response) => {
 });
 module.exports = function (app: any) {
     app.use('/', def);
-    app.use('/beacons', require('./beacon').beaconRouter);
-    app.use('/clients', require('./client').clientRouter);
+    app.use('/beacon', require('./beacon.route').beaconRouter);
+    app.use('/client', require('./client.route').clientRouter);
+    app.use('/beacons', require('./beacons.route').beaconsRouter);
+    app.use('/clients', require('./clients.route').clientsRouter);
 };

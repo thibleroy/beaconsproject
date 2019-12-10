@@ -2,9 +2,9 @@ import express, {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
 import {timeLog} from "../functions/express.functions";
-const r: Router = express.Router();
-r.use(timeLog);
-r.get('/client/:id', (req: Request, res: Response) => {
+const router: Router = express.Router();
+router.use(timeLog);
+router.get('/:id', (req: Request, res: Response) => {
     const collection: any = getCollection('clients');
     collection.find({}).toArray((err: any, items: any) => {
         if (err) {
@@ -17,8 +17,7 @@ r.get('/client/:id', (req: Request, res: Response) => {
         }
     });
 });
-
-r.get('clients', (req: Request, res: Response) => {
+router.delete('/:id', (req: Request, res: Response) => {
     const collection: any = getCollection('clients');
     collection.find({}).toArray((err: any, items: any) => {
         if (err) {
@@ -31,4 +30,4 @@ r.get('clients', (req: Request, res: Response) => {
         }
     });
 });
-exports.clientRouter = r;
+exports.clientRouter = router;
