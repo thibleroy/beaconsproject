@@ -8,7 +8,7 @@
     "types": ["cypress"]
   },
   "include": [
-    "src/**/*",
-    "cypress/**/*"
+    "../../node_modules/cypress",
+    "cypress/*/*.ts"
   ]
 }
