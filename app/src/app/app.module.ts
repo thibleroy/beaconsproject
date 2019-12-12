@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {IBeacon} from '@ionic-native/ibeacon/ngx';
 import {BeaconScannerService} from '../services/beacon-scanner.service'
+import {HttpClientModule} from "@angular/common/http";
+import {HttpServiceService} from "../services/http-service.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,14 +19,16 @@ import {BeaconScannerService} from '../services/beacon-scanner.service'
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+      HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     IBeacon,
-    BeaconScannerService
+    BeaconScannerService,
+      HttpServiceService
   ],
   bootstrap: [AppComponent]
 })

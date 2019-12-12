@@ -16,7 +16,7 @@ router.get('/:id', (req: Request, res: Response) => {
             console.error('Caught error', err);
         } else {
             items = items.map((item: any) => { return { id: item._id, client_id: item.client_id, uuid: item.uuid, major: item.major, minor: item.minor, name: item.name}});
-            res.json(items[0]);
+            res.json({status: true, beacon: items[0]});
         }
     });
 });

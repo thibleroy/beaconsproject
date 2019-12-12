@@ -7,8 +7,7 @@ const router: Router = express.Router();
 
 router.get('/:id', (req: Request, res: Response) => {
     const collection: Collection = getCollection('clients');
-    console.log(req.baseUrl);
-    collection.find({_id: req.body._id}).toArray((err: any, items: any) => {
+    collection.find({_id: req.body.id}).toArray((err: any, items: any) => {
         if (err) {
             res.status(500);
             res.end();
