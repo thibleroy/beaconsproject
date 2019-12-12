@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'beacons',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'beacon/:id',
+    loadChildren: () => import('./beacon/beacon.module').then(m => m.BeaconPageModule)
   }
 ];
 

@@ -1,4 +1,5 @@
-import express, {Router} from "express";
+import * as express from "express";
+import {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
 import {Beacon} from "../../src/entities/interfaces";
@@ -14,7 +15,6 @@ router.get('/', (req: Request, res: Response) => {
             console.error('Caught error', err);
         } else {
             items = items.map((item: any) => { return { id: item._id, name: item.name}});
-            console.log('items', items);
             res.json({status: true, beacons: items});
         }
     });

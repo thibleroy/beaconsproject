@@ -20,6 +20,11 @@ export class AppComponent {
       title: 'Registered beacons',
       url: '/beacons',
       icon: 'list'
+    },
+    {
+      title: 'Discovered beacons',
+      url: '/dbeacons',
+      icon: 'list'
     }
   ];
 

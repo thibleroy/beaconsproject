@@ -1,6 +1,6 @@
 import {MongoHelper} from './helpers/mongo.helper';
 import {app} from "./helpers/express.helper";
-import http from 'http';
+import * as http from 'http';
 export const port = 3000;
 const server = http.createServer(app);
 server.listen(port);

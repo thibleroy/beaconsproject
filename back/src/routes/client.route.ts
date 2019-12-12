@@ -1,4 +1,5 @@
-import express, {Router} from "express";
+import * as express from 'express';
+import {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
 import {Collection} from "mongodb";

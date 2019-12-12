@@ -1,11 +1,9 @@
 <ion-card>
 
   <ion-card-content>
-
-      <ul data-cy="beaconslist">
-          <li *ngFor="let beacon of dataService.beacons">{{beacon.name}}</li>
-      </ul>
-
+              <ng-container *ngFor="let beacon of dataService.beacons">
+                  <ion-button (click)="setCurrentBeacon(beacon.id, beacon.name)" [routerLink]="['/beacon/', beacon.id]" shape="round" expand="full" fill="outline" color="dark">{{beacon.name}}</ion-button>
+              </ng-container>
   </ion-card-content>
 
 </ion-card>

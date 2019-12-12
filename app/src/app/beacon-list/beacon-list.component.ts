@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {BeaconScannerService} from "../../services/beacon-scanner.service";
 import {HttpServiceService} from "../../services/http-service.service";
-import {Beacon} from '../../../../back/src/entities/interfaces';
 import {DataService} from "../../services/data.service";
-import {BeaconResponse, BeaconsResponse} from "../../models/responses";
+import {BeaconsResponse} from "../../models/responses";
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-beacon-list',
   templateUrl: './beacon-list.component.html',
@@ -11,19 +12,22 @@ import {BeaconResponse, BeaconsResponse} from "../../models/responses";
 })
 export class BeaconListComponent implements OnInit {
 
-      constructor(private beaconScanner: BeaconScannerService, private httpService: HttpServiceService, private dataService: DataService) {
+      constructor(private beaconScanner: BeaconScannerService,
+                  private httpService: HttpServiceService,
+                  private dataService: DataService,
+                  private router: Router
+                  ) {
         
       }
 
       getBeacons(){
           this.httpService.getBeacons().subscribe((res: BeaconsResponse) => {
-              res.beacons.forEach((beacon: Beacon) => {
-                  this.httpService.getBeacon(beacon.id).subscribe((resb: BeaconResponse) => {
-                      console.log(resb)
-                      this.dataService.beacons.push(resb.beacon);
-                  })
-              })
+              this.dataService.beacons = res.beacons;
           });
+      }
+
+      setCurrentBeacon(id: string, name: string) {
+this.dataService.currentBeacon = {id: id, name: name}
       }
 
       ngOnInit() {

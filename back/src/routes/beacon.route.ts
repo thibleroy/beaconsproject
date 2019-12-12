@@ -1,4 +1,5 @@
-import express, {Router} from "express";
+import * as express from "express";
+import {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
 import {Collection} from "mongodb";
@@ -8,8 +9,8 @@ const router: Router = express.Router();
 
 router.get('/:id', (req: Request, res: Response) => {
     const collection: Collection = getCollection('beacons');
-    console.log(req.baseUrl);
-    collection.find({_id: req.body._id}).toArray((err: any, items: any) => {
+    const id = req.url.split('/')[1];
+    collection.find({id: id}).toArray((err: any, items: any) => {
         if (err) {
             res.status(500);
             res.end();
