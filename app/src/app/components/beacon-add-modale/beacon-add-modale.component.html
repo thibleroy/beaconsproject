@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title class="ion-justify-content-center">
 
-        Ajouter un beacon
+        {{this.action}} un beacon
 
     </ion-title>
   </ion-toolbar>
@@ -15,20 +15,32 @@
         <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
           <div class="ion-padding">
             <ion-item>
-              <ion-input name="name" type="string" placeholder="Name" ngModel required></ion-input>
+              <ion-label color="medium">
+                Name :
+              </ion-label>
+              <ion-input name="name" type="string" value="{{this.name}}" placeholder="Name" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input  name="uuid" type="text" placeholder="UUID" ngModel required></ion-input>
+              <ion-label color="medium">
+                UUID :
+              </ion-label>
+              <ion-input  name="uuid" type="text" value="{{this.uuid}}" placeholder="UUID" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="major" type="number" placeholder="MAJOR" ngModel required></ion-input>
+              <ion-label color="medium">
+                MAJOR :
+              </ion-label>
+              <ion-input name="major" type="number" value="{{this.major}}" placeholder="MAJOR" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="minor" type="number" placeholder="MINOR" ngModel required></ion-input>
+              <ion-label color="medium">
+                MINOR :
+              </ion-label>
+              <ion-input name="minor" type="number" value="{{this.minor}}" placeholder="MINOR" required ></ion-input>
             </ion-item>
           </div>
           <div class="ion-padding">
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+            <ion-button size="large" fill="outline" color="dark" type="submit" [disabled]="form.invalid" expand="block">{{this.action}}</ion-button>
           </div>
         </ion-col>
       </ion-row>

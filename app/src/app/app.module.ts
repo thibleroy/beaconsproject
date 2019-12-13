@@ -13,10 +13,11 @@ import {BeaconScannerService} from '../services/beacon-scanner.service';
 import {HttpClientModule} from "@angular/common/http";
 import {HttpServiceService} from "../services/http-service.service";
 import {FormsModule} from "@angular/forms";
+import {BeaconAddModaleComponent} from "./components/beacon-add-modale/beacon-add-modale.component";
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, BeaconAddModaleComponent],
+  entryComponents: [BeaconAddModaleComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

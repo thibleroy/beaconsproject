@@ -11,7 +11,11 @@ import {ModalController} from "@ionic/angular";
   styleUrls: ['./beacon-add-modale.component.scss'],
 })
 export class BeaconAddModaleComponent implements OnInit {
-
+  uuid: string;
+  major: number;
+  minor: number;
+  name: string;
+  action: string;
   constructor(private httpService: HttpServiceService,
               public toast: ToastController,
               private router: Router,
@@ -41,6 +45,11 @@ export class BeaconAddModaleComponent implements OnInit {
       }
     });
   }
-  ngOnInit() {}
+
+  presentModale(){
+
+  }
+  ngOnInit() {
+  }
 
 }

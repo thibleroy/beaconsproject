@@ -6,30 +6,39 @@
       </ion-buttons>
       <ion-title>
         Beacon {{dataService.currentBeacon.name}}
+        <ion-button (click)="presentModal()" fill="clear" class="ion-float-right">
+          <ion-icon slot="icon-only" color="dark" name="create">
+          </ion-icon>
+        </ion-button>
       </ion-title>
+
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
       <ion-item>
+        <ion-label color="medium">
+          UUID :
+        </ion-label>
         <ion-label>
-          UUID : {{dataService.currentBeacon.uuid}}
+          {{dataService.currentBeacon.uuid}}
         </ion-label>
       </ion-item>
       <ion-item>
+        <ion-label color="medium">
+          Major :
+        </ion-label>
         <ion-label>
-          Major : {{dataService.currentBeacon.major}}
+          {{dataService.currentBeacon.major}}
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>
-          Minor : {{dataService.currentBeacon.minor}}
+        <ion-label color="medium">
+          Minor :
         </ion-label>
-      </ion-item>
-      <ion-item>
         <ion-label>
-          Client : {{dataService.currentBeacon.id_client}}
+          {{dataService.currentBeacon.minor}}
         </ion-label>
       </ion-item>
     </ion-list>

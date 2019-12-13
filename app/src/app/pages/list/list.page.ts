@@ -10,14 +10,13 @@ export class ListPage implements OnInit {
 constructor(public modalController: ModalController){}
   async presentModal() {
     const modal = await this.modalController.create({
-      component: BeaconAddModaleComponent
+      component: BeaconAddModaleComponent,
+      componentProps: {
+        action: 'Ajouter'
+      }
     });
     return await modal.present();
   }
   ngOnInit() {
   }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
 }
