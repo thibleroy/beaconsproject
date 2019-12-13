@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-  <form  #form="ngForm" (ngSubmit)="addBeacon(form)">
+  <form  #form="ngForm">
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
@@ -18,29 +18,29 @@
               <ion-label color="medium">
                 Name :
               </ion-label>
-              <ion-input name="name" type="string" value="{{this.name}}" placeholder="Name" required></ion-input>
+              <ion-input name="name" type="string" [(ngModel)]="this.name" placeholder="Name" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-label color="medium">
                 UUID :
               </ion-label>
-              <ion-input  name="uuid" type="text" value="{{this.uuid}}" placeholder="UUID" required></ion-input>
+              <ion-input  name="uuid" type="text" [(ngModel)]="this.uuid" placeholder="UUID" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-label color="medium">
                 MAJOR :
               </ion-label>
-              <ion-input name="major" type="number" value="{{this.major}}" placeholder="MAJOR" required></ion-input>
+              <ion-input name="major" type="number" [(ngModel)]="this.major" placeholder="MAJOR" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-label color="medium">
                 MINOR :
               </ion-label>
-              <ion-input name="minor" type="number" value="{{this.minor}}" placeholder="MINOR" required ></ion-input>
+              <ion-input name="minor" type="number" [(ngModel)]="this.minor" placeholder="MINOR" required ></ion-input>
             </ion-item>
           </div>
           <div class="ion-padding">
-            <ion-button size="large" fill="outline" color="dark" type="submit" [disabled]="form.invalid" expand="block">{{this.action}}</ion-button>
+            <ion-button size="large" fill="outline" color="dark" (click)="addBeacon()" [disabled]="form.invalid" expand="block">{{this.action}}</ion-button>
           </div>
         </ion-col>
       </ion-row>

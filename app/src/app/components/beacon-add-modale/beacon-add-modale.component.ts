@@ -20,8 +20,6 @@ export class BeaconAddModaleComponent implements OnInit {
               public toast: ToastController,
               private router: Router,
               private modalController: ModalController) {
-    // componentProps can also be accessed at construction time using NavParams
-
   }
 
   async presentToast(val: string) {
@@ -34,20 +32,17 @@ export class BeaconAddModaleComponent implements OnInit {
     }
 
 
-  addBeacon(form) {
-    this.httpService.addBeacon(form.value).subscribe((res: addBeaconResponse) => {
+  addBeacon() {
+    console.log(this.uuid);
+    this.httpService.addBeacon({uuid: this.uuid, major: this.major, minor: this.minor, name: this.name}).subscribe((res: addBeaconResponse) => {
       if (res.status) {
         this.modalController.dismiss();
         this.router.navigateByUrl('/beacon/'+res.id);
-        this.presentToast(`Le beacon ${form.value.name} a bien été ajouté`);
+        this.presentToast(`Le beacon ${this.name} a bien été ajouté`);
       } else {
         this.presentToast(res.reason);
       }
     });
-  }
-
-  presentModale(){
-
   }
   ngOnInit() {
   }
