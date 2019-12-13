@@ -4,6 +4,7 @@ export class Beacon {
     major: number;
     name: string;
     id_client: string;
+
     constructor(uuid: string, minor: number, major: number, id_client: string, name: string){
         this.uuid = uuid;
         this.minor = minor;

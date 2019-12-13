@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-justify-content-center">
+
+        Ajouter un beacon
+
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form  #form="ngForm" (ngSubmit)="addBeacon(form)">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input name="name" type="string" placeholder="Name" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input  name="uuid" type="text" placeholder="UUID" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="major" type="number" placeholder="MAJOR" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="minor" type="number" placeholder="MINOR" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

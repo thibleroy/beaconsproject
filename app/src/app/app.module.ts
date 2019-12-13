@@ -9,9 +9,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {IBeacon} from '@ionic-native/ibeacon/ngx';
-import {BeaconScannerService} from '../services/beacon-scanner.service'
+import {BeaconScannerService} from '../services/beacon-scanner.service';
 import {HttpClientModule} from "@angular/common/http";
 import {HttpServiceService} from "../services/http-service.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import {HttpServiceService} from "../services/http-service.service";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      FormsModule
   ],
   providers: [
     StatusBar,

@@ -29,7 +29,7 @@ router.post('/',(req: Request, res: Response) => {
        console.log('count', result1.matchedCount);
         if (result1.matchedCount === 0) {
             collection.updateOne({uuid: req.body.uuid, major: req.body.major, minor: req.body.minor}, {$set:{id: result1.upsertedId._id.toHexString()}}, ((error: MongoError, result2: UpdateWriteOpResult) => {
-                res.json({status: true, beacon_id: result1.upsertedId._id});
+                res.json({status: true, id: result1.upsertedId._id});
             }));
        } else {
            res.json({status: false, reason: messages.beacon_existing});

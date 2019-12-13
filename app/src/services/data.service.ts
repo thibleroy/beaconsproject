@@ -13,7 +13,7 @@ export class DataService {
     this.currentBeacon = null;
     this.beacons = [];
     this.oBeacons = new Observable<Beacon[]>();
-    this.loading = true;
+    this.loading = false;
   }
 }
 

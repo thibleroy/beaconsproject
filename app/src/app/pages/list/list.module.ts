@@ -5,7 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { ListPage } from './list.page';
-import {BeaconListComponent} from '../beacon-list/beacon-list.component'
+import {BeaconListComponent} from '../../components/beacon-list/beacon-list.component'
+import {BeaconAddModaleComponent} from "../../components/beacon-add-modale/beacon-add-modale.component";
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {BeaconListComponent} from '../beacon-list/beacon-list.component'
       }
     ])
   ],
-  declarations: [ListPage,BeaconListComponent]
+  declarations: [ListPage,BeaconListComponent, BeaconAddModaleComponent],
+  entryComponents: [BeaconAddModaleComponent]
 })
 export class ListPageModule {}

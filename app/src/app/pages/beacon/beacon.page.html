@@ -1,0 +1,39 @@
+<ng-container *ngIf="!dataService.loading">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Beacon {{dataService.currentBeacon.name}}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          UUID : {{dataService.currentBeacon.uuid}}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Major : {{dataService.currentBeacon.major}}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Minor : {{dataService.currentBeacon.minor}}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Client : {{dataService.currentBeacon.id_client}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+
+</ng-container>
