@@ -14,3 +14,8 @@ export interface addBeaconResponse {
     id: string;
     reason?: string
 }
+export interface updateBeaconResponse {
+    status: boolean;
+    id: string;
+    reason?: string;
+}

@@ -2,8 +2,9 @@ import * as express from "express";
 import {Router} from "express";
 import {Request, Response} from "express";
 import {getCollection} from "../functions/mongo.functions";
-import {Collection} from "mongodb";
+import {Collection, MongoError, UpdateWriteOpResult} from "mongodb";
 import {messages} from "../constants/wording";
+import {Beacon} from "../entities/interfaces";
 const router: Router = express.Router();
 
 
@@ -28,8 +29,6 @@ router.delete('/:id', (req: Request, res: Response) => {
     const id = req.url.split('/')[1];
     console.log('id', id);
     collection.deleteOne({id: id}, ((error, result) => {
-        console.log('error', error);
-        console.log('result', result)
         if (result.deletedCount === 1) {
             res.json({status: true, id: id});
         } else {
@@ -37,6 +36,18 @@ router.delete('/:id', (req: Request, res: Response) => {
         }
     }))
 
+});
+
+router.post('/:id', (req: Request, res: Response) => {
+    const collection: Collection = getCollection('beacons');
+    const currentBeacon: Beacon = {id: req.url.split('/')[1],uuid: req.body.uuid,minor: req.body.minor,major: req.body.major,id_client: req.body.id_client,name: req.body.name};
+    collection.updateOne({id: req.url.split('/')[1]}, {$set: {...currentBeacon}},{ upsert: false }, ((error: MongoError, result1: UpdateWriteOpResult) => {
+        if (result1.modifiedCount === 1) {
+            res.json({status: true, id: currentBeacon.id});
+        } else {
+            res.json({status: false, reason: messages.beacon_existing});
+        }
+    }));
 });
 
 exports.beaconRouter = router;

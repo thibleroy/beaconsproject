@@ -4,6 +4,7 @@ import {addBeaconResponse} from "../../../models/responses";
 import {ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {ModalController} from "@ionic/angular";
+import {DataService} from "../../../services/data.service";
 
 @Component({
   selector: 'app-beacon-add-modale',
@@ -19,7 +20,8 @@ export class BeaconAddModaleComponent implements OnInit {
   constructor(private httpService: HttpServiceService,
               public toast: ToastController,
               private router: Router,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private dataService: DataService) {
   }
 
   async presentToast(val: string) {
@@ -32,13 +34,42 @@ export class BeaconAddModaleComponent implements OnInit {
     }
 
 
+  addOrUpdateBeacon() {
+    if (this.action === 'Ajouter') {
+      this.addBeacon()
+    } else this.updateBeacon()
+
+  }
+
   addBeacon() {
-    console.log(this.uuid);
-    this.httpService.addBeacon({uuid: this.uuid, major: this.major, minor: this.minor, name: this.name}).subscribe((res: addBeaconResponse) => {
+    this.httpService.addBeacon({
+      uuid: this.uuid,
+      major: this.major,
+      minor: this.minor,
+      name: this.name
+    }).subscribe((res: addBeaconResponse) => {
       if (res.status) {
         this.modalController.dismiss();
-        this.router.navigateByUrl('/beacon/'+res.id);
+        this.router.navigateByUrl('/beacon/' + res.id);
         this.presentToast(`Le beacon ${this.name} a bien été ajouté`);
+      } else {
+        this.presentToast(res.reason);
+      }
+    });
+  }
+  updateBeacon() {
+    const cb = {
+      id: this.router.url.split('/beacon/')[1],
+      uuid: this.uuid,
+      major: this.major,
+      minor: this.minor,
+      name: this.name
+    }
+    this.httpService.updateBeacon(cb).subscribe((res: addBeaconResponse) => {
+      if (res.status) {
+        this.modalController.dismiss();
+        this.dataService.currentBeacon = cb;
+        this.presentToast(`Le beacon a bien été modifié`);
       } else {
         this.presentToast(res.reason);
       }
