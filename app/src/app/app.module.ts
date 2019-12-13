@@ -14,6 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {HttpServiceService} from "../services/http-service.service";
 import {FormsModule} from "@angular/forms";
 import {BeaconAddModaleComponent} from "./components/beacon-add-modale/beacon-add-modale.component";
+import {ToastService} from "../services/toast.service";
 
 @NgModule({
   declarations: [AppComponent, BeaconAddModaleComponent],
@@ -31,7 +32,8 @@ import {BeaconAddModaleComponent} from "./components/beacon-add-modale/beacon-ad
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     IBeacon,
     BeaconScannerService,
-      HttpServiceService
+      HttpServiceService,
+      ToastService
   ],
   bootstrap: [AppComponent]
 })

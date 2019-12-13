@@ -5,7 +5,8 @@
   stage: test
   tags:
     - activiot-mac
-
+  only:
+    - dev
 .build:
   before_script:
     - cd back
@@ -13,7 +14,8 @@
   stage: build
   tags:
     - activiot-mac
-
+  only:
+    - dev
 test_api:
   extends: .test
   script:

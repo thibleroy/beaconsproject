@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpServiceService} from "../../../services/http-service.service";
 import {addBeaconResponse} from "../../../models/responses";
-import {ToastController} from "@ionic/angular";
-import {Router} from "@angular/router";
 import {ModalController} from "@ionic/angular";
+import {Router} from "@angular/router";
 import {DataService} from "../../../services/data.service";
 import {wording} from "../../../models/wording";
 import {Beacon} from "../../../../../back/src/entities/interfaces";
+import {ToastService} from "../../../services/toast.service";
 
 @Component({
   selector: 'app-beacon-add-modale',
@@ -20,21 +20,11 @@ export class BeaconAddModaleComponent implements OnInit {
   name: string;
   action: string;
   constructor(private httpService: HttpServiceService,
-              public toast: ToastController,
               private router: Router,
               private modalController: ModalController,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private toastSerivce: ToastService) {
   }
-
-  async presentToast(val: string) {
-
-      const toast = await this.toast.create({
-        message: val,
-        duration: 3000
-      });
-      toast.present();
-    }
-
 
   addOrUpdateBeacon() {
     const cb = {
@@ -61,9 +51,9 @@ export class BeaconAddModaleComponent implements OnInit {
         this.dataService.beacons.push(beacon);
         this.modalController.dismiss();
         this.router.navigateByUrl('/beacon/' + res.id);
-        this.presentToast(wording.beacon.addAck);
+        this.toastSerivce.presentToast(wording.beacon.addAck);
       } else {
-        this.presentToast(res.reason);
+        this.toastSerivce.presentToast(res.reason);
       }
     });
   }
@@ -73,9 +63,9 @@ export class BeaconAddModaleComponent implements OnInit {
       if (res.status) {
         this.modalController.dismiss();
         this.dataService.currentBeacon = beacon;
-        this.presentToast(wording.beacon.editAck);
+        this.toastSerivce.presentToast(wording.beacon.editAck);
       } else {
-        this.presentToast(res.reason);
+        this.toastSerivce.presentToast(res.reason);
       }
     });
   }
