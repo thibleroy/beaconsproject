@@ -5,6 +5,8 @@ import {ToastController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {ModalController} from "@ionic/angular";
 import {DataService} from "../../../services/data.service";
+import {wording} from "../../../models/wording";
+import {Beacon} from "../../../../../back/src/entities/interfaces";
 
 @Component({
   selector: 'app-beacon-add-modale',
@@ -35,13 +37,20 @@ export class BeaconAddModaleComponent implements OnInit {
 
 
   addOrUpdateBeacon() {
+    const cb = {
+      id: this.router.url.split('/beacon/')[1],
+      uuid: this.uuid,
+      major: this.major,
+      minor: this.minor,
+      name: this.name
+    };
     if (this.action === 'Ajouter') {
-      this.addBeacon()
-    } else this.updateBeacon()
+      this.addBeacon(cb)
+    } else this.updateBeacon(cb)
 
   }
 
-  addBeacon() {
+  addBeacon(beacon: Beacon) {
     this.httpService.addBeacon({
       uuid: this.uuid,
       major: this.major,
@@ -49,27 +58,22 @@ export class BeaconAddModaleComponent implements OnInit {
       name: this.name
     }).subscribe((res: addBeaconResponse) => {
       if (res.status) {
+        this.dataService.beacons.push(beacon);
         this.modalController.dismiss();
         this.router.navigateByUrl('/beacon/' + res.id);
-        this.presentToast(`Le beacon ${this.name} a bien été ajouté`);
+        this.presentToast(wording.beacon.addAck);
       } else {
         this.presentToast(res.reason);
       }
     });
   }
-  updateBeacon() {
-    const cb = {
-      id: this.router.url.split('/beacon/')[1],
-      uuid: this.uuid,
-      major: this.major,
-      minor: this.minor,
-      name: this.name
-    }
-    this.httpService.updateBeacon(cb).subscribe((res: addBeaconResponse) => {
+  updateBeacon(beacon: Beacon) {
+
+    this.httpService.updateBeacon(beacon).subscribe((res: addBeaconResponse) => {
       if (res.status) {
         this.modalController.dismiss();
-        this.dataService.currentBeacon = cb;
-        this.presentToast(`Le beacon a bien été modifié`);
+        this.dataService.currentBeacon = beacon;
+        this.presentToast(wording.beacon.editAck);
       } else {
         this.presentToast(res.reason);
       }

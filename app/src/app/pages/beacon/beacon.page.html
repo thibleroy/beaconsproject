@@ -5,13 +5,18 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>
-        Beacon {{dataService.currentBeacon.name}}
-        <ion-button (click)="presentModal()" fill="clear" class="ion-float-right">
+        <ion-label style="text-align: center; line-height: 45px;">
+          Beacon {{dataService.currentBeacon.name}}
+        </ion-label>
+        <ion-button (click)="deleteBeacon()" fill="clear" class="ion-float-right">
+          <ion-icon slot="icon-only" name="trash" color="dark">
+          </ion-icon>
+        </ion-button>
+        <ion-button (click)="presentAddModal()" fill="clear" class="ion-float-right">
           <ion-icon slot="icon-only" color="dark" name="create">
           </ion-icon>
         </ion-button>
       </ion-title>
-
     </ion-toolbar>
   </ion-header>
 
