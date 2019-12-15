@@ -1,5 +1,0 @@
-# Admin
-
-## Spécification
-
-## Features
