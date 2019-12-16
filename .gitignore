@@ -33,3 +33,4 @@ npm-debug.log*
 /back/node_modules
 /back/dist
 /back/.idea
+.DS_STORE
