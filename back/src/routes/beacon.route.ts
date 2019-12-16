@@ -38,7 +38,7 @@ router.delete('/:id', (req: Request, res: Response) => {
 
 });
 
-router.post('/:id', (req: Request, res: Response) => {
+router.put('/:id', (req: Request, res: Response) => {
     const collection: Collection = getCollection('beacons');
     const currentBeacon: Beacon = {id: req.url.split('/')[1],uuid: req.body.uuid,minor: req.body.minor,major: req.body.major,id_client: req.body.id_client,name: req.body.name};
     collection.updateOne({id: req.url.split('/')[1]}, {$set: {...currentBeacon}},{ upsert: false }, ((error: MongoError, result1: UpdateWriteOpResult) => {
