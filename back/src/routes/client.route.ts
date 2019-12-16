@@ -1,9 +1,9 @@
 import * as express from 'express';
 import {Router} from "express";
 import {Request, Response} from "express";
-import {getCollection} from "../functions/mongo.functions";
+import {getCollection} from "@functions/mongo.functions";
 import {Collection} from "mongodb";
-import {messages} from "../constants/wording";
+import {messages} from "@constants/wording";
 const router: Router = express.Router();
 
 router.get('/:id', (req: Request, res: Response) => {

@@ -1,9 +1,9 @@
 import * as express from "express";
 import {Router} from "express";
 import {Request, Response} from "express";
-import {getCollection} from "../functions/mongo.functions";
-import {Beacon} from "../../src/entities/interfaces";
-import {messages} from '../constants/wording';
+import {getCollection} from "@functions/mongo.functions";
+import {Beacon} from "@entities/interfaces";
+import {messages} from '@constants/wording';
 import {Collection, MongoError, UpdateWriteOpResult} from "mongodb";
 const router: Router = express.Router();
 router.get('/', (req: Request, res: Response) => {

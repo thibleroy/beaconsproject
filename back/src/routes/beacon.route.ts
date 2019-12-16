@@ -1,10 +1,10 @@
 import * as express from "express";
 import {Router} from "express";
 import {Request, Response} from "express";
-import {getCollection} from "../functions/mongo.functions";
+import {getCollection} from "@functions/mongo.functions";
 import {Collection, MongoError, UpdateWriteOpResult} from "mongodb";
-import {messages} from "../constants/wording";
-import {Beacon} from "../entities/interfaces";
+import {messages} from "@constants/wording";
+import {Beacon} from "@entities/interfaces";
 const router: Router = express.Router();
 
 

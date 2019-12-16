@@ -1,3 +1,13 @@
+export interface Environnement {
+    name: string;
+    version: string;
+    git: string;
+    db_url: string;
+    db_port: number;
+    api_port: number,
+    db_name: string
+}
+
 export interface Beacon {
     id?: string;
     uuid?: string;

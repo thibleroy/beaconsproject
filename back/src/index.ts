@@ -1,15 +1,18 @@
-import {MongoHelper} from './helpers/mongo.helper';
-import {app} from "./helpers/express.helper";
+import 'module-alias/register';
+import {MongoHelper} from '@helpers/mongo.helper';
+import {app} from "@helpers/express.helper";
 import * as http from 'http';
-export const port = 3000;
+import {ENV} from "./env";
 const server = http.createServer(app);
-server.listen(port);
+server.listen(ENV.api_port);
 server.on('listening', async () => {
     try {
-        await MongoHelper.connect(`mongodb://localhost:27017/activiot`);
+        await MongoHelper.connect(`mongodb://${ENV.db_url}:${ENV.db_port}/${ENV.db_name}`);
         console.info(`Connected to Mongo`);
     } catch (err) {
         console.error(`Unable to connect to Mongo!`, err);
     }
 });
+
+
 

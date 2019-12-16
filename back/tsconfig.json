@@ -5,10 +5,22 @@
     "outDir": "dist",
     "target": "esnext",
     "strict": true,
-    "types": ["cypress"]
+    "types": ["cypress"],
+    "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "paths": {
+      "@constants/*": ["constants/*"],
+      "@documentation/*": ["documentation/*"],
+      "@entities/*": ["entities/*"],
+      "@functions/*": ["functions/*"],
+      "@helpers/*": ["helpers/*"],
+      "@routes/*": ["routes/*"],
+      "@src/*": ["*"]
+    }
   },
   "include": [
     "src/**/*",
-    "cypress/**/*"
+    "cypress/**/*",
+    "src/documentation/**/*"
   ]
 }
