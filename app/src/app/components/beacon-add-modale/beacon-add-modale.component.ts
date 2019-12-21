@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpServiceService} from "../../../services/http-service.service";
-import {addBeaconResponse} from "../../../models/responses";
-import {ModalController} from "@ionic/angular";
-import {Router} from "@angular/router";
-import {DataService} from "../../../services/data.service";
-import {wording} from "../../../models/wording";
-import {Beacon} from "../../../../../back/src/entities/interfaces";
-import {ToastService} from "../../../services/toast.service";
+import {HttpServiceService} from '../../../services/http-service.service';
+import {addBeaconResponse} from '../../../models/responses';
+import {ModalController} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {DataService} from '../../../services/data.service';
+import {wording} from '../../../models/wording';
+import {Beacon} from '../../../../../back/src/entities/interfaces';
+import {ToastService} from '../../../services/toast.service';
 
 @Component({
   selector: 'app-beacon-add-modale',
@@ -35,8 +35,10 @@ export class BeaconAddModaleComponent implements OnInit {
       name: this.name
     };
     if (this.action === 'Ajouter') {
-      this.addBeacon(cb)
-    } else this.updateBeacon(cb)
+      this.addBeacon(cb);
+    } else {
+      this.updateBeacon(cb);
+    }
 
   }
 
@@ -48,7 +50,7 @@ export class BeaconAddModaleComponent implements OnInit {
       name: this.name
     }).subscribe((res: addBeaconResponse) => {
       if (res.status) {
-        this.dataService.beacons.push(beacon);
+        this.dataService.loadedBeaconsSubject.next([...this.dataService.loadedBeaconsSubject.getValue(), beacon]);
         this.modalController.dismiss();
         this.router.navigateByUrl('/beacon/' + res.id);
         this.toastSerivce.presentToast(wording.beacon.addAck);
@@ -62,7 +64,7 @@ export class BeaconAddModaleComponent implements OnInit {
     this.httpService.updateBeacon(beacon).subscribe((res: addBeaconResponse) => {
       if (res.status) {
         this.modalController.dismiss();
-        this.dataService.currentBeacon = beacon;
+        this.dataService.currentBeaconSubject.next(beacon);
         this.toastSerivce.presentToast(wording.beacon.editAck);
       } else {
         this.toastSerivce.presentToast(res.reason);

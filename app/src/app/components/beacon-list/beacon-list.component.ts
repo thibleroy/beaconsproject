@@ -1,31 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import {BeaconScannerService} from "../../../services/beacon-scanner.service";
-import {HttpServiceService} from "../../../services/http-service.service";
-import {DataService} from "../../../services/data.service";
-import {BeaconsResponse} from "../../../models/responses";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {HttpServiceService} from '../../../services/http-service.service';
+import {DataService} from '../../../services/data.service';
+import {Beacon} from '../../../../../back/src/entities/interfaces';
+import {Subscription} from 'rxjs';
+
 
 @Component({
-  selector: 'app-beacon-list',
-  templateUrl: './beacon-list.component.html',
-  styleUrls: ['./beacon-list.component.scss'],
+    selector: 'app-beacon-list',
+    templateUrl: './beacon-list.component.html',
+    styleUrls: ['./beacon-list.component.scss'],
 })
-export class BeaconListComponent implements OnInit {
-
-      constructor(private beaconScanner: BeaconScannerService,
-                  private httpService: HttpServiceService,
-                  private dataService: DataService,
-                  ) {
-        
-      }
-
-      getBeacons(){
-          this.httpService.getBeacons().subscribe((res: BeaconsResponse) => {
-              this.dataService.beacons = res.beacons;
-          });
-      }
-
-      ngOnInit() {
-    this.getBeacons();
-      }
-
+export class BeaconListComponent implements OnInit, OnDestroy {
+    beacons: Beacon[];
+    sub: Subscription;
+    constructor(private httpService: HttpServiceService,
+                private dataService: DataService,
+    ) {
+    }
+    ngOnInit() {
+        this.beacons = this.dataService.loadedBeaconsSubject.getValue();
+        this.sub = this.dataService.loadedBeaconsSubject.subscribe((b: Beacon[]) => {
+            this.beacons = b;
+        });
+        this.httpService.getBeacons();
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 }

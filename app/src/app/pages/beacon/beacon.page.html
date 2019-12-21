@@ -1,4 +1,4 @@
-<ng-container *ngIf="!dataService.loading">
+<ng-container>
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -6,7 +6,7 @@
       </ion-buttons>
       <ion-title>
         <ion-label style="text-align: center; line-height: 45px;">
-          Beacon {{dataService.currentBeacon.name}}
+          Beacon {{this.beacon.name}}
         </ion-label>
         <ion-button (click)="deleteBeacon()" fill="clear" class="ion-float-right">
           <ion-icon slot="icon-only" name="trash" color="dark">
@@ -27,7 +27,7 @@
           UUID :
         </ion-label>
         <ion-label>
-          {{dataService.currentBeacon.uuid}}
+          {{this.beacon.uuid}}
         </ion-label>
       </ion-item>
       <ion-item>
@@ -35,7 +35,7 @@
           Major :
         </ion-label>
         <ion-label>
-          {{dataService.currentBeacon.major}}
+          {{this.beacon.major}}
         </ion-label>
       </ion-item>
       <ion-item>
@@ -43,7 +43,7 @@
           Minor :
         </ion-label>
         <ion-label>
-          {{dataService.currentBeacon.minor}}
+          {{this.beacon.minor}}
         </ion-label>
       </ion-item>
     </ion-list>

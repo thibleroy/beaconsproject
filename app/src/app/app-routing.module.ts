@@ -19,8 +19,15 @@ const routes: Routes = [
     path: 'beacon/:id',
     loadChildren: () => import('./pages/beacon/beacon.module').then(m => m.BeaconPageModule)
   },
-  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule) },
-  { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule) }
+  { path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  { path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
+  },
+  { path: 'detect',
+    loadChildren: () => import('./pages/detect/detect.module').then(m => m.DetectPageModule)
+  }
 ];
 
 @NgModule({

@@ -22,8 +22,8 @@ export class AppComponent {
       icon: 'list'
     },
     {
-      title: 'Discovered beacons',
-      url: '/dbeacons',
+      title: 'Discover beacons',
+      url: '/detect',
       icon: 'list'
     }
   ];

@@ -18,7 +18,7 @@ import {BeaconListComponent} from '../../components/beacon-list/beacon-list.comp
       }
     ])
   ],
-  declarations: [ListPage,BeaconListComponent],
+  declarations: [ListPage, BeaconListComponent],
   entryComponents: []
 })
 export class ListPageModule {}
