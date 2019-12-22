@@ -1,12 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {BeaconScannerService} from '../../../services/beacon-scanner.service';
-import {Platform} from '@ionic/angular';
+import {Events, Platform} from '@ionic/angular';
 import {ToastService} from '../../../services/toast.service';
 import {wording} from '../../../models/wording';
-import {Beacon} from '@ionic-native/ibeacon';
-import {BehaviorSubject} from 'rxjs';
-import {BeaconRegion, IBeacon, IBeaconPluginResult} from '@ionic-native/ibeacon/ngx';
+import {Beacon} from '@ionic-native/ibeacon/ngx';
+
 
 @Component({
     selector: 'app-detect',
@@ -15,33 +14,34 @@ import {BeaconRegion, IBeacon, IBeaconPluginResult} from '@ionic-native/ibeacon/
 })
 export class DetectPage implements OnInit, OnDestroy {
     beacons: Beacon[];
-    region: BeaconRegion;
-    behavior: BehaviorSubject<Beacon[]>;
-
-    constructor(private dataService: DataService, private beaconScanner: BeaconScannerService,
-                public platform: Platform, private toast: ToastService, private iBeacon: IBeacon) {
-        this.behavior = new BehaviorSubject([]);
+    zone: NgZone;
+    constructor(private dataService: DataService,
+                public platform: Platform,
+                private toast: ToastService,
+                private beaconScanner: BeaconScannerService,
+                private events: Events) {
     }
-
     ngOnInit() {
         this.beacons = [];
-        this.behavior.subscribe((b: Beacon[]) => {
-            this.beacons = b;
-        });
-        this.beaconScanner.setRegion().then(() => {
-            this.startDetection();
-        });
-    }
-
-    startDetection() {
         if (this.platform.is('cordova')) {
-
+            this.zone = new NgZone({ enableLongStackTrace: false });
+            this.beaconScanner.initialise().then(() => {
+                this.events.subscribe('didRangeBeaconsInRegion', (data) => {
+                    this.zone.run(() => {
+                        this.beacons = [];
+                        data.beacons.forEach((beacon) => {
+                            this.beacons.push(beacon);
+                        });
+                    });
+                });
+            });
         } else {
             this.toast.presentToast(wording.beacon.onlyApp);
         }
     }
-
     ngOnDestroy() {
-        this.beaconScanner.stopRanging(this.beaconScanner.region).then(() => this.behavior.unsubscribe());
+        if (this.platform.is('cordova')) {
+            this.beaconScanner.stopRanging();
+        }
     }
 }

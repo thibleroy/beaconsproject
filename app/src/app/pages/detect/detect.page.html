@@ -10,14 +10,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="this.beacons.length > 0">
+  <ion-list *ngIf="beacons.length>0">
 
-    <ion-item *ngFor="let detectedBeacon of this.behavior.asObservable() | async">
+    <ion-item *ngFor="let detectedBeacon of beacons">
 
       <ion-label>
-
-      RSSI : {{detectedBeacon.rssi}}
-
+        Major : {{detectedBeacon.major}}<br />
+        Minor : {{detectedBeacon.minor}}<br />
+        Proximity : {{detectedBeacon.proximity}}<br />
+        RSSI : {{detectedBeacon.rssi}}<br />
       </ion-label>
 
     </ion-item>
