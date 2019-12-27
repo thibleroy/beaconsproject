@@ -1,12 +1,17 @@
 import * as express from 'express';
 import {Request, Response} from "express";
-import {timeLog} from "@functions/express.functions";
+import {MyLogger} from "@helpers/logger.helper";
 const def = express.Router();
 def.get('/', (req: Request, res: Response) => {
-    res.json({hello: 'cc'});
+    res.json({hello: 'cc !'});
 });
 module.exports = function (app: any) {
-    app.use(timeLog);
+    const logger = new MyLogger('info');
+    app.use((req: Request, res: Response, next: any) => {
+        console.log(`${res.statusCode} ${req.method} ${req.originalUrl} | ${req.headers["user-agent"]}`);
+        logger.infoLog({time: Date.now()});
+        next();
+    });
     app.use('/', def);
     app.use('/beacon', require('./beacon.route').beaconRouter);
     app.use('/client', require('./client.route').clientRouter);
