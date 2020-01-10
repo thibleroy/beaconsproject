@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Beacon as b} from '../../../back/src/entities/interfaces';
+import {IBeacon as b} from '../../../back/src/entities/interfaces';
 import {Beacon} from '@ionic-native/ibeacon/ngx';
 import {BehaviorSubject} from 'rxjs';
 @Injectable({

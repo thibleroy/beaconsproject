@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpServiceService} from '../../../services/http-service.service';
-import {addBeaconResponse} from '../../../models/responses';
+import {AddBeaconResponse} from '../../../models/responses';
 import {ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {DataService} from '../../../services/data.service';
 import {wording} from '../../../models/wording';
-import {Beacon} from '../../../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../../../back/src/entities/interfaces';
 import {ToastService} from '../../../services/toast.service';
 
 @Component({
@@ -23,51 +23,46 @@ export class BeaconAddModaleComponent implements OnInit {
               private router: Router,
               private modalController: ModalController,
               private dataService: DataService,
-              private toastSerivce: ToastService) {
+              private toastService: ToastService) {
   }
 
   addOrUpdateBeacon() {
-    const cb = {
-      id: this.router.url.split('/beacon/')[1],
-      uuid: this.uuid,
-      major: this.major,
-      minor: this.minor,
-      name: this.name
-    };
     if (this.action === 'Ajouter') {
-      this.addBeacon(cb);
+      this.addBeacon();
     } else {
-      this.updateBeacon(cb);
+      this.updateBeacon({uuid: this.uuid, major: this.major,
+          minor: this.minor, name: this.name, id_beacon: this.router.url.split('/beacon/')[1]});
     }
-
+  }
+  async closeModal() {
+    await this.modalController.dismiss();
   }
 
-  addBeacon(beacon: Beacon) {
+  addBeacon() {
     this.httpService.addBeacon({
       uuid: this.uuid,
       major: this.major,
       minor: this.minor,
       name: this.name
-    }).subscribe((res: addBeaconResponse) => {
+    }).subscribe(async (res: AddBeaconResponse) => {
       if (res.status) {
-        this.dataService.loadedBeaconsSubject.next([...this.dataService.loadedBeaconsSubject.getValue(), beacon]);
-        this.modalController.dismiss();
-        this.router.navigateByUrl('/beacon/' + res.id);
-        this.toastSerivce.presentToast(wording.beacon.addAck);
+        this.dataService.loadedBeaconsSubject.next([...this.dataService.loadedBeaconsSubject.getValue(), res.beacon]);
+        await this.modalController.dismiss();
+        await this.router.navigateByUrl('/beacon/' + res.beacon.id_beacon);
+        this.toastService.presentToast(wording.beacon.addAck);
       } else {
-        this.toastSerivce.presentToast(res.reason);
+        this.toastService.presentToast(res.reason);
       }
     });
   }
-  updateBeacon(beacon: Beacon) {
-
-    this.httpService.updateBeacon(beacon).subscribe((res: addBeaconResponse) => {
+  updateBeacon(beacon: IBeacon) {
+    this.httpService.updateBeacon(beacon).subscribe(async (res: AddBeaconResponse) => {
       if (res.status) {
-        this.modalController.dismiss();
+        await this.modalController.dismiss();
         this.dataService.currentBeaconSubject.next(beacon);
-        this.toastSerivce.presentToast(wording.beacon.editAck);
+        this.toastService.presentToast(wording.beacon.editAck);
       } else {
-        this.toastSerivce.presentToast(res.reason);
+        this.toastService.presentToast(res.reason);
       }
     });
   }

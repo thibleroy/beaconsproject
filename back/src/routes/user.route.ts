@@ -1,9 +1,11 @@
-import * as express from 'express';
+import * as express from "express";
 import {Router} from "express";
 import {Request, Response} from "express";
-import {Collection} from "mongodb";
+import {Collection, MongoError, UpdateWriteOpResult} from "mongodb";
 import {messages} from "@constants/wording";
+import {IBeacon} from "@entities/interfaces";
 import {UserModel} from "@src/db/User";
+
 const router: Router = express.Router();
 
 router.get('/:id', async (req: Request, res: Response) => {
@@ -22,8 +24,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
     try {
         const id = req.url.split('/')[1];
-        const beacon = await UserModel.find({id: id});
-        res.json(beacon);
+        await UserModel.findByIdAndDelete({id: id});
 
     } catch (err) {
         res.status(500);
@@ -33,5 +34,17 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 });
 
-exports.clientRouter = router;
+router.put('/:id', async (req: Request, res: Response) => {
+    try {
+        const id = req.url.split('/')[1];
+        const beacon = await UserModel.findByIdAndUpdate({id: id}, {});
+        res.json(beacon);
 
+    } catch (err) {
+        res.status(500);
+        res.end();
+        console.error('Caught error', err);
+    }
+});
+
+exports.userRouter = router;

@@ -17,4 +17,5 @@ module.exports = function (app: any) {
     app.use('/client', require('./client.route').clientRouter);
     app.use('/beacons', require('./beacons.route').beaconsRouter);
     app.use('/clients', require('./clients.route').clientsRouter);
+    app.use('/user', require('./user.route').userRouter);
 };

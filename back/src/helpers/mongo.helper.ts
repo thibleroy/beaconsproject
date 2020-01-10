@@ -1,25 +1,23 @@
-import mongo from 'mongodb';
+import {connect, disconnect} from 'mongoose';
 
-export class MongoHelper {
-    public static client: mongo.MongoClient;
-
-    constructor() {
-    }
-
-    public static connect(url: string): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
-            mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, (err, client: mongo.MongoClient) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    MongoHelper.client = client;
-                    resolve(client);
-                }
-            });
+export const InitiateMongoServer = async (url: string) => {
+    try {
+        await connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
         });
+        console.log("Connected to DB !");
+    } catch (e) {
+        console.log(e);
+        throw e;
     }
-
-    public disconnect(): void {
-        MongoHelper.client.close();
+};
+export const disconnectFromDB = async () => {
+    try {
+        await disconnect();
+        console.log('Disconnected from DB !');
+    } catch (e) {
+        console.log(e);
+        throw e;
     }
-}
+};

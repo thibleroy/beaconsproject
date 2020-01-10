@@ -25,4 +25,4 @@ test_api:
 build_api:
   extends: .build
   script:
-    - tsc
+    - npm run build

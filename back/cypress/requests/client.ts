@@ -1,5 +1,5 @@
-import {Beacon, Client} from "../../src/entities/interfaces";
-export const addClient: any = (client: Client) => {
+import {IClient} from "../../src/entities/interfaces";
+export const addClient: any = (client: IClient) => {
     return cy.request({
         url: 'localhost:3000/clients/',
         method: 'POST',

@@ -1,5 +1,5 @@
-import {Beacon} from "../../src/entities/interfaces";
-export const addBeacon: any = (beacon: Beacon) => {
+import {IBeacon} from "@entities/interfaces";
+export const addBeacon: any = (beacon: IBeacon) => {
     return cy.request({
         url: 'localhost:3000/beacons/',
         method: 'POST',

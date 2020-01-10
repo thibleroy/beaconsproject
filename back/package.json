@@ -33,6 +33,7 @@
     "@types/jquery": "^3.3.31",
     "@types/mocha": "^5.2.7",
     "@types/mongodb": "^3.3.11",
+    "@types/mongoose": "^5.5.36",
     "@types/node": "^12.12.14",
     "concurrently": "^5.0.0",
     "cypress": "^3.7.0",
@@ -52,9 +53,11 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-openapi": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
     "log4js": "^6.1.0",
     "module-alias": "^2.2.2",
     "mongodb": "^3.3.5",
+    "mongoose": "^5.8.3",
     "path": "^0.12.7",
     "swagger-ui-express": "^4.1.2"
   }

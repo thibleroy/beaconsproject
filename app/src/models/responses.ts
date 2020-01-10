@@ -1,21 +1,21 @@
-import {Beacon} from '../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../back/src/entities/interfaces';
 export interface BeaconsResponse {
     status: boolean;
-    beacons: Beacon[]
-    reason?: string
+    beacons: IBeacon[];
+    reason?: string;
 }
 export interface BeaconResponse {
     status: boolean;
-    beacon: Beacon;
-    reason?: string
+    beacon: IBeacon;
+    reason?: string;
 }
-export interface addBeaconResponse {
+export interface AddBeaconResponse {
     status: boolean;
-    id: string;
-    reason?: string
+    beacon: IBeacon;
+    reason?: string;
 }
-export interface updateBeaconResponse {
+export interface UpdateBeaconResponse {
     status: boolean;
-    id: string;
+    id_beacon: string;
     reason?: string;
 }

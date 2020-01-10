@@ -1,41 +1,40 @@
 import * as express from "express";
 import {Router} from "express";
 import {Request, Response} from "express";
-import {getCollection} from "@functions/mongo.functions";
-import {Client} from "@entities/interfaces";
+import {IClient} from "@entities/interfaces";
 import {messages} from '@constants/wording';
 import {Collection, MongoError, UpdateWriteOpResult} from "mongodb";
+import {UserModel} from "@src/db/User";
 const router: Router = express.Router();
-router.get('/', (req: Request, res: Response) => {
-    const collection: any = getCollection('clients');
-    collection.find({}).toArray((err: any, items: any) => {
-        if (err) {
-            res.status(500);
-            res.end();
-            console.error('Caught error', err);
-        } else {
-            items = items.map((item: any) => { return { id: item._id, name: item.name}});
-            console.log('items', items);
-            res.json({status: true, clients: items});
-        }
-    });
+ router.get('/', async (req: Request, res: Response) => {
+     try {
+         const id = req.url.split('/')[1];
+         const beacon = await UserModel.find({id: id});
+         res.json(beacon);
+
+     } catch (err) {
+         res.status(500);
+         res.end();
+         console.error('Caught error', err);
+     }
 
 });
 
-router.post('/',(req: Request, res: Response) => {
-    const collection: Collection = getCollection('clients');
+router.post('/',async (req: Request, res: Response) => {
+
     //console.log('tesst', req.body);
-    const currentClient: Client = {name: req.body.name};
-    collection.updateOne({name: req.body.name}, {$set: {...currentClient}},{ upsert: true }, ((error: MongoError, result1: UpdateWriteOpResult) => {
-        console.log('count', result1.matchedCount);
-        if (result1.matchedCount === 0) {
-            collection.updateOne({name: req.body.name}, {$set:{id: result1.upsertedId._id.toHexString()}}, ((error: MongoError, result2: UpdateWriteOpResult) => {
-                res.json({status: true, client_id: result1.upsertedId._id});
-            }));
-        } else {
-            res.json({status: false, reason: messages.client_existing});
-        }
-    }));
+    const currentClient: IClient = {name: req.body.name};
+    try {
+        const id = req.url.split('/')[1];
+        const beacon = await UserModel.find({id: id});
+        res.json(beacon);
+
+    } catch (err) {
+        res.status(500);
+        res.end();
+        console.error('Caught error', err);
+    }
 });
 
 exports.clientsRouter = router;
+

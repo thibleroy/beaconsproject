@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpServiceService} from '../../../services/http-service.service';
 import {DataService} from '../../../services/data.service';
-import {addBeaconResponse} from '../../../models/responses';
+import {AddBeaconResponse} from '../../../models/responses';
 import {Router} from '@angular/router';
 import { ModalController, AlertController} from '@ionic/angular';
 import {BeaconAddModaleComponent} from '../../components/beacon-add-modale/beacon-add-modale.component';
 import {wording} from '../../../models/wording';
 import {ToastService} from '../../../services/toast.service';
-import {Beacon} from '../../../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../../../back/src/entities/interfaces';
 @Component({
   selector: 'app-beacon',
   templateUrl: './beacon.page.html',
   styleUrls: ['./beacon.page.scss'],
 })
 export class BeaconPage implements OnInit {
-  beacon: Beacon;
+  beacon: IBeacon;
   constructor(private httpService: HttpServiceService,
               private dataService: DataService,
               private router: Router,
@@ -24,10 +24,12 @@ export class BeaconPage implements OnInit {
               ) {
   }
   ngOnInit() {
-    this.dataService.currentBeaconSubject.subscribe((b: Beacon) => {
+    this.dataService.currentBeaconSubject.subscribe((b: IBeacon) => {
       this.beacon = b;
     });
-    this.httpService.getBeacon(this.router.url.split('/beacon/')[1]);
+    this.httpService.getBeacon(this.router.url.split('/beacon/')[1]).subscribe((b) => {
+      this.dataService.currentBeaconSubject.next(b);
+    });
   }
   async presentAddModal() {
     const modal = await this.modal.create({
@@ -55,14 +57,14 @@ export class BeaconPage implements OnInit {
           }, {
             text: 'Supprimer',
             handler: () => {
-              this.httpService.deleteBeacon(currendId).subscribe((res: addBeaconResponse) => {
+              this.httpService.deleteBeacon(currendId).subscribe(async (res: AddBeaconResponse) => {
                 if (res.status) {
                   this.toastController.presentToast(wording.beacon.deleteAck);
                   this.dataService.loadedBeaconsSubject.next(this.dataService.loadedBeaconsSubject.getValue().filter(( obj ) => {
-                    return (obj.id !== currendId);
+                    return (obj.id_beacon !== currendId);
                   }));
                   this.dataService.currentBeaconSubject.next(null);
-                  this.router.navigateByUrl('/beacons');
+                  await this.router.navigateByUrl('/beacons');
                 } else {
                   this.toastController.presentToast(res.reason);
                 }

@@ -1,6 +1,6 @@
 import {addClient, deleteClient, getClients} from "../requests/client";
-import {Client} from "../../src/entities/interfaces";
-const testClient: Client = {name: 'testname'};
+import {IClient} from "../../src/entities/interfaces";
+const testClient: IClient = {name: 'testname'};
 
 describe('add client', function() {
     before(() => {
@@ -26,7 +26,7 @@ describe('delete client', () => {
     });
     it('deletes client', () => {
         getClients().then((resp: Cypress.Response) => {
-            resp.body.clients.forEach((client: any) => {
+            resp.body.forEach((client: any) => {
                 if (client.name === 'testname'){
                     deleteClient(client.id).then((resp: Cypress.Response) => {
                         expect(resp.body.status).to.eq(true);
