@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IBeacon as b} from '../../../back/src/entities/interfaces';
+import {IBeacon as b, IUser} from '../../../back/src/entities/interfaces';
 import {Beacon} from '@ionic-native/ibeacon/ngx';
 import {BehaviorSubject} from 'rxjs';
 @Injectable({
@@ -9,10 +9,12 @@ export class DataService {
   loadedBeaconsSubject: BehaviorSubject<b[]>;
   detectedBeaconsSubject: BehaviorSubject<Beacon[]>;
   currentBeaconSubject: BehaviorSubject<b>;
+  currentUserSubject: BehaviorSubject<IUser>;
   constructor() {
     this.loadedBeaconsSubject = new BehaviorSubject<b[]>([]);
     this.detectedBeaconsSubject = new BehaviorSubject<Beacon[]>([]);
     this.currentBeaconSubject = new BehaviorSubject<b>({});
+    this.currentUserSubject = new BehaviorSubject<IUser>({});
   }
 }
 

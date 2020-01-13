@@ -27,4 +27,7 @@ export class HttpServiceService {
   deleteBeacon(id: string): Observable<AddBeaconResponse> {
       return this.http.delete<AddBeaconResponse>(`${environment.ip}/beacon/${id}`);
   }
+  userLogin(username, password): Observable<any> {
+        return this.http.post<any>(`${environment.ip}/login`, {username, password});
+  }
 }
