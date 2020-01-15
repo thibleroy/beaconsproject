@@ -13,5 +13,9 @@
     "swagger-ui-express": "^4.1.2",
     "kafka-node": "^5.0.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3"
+  }
 }

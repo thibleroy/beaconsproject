@@ -26,3 +26,4 @@ build_api:
   extends: .build
   script:
     - npm run build
+
