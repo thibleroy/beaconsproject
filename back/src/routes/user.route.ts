@@ -35,16 +35,8 @@ router.delete('/:id', async (req: Request, res: Response) => {
 });
 
 router.put('/:id', async (req: Request, res: Response) => {
-    try {
-        const id = req.url.split('/')[1];
-        const beacon = await UserModel.findByIdAndUpdate({id: id}, {});
-        res.json(beacon);
+    kafka.producer.sendmsg('auth', {type: ''})
 
-    } catch (err) {
-        res.status(500);
-        res.end();
-        console.error('Caught error', err);
-    }
 });
 
 exports.userRouter = router;

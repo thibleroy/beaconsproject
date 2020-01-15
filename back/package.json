@@ -47,20 +47,10 @@
     "webpack": "^4.41.2"
   },
   "dependencies": {
-    "@log4js-node/logstash-http": "^1.0.0",
-    "@log4js-node/logstashudp": "^1.2.1",
-    "@types/swagger-ui-express": "^4.1.0",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-openapi": "^6.0.0",
     "express-validator": "^6.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "log4js": "^6.1.0",
     "module-alias": "^2.2.2",
-    "mongodb": "^3.3.5",
-    "mongoose": "^5.8.3",
-    "path": "^0.12.7",
-    "swagger-ui-express": "^4.1.2"
+    "path": "^0.12.7"
   }
 }

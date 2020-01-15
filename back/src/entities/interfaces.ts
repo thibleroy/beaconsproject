@@ -5,7 +5,14 @@ export interface Environnement {
     db_url?: string;
     db_port?: number;
     api_port?: number,
-    db_name?: string
+    db_name?: string,
+    kafka_url?: string,
+    kafka_port?: string,
+    kafka_topic_auth?: string,
+    kafka_topic_beacon?: string,
+    kafka_topic_client?: string,
+    kafka_topic_documentation?: string,
+    kafka_topic_logger?: string
 }
 
 export interface IBeacon {
