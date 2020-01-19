@@ -1,7 +1,0 @@
-{
-  "name": "user",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
