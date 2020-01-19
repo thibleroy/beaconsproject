@@ -1,6 +1,4 @@
-import {Schema, model, Document} from 'mongoose';
-import {IUser} from '@entities/interfaces';
-
+import {Schema, model} from 'mongoose';
 const UserSchema: Schema = new Schema({
     username: {
         type: String,
