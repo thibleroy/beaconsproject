@@ -1,5 +1,5 @@
 import 'module-alias/register';
-import {InitiateMongoServer} from '@helpers/mongo.helper';
+import {InitiateMongoServer} from '@src/microservices/mongo.helper';
 import {app} from "@helpers/express.helper";
 import * as http from 'http';
 import {ENV} from "./env";

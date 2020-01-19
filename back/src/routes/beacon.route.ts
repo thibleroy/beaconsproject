@@ -1,23 +1,17 @@
 import * as express from "express";
 import {Router} from "express";
 import {Request, Response} from "express";
-import {BeaconModel} from '@src/db/Beacon';
-import {messages} from "@constants/wording";
 import {IBeacon} from "@entities/interfaces";
+import * as instances from '../api_connector';
+import {BeaconMessage} from "@src/microservices/IMessage";
+import {ENV} from "@src/env";
 const router: Router = express.Router();
 
-
 router.get('/:id', async (req: Request, res: Response) => {
-    try {
-        const id: string = req.url.split('/')[1];
-        const existingBeacon = await BeaconModel.findById(id);
-        console.log('existing', existingBeacon);
-        res.json(existingBeacon);
-    } catch (err){
-        res.status(500);
-        res.end();
-        console.error('Caught error', err);
-    }
+    const beaconMsg: BeaconMessage = {type: 'req', action: 'get', value: {id_beacon: req.url.split('/')[1]}}
+    instances.apiProducer.send([{topic: '' + ENV.kafka_topic_beacon, messages: beaconMsg}], (err, data) => {
+        console.log('send producer beacons', data);
+    });
 });
 
 

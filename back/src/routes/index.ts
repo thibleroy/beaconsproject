@@ -1,6 +1,6 @@
 import * as express from 'express';
 import {Request, Response} from "express";
-import {MyLogger} from "@helpers/logger.helper";
+import {MyLogger} from "@src/microservices/logger/src/logger.helper";
 const def = express.Router();
 def.get('/', (req: Request, res: Response) => {
     res.json({hello: 'cc !'});
