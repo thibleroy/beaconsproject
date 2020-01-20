@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Activ'IoT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <img src="/assets/logo.png" alt=""/>
+    <ion-card-header>
+      <ion-card-title>Bienvenue sur Activ'IoT</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Projet 3ème année IoT 2020 : Maxime Carpier, Thibault Leroy, Issa Rompion, Alexandre Schmidt
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list lines="none">
+    <ion-item routerLink="/home" (click)="enableMenu()">
+      <ion-label>ESIR</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
