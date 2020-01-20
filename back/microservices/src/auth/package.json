@@ -6,6 +6,10 @@
   "scripts": {
     "start": "node_modules/.bin/tsc && node -r dotenv/config dist/microservices/src/auth/src/index.js"
   },
+  "repository": {
+    "type": "cloud",
+    "url": "https://gitlab.istic.univ-rennes1.fr/activiot/beaconsproject"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
