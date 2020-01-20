@@ -1,0 +1,21 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/.bin/tsc && node -r dotenv/config dist/microservices/src/auth/src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.7",
+    "msconnector": "file:../../lib"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.3"
+  }
+}

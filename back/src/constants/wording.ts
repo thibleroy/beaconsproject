@@ -3,5 +3,4 @@ export const messages = {
     beacon_not_existing: 'This beacon doesnt exist !',
     client_existing: 'This client already exists !',
     client_not_existing: 'This client doesnt exist !'
-
 };
