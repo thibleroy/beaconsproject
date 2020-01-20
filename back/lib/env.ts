@@ -1,5 +1,5 @@
 import * as DotEnv from 'dotenv';
-import {Environnement} from '../src/entities/interfaces';
+import {Environnement} from './interfaces';
 DotEnv.config({path: './.env'});
 export const ENV: Environnement = {
     name: String(process.env.NAME),

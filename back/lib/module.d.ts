@@ -1,4 +1,4 @@
-import {Environnement} from "@entities/interfaces";
+import {Environnement} from "./interfaces";
 
 declare namespace NodeJS {
     export interface ProcessEnv {
