@@ -1,4 +1,4 @@
-import {Environnement} from "./interfaces";
+import {Environnement} from "./";
 
 declare namespace NodeJS {
     export interface ProcessEnv {

@@ -1,4 +1,4 @@
-import {IBeacon, IClient, IUser} from '@entities/interfaces';
+import {IBeacon, IClient, IUser} from 'lib';
 
 interface DefaultMessage {
     type: 'req'|'res'

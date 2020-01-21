@@ -1,8 +1,8 @@
 import {kafkaClient} from 'msconnector';
 import {Consumer, ConsumerOptions, Message} from 'msconnector/node_modules/kafka-node';
-import {ENV} from '@env';
+import {ENV} from 'lib';
 import {AuthMessage} from 'msconnector/IMessage';
-import {IUser} from '@entities/interfaces';
+import {IUser} from 'lib';
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer: Consumer = new Consumer(kafkaClient, ['' + ENV.kafka_topic_auth], consumerOptions);
 authConsumer.on('message', (message: Message) => {

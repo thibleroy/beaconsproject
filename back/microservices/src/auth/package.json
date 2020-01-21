@@ -16,10 +16,10 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.7",
-    "msconnector": "file:../../lib"
+    "mongoose": "^5.8.7"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.5.41",
     "typescript": "^3.7.3"
   }
 }
