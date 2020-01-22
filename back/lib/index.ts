@@ -1,5 +1,5 @@
 import * as DotEnv from 'dotenv';
-DotEnv.config({path: './.env'});
+DotEnv.config({path: './../.env'});
 export interface Environnement {
     name?: string;
     version?: string;

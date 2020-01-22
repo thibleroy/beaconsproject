@@ -9,16 +9,7 @@
     "baseUrl": "./",
     "resolveJsonModule": true,
     "composite": true,
-    "paths": {
-      "@constants/*": ["./../../constants/*"],
-      "@documentation/*": ["./../../documentation/*"],
-      "@entities/*": ["./../../entities/*"],
-      "@functions/*": ["./../../functions/*"],
-      "@helpers/*": ["./../../helpers/*"],
-      "@routes/*": ["./../../routes/*"],
-      "@src/*": ["./../../*"]
-    },
-    "rootDir": "../../"
+    "rootDir": "."
   },
   "include": [
     "./*.ts", "../../env.ts","../../entities/interfaces.ts"
