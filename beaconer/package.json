@@ -10,7 +10,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cypress-dashboard": "cypress open"
+    "serve":"ionic serve",
+    "cy-test-ui": "cypress open",
+    "cy-test":"cypress run"
   },
   "private": true,
   "dependencies": {

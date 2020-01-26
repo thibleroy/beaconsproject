@@ -8,7 +8,9 @@ import { MenuController } from '@ionic/angular'
 })
 export class WelcomePage implements OnInit {
 
-  constructor(public menuCtrl : MenuController) { 
+  constructor(
+    public menuCtrl : MenuController,
+    ) { 
     this.disableMenu()
   }
 
@@ -17,10 +19,6 @@ export class WelcomePage implements OnInit {
 
   disableMenu() {
     this.menuCtrl.enable(false);
-  }
-
-  enableMenu() {
-    this.menuCtrl.enable(true);
   }
 
 }

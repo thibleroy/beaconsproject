@@ -1,0 +1,5 @@
+<ion-list lines="none">
+  <ion-item *ngFor="let client of this.clients" routerLink="/home" [queryParams]="{id_client : client.id_client}" (click)="enableMenu()">
+    <ion-label>{{client.name}}</ion-label>
+  </ion-item>
+</ion-list>
