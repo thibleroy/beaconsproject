@@ -13,9 +13,5 @@ module.exports = function (app: any) {
         next();
     });
     app.use('/', def);
-    app.use('/beacon', require('./beacon.route').beaconRouter);
-    app.use('/client', require('./client.route').clientRouter);
-    app.use('/beacons', require('./beacons.route').beaconsRouter);
-    app.use('/clients', require('./clients.route').clientsRouter);
-    app.use('/user', require('./user.route').userRouter);
+    app.use('/clients', require('./route').clientsRouter);
 };

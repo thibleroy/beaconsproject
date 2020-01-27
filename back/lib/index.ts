@@ -24,6 +24,7 @@ export interface IBeacon {
     id_client?: string;
     id_content?: string;
 }
+
 export interface IClient {
     id_client?: string;
     name?: string;
