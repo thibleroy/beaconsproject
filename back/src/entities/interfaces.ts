@@ -27,6 +27,10 @@ export interface IBeacon {
 export interface IClient {
     id_client?: string;
     name?: string;
+    url?:string;
+    img?:string;
+    lat?:number;
+    lng?:number;
 }
 
 export interface IUser {

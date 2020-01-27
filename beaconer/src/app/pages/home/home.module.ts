@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { ClientDetailsComponent } from '../../components/client-details/client-details.component';
+import { MapsComponent } from '../../components/maps/maps.component'
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { ClientDetailsComponent } from '../../components/client-details/client-d
   ],
   declarations: [
     HomePage,
-    ClientDetailsComponent
+    ClientDetailsComponent,
+    MapsComponent
   ]
 })
 export class HomePageModule {}

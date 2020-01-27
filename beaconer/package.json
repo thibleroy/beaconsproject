@@ -22,13 +22,16 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
-    "@ionic-native/core": "^5.0.0",
+    "@ionic-native/core": "^5.19.1",
+    "@ionic-native/google-maps": "^5.5.0",
     "@ionic-native/ibeacon": "github:IT-Dan/Ionic4ibeacon#master",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "com.unarin.cordova.beacon": "^3.8.1",
+    "cordova-browser": "6.0.0",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-googlemaps": "^2.6.2",
     "cordova-plugin-ibeacon": "^3.8.1",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
@@ -77,10 +80,11 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "com.unarin.cordova.beacon": {}
+      "com.unarin.cordova.beacon": {},
+      "cordova-plugin-googlemaps": {}
     },
     "platforms": [
-      "ios"
+      "browser"
     ]
   }
 }
