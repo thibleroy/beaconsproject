@@ -25,6 +25,7 @@
     "lib": "file:../../lib/"
   },
   "devDependencies": {
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "@types/node": "^13.5.0"
   }
 }

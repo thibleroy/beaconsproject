@@ -1,5 +1,3 @@
-import * as DotEnv from 'dotenv';
-DotEnv.config({path: './../.env'});
 export interface Environnement {
     name?: string;
     version?: string;
@@ -9,7 +7,7 @@ export interface Environnement {
     api_port?: number,
     db_name?: string,
     kafka_url?: string,
-    kafka_port?: string,
+    kafka_port?: number,
     kafka_topic_auth?: string,
     kafka_topic_beacon?: string,
     kafka_topic_client?: string,
@@ -39,18 +37,18 @@ export interface IUser {
 }
 
 export const ENV: Environnement = {
-    name: String(process.env.NAME),
-    version: String(process.env.VERSION),
-    git: String(process.env.GIT),
-    db_port: Number(process.env.DB_PORT),
-    db_url: String(process.env.DB_URL),
-    api_port: Number(process.env.API_PORT),
-    db_name: String(process.env.DB_NAME),
-    kafka_url: String(process.env.KAFKA_URL),
-    kafka_port: String(process.env.KAFKA_PORT),
-    kafka_topic_auth: String(process.env.KAFKA_TOPIC_AUTH),
-    kafka_topic_beacon: String(process.env.KAFKA_TOPIC_BEACON),
-    kafka_topic_client: String(process.env.KAFKA_TOPIC_CLIENT),
-    kafka_topic_documentation: String(process.env.KAFKA_TOPIC_DOCUMENTATION),
-    kafka_topic_logger: String(process.env.KAFKA_TOPIC_LOGGER)
+    name: 'Beacons manager',
+    version: '1.0',
+    git: 'https://gitlab.istic.univ-rennes1.fr/activiot/beaconsproject',
+    db_port: 27017,
+    db_url: '52.91.214.113',
+    api_port: 3000,
+    db_name: 'activiot',
+    kafka_url: '172.31.83.86',
+    kafka_port: 32769,
+    kafka_topic_auth: 'auth',
+    kafka_topic_beacon: 'beacon',
+    kafka_topic_client: 'client',
+    kafka_topic_documentation: 'doc',
+    kafka_topic_logger: 'logger'
 };
