@@ -1,5 +1,4 @@
 import {Schema, model} from 'mongoose';
-import {IBeacon} from '../../../entities/interfaces';
 
 const BeaconSchema: Schema = new Schema({
     id_beacon: {

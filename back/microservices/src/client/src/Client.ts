@@ -1,5 +1,5 @@
-import {Schema, model, Document} from 'mongoose';
-import {IClient} from '../../../entities/interfaces';
+import {Schema, model} from 'mongoose';
+import {IClient} from 'lib';
 
 const ClientSchema: Schema = new Schema({
     username: {
