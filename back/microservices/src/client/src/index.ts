@@ -1,7 +1,7 @@
 import * as instances from "msconnector";
 import {Consumer, ConsumerOptions, Message} from "msconnector/node_modules/kafka-node";
 import {ENV} from "lib";
-import {ClientMessage} from 'msconnector/IMessage';
+import {ClientMessage} from "msconnector/IMessage";
 import {IBeacon} from "lib";
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer: Consumer = new Consumer(instances.kafkaClient, ['' + ENV.kafka_topic_client], consumerOptions);
