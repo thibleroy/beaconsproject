@@ -11,7 +11,7 @@ export class ClientDetailsComponent implements OnInit {
 
   @Input() id_client:string;
   client: IClient = {};
-
+  done : boolean = false
   constructor(
     private http : HttpService,
   ) {
@@ -20,9 +20,8 @@ export class ClientDetailsComponent implements OnInit {
   ngOnInit() {
     this.http.getClient(this.id_client)
     .subscribe(cr =>{
-      if(cr.status){
-       this.client = cr.client
-      }
+       this.client = cr.value
+       this.done = true
     })
   }
 

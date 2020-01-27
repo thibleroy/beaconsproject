@@ -1,22 +1,20 @@
-import {IBeacon,IClient} from '../../../back/src/entities/interfaces';
-export interface BeaconsResponse {
-    status: boolean;
-    beacons: IBeacon[];
-    reason?: string;
-}
-export interface BeaconResponse {
-    status: boolean;
-    beacon: IBeacon;
-    reason?: string;
-}
+import {IBeacon,IClient,IContent} from '../../../back/src/entities/interfaces';
 export interface ClientsResponse {
-    status: boolean;
-    clients: IClient[];
-    reason?: string;
+    value: IClient[];
 }
 export interface ClientResponse {
-    status: boolean;
-    client: IClient;
-    reason?: string;
+    value: IClient;
+}
+export interface BeaconsResponse {
+    value: IBeacon[];
+}
+export interface BeaconResponse {
+    value: IBeacon;
+}
+export interface ContentsResponse {
+    value: IContent[];
+}
+export interface ContentResponse {
+    value: IContent;
 }
 

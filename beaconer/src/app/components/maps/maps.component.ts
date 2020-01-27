@@ -22,21 +22,24 @@ export class MapsComponent implements OnInit {
 
   @Input() name:string;
   @Input() lat:number;
-  @Input() lng:string;
+  @Input() lng:number;
+  @Input() address:string;
 
   map: GoogleMap;
+  marker: Marker;
 
   constructor(
     public alertController: AlertController,
     public actionCtrl: ActionSheetController,
     private platform: Platform
   ) {
+  }
+
+  ngOnInit() {
     if (this.platform.is('cordova')) {
       this.loadMap();
     }
   }
-
-  ngOnInit() {}
 
   loadMap() {
     Environment.setEnv({
@@ -53,6 +56,20 @@ export class MapsComponent implements OnInit {
         tilt: 30
       }
     });
+
+    let marker: Marker = this.map.addMarkerSync({
+      title: this.address,
+      icon: 'blue',
+      animation: 'DROP',
+      position: {
+        lat: this.lat,
+        lng: this.lng
+      }
+    });
+    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+      //alert('clicked');
+    });
+
   }
 
 }

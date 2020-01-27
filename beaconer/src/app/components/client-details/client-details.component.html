@@ -1,3 +1,5 @@
-<img [src]=client.img>
-<ion-button expand="block" [href]="client.url">Lien vers le site</ion-button>
-<app-maps [name]="client.name" [lat]="client.lat" [lng]="client.lng"></app-maps>
+<ion-content *ngIf="done">
+    <img [src]=client.img>
+    <ion-button expand="block" [href]="client.url">Lien vers le site</ion-button>
+    <app-maps [name]="client.name" [lat]="client.lat" [lng]="client.lng" [address]="client.address"   ></app-maps>
+</ion-content>

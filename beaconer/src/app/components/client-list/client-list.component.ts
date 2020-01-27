@@ -20,9 +20,7 @@ export class ClientListComponent implements OnInit {
   ngOnInit() {
     this.http.getClients()
     .subscribe(cr =>{
-      if(cr.status){
-       this.clients = cr.clients
-      }
+       this.clients = cr.value
     })
   }
 
