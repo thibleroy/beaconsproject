@@ -1,0 +1,23 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "node_modules/.bin/cypress run",
+    "test-ui": "node_modules/.bin/cypress open",
+    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"tsc --watch\" \"nodemon -r dotenv/config dist/src/index.js\"",
+    "start": "node_modules/.bin/tsc && node -r dotenv/config dist/src/index.js",
+    "ci": "node_modules/.bin/start-server-and-test start http://localhost:3000/ test",
+    "build": "node_modules/.bin/tsc"
+  },
+  "_moduleAliasIgnoreWarning": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.1.8",
+    "typescript": "^3.7.3"
+  },
+  "dependencies": {}
+}
