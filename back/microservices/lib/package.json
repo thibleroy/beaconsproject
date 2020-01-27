@@ -1,0 +1,31 @@
+{
+  "name": "microservices",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "start": "node_modules/.bin/tsc && node dist/microservices/lib/index.js"
+  },
+  "_moduleAliases": {
+    "@constants": "dist/src/constants",
+    "@documentation": "dist/src/documentation",
+    "@entities": "dist/src/entities",
+    "@functions": "dist/src/functions",
+    "@helpers": "dist/src/helpers",
+    "@routes": "dist/src/routes",
+    "@src": "./../../../dist/src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kafka-node": "^5.0.0",
+    "module-alias": "^2.2.2",
+    "lib": "file:../../lib/"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.3",
+    "@types/node": "^13.5.0"
+  }
+}

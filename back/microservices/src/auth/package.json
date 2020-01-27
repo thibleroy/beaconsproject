@@ -1,0 +1,27 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js"
+  },
+  "repository": {
+    "type": "cloud",
+    "url": "https://gitlab.istic.univ-rennes1.fr/activiot/beaconsproject"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.7",
+    "msconnector": "file:../../lib",
+    "lib": "file:../../../lib"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.5.41",
+    "typescript": "^3.7.3"
+  },
+  "description": ""
+}
