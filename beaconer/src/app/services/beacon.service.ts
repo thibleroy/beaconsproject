@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Events, Platform} from '@ionic/angular';
+//import {Events, Platform} from '@ionic/angular';
+import {Platform} from '@ionic/angular';
 import {IBeacon, IBeaconDelegate, IBeaconPluginResult, BeaconRegion} from '@ionic-native/ibeacon/ngx';
-import {Observable} from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,20 @@ export class BeaconService {
   region: BeaconRegion;
   delegate: IBeaconDelegate;
 
+  private myObservable = new Subject<IBeaconPluginResult>();
+  currentBeacons = this.myObservable.asObservable()
+
   constructor(
       public platform: Platform,
       private iBeacon: IBeacon,
-      public events: Events
+      //public events: Events,
   ) { 
     if (this.platform.is('cordova')) {
       this.iBeacon.requestAlwaysAuthorization();
       this.delegate = this.iBeacon.Delegate();
-      // this.iBeacon.disableDebugLogs();
     }
   }
+
 initialise(uuid:string): Promise<boolean> {
     return new Promise((resolve => {
       if (this.platform.is('cordova') && uuid) {
@@ -32,7 +36,8 @@ initialise(uuid:string): Promise<boolean> {
 
           /* Subscribe to some of the delegate's event handlers */
           this.delegate.didRangeBeaconsInRegion().subscribe(data => {
-                  this.events.publish('didRangeBeaconsInRegion', data);
+                  //this.events.publish('didRangeBeaconsInRegion', data);
+                  this.myObservable.next(data)
               }
           );
           this.iBeacon.startRangingBeaconsInRegion(
@@ -47,6 +52,7 @@ initialise(uuid:string): Promise<boolean> {
 stopRanging(): Promise<void> {
   return this.iBeacon.stopRangingBeaconsInRegion(this.iBeacon.BeaconRegion('thib', '12345678-9101-1121-3141-516171819203'));
 }
+
 
 /*startRanging(): Promise<void> {
     return this.iBeacon.startRangingBeaconsInRegion(this.iBeacon.BeaconRegion('thib', '12345678-9101-1121-3141-516171819203'));

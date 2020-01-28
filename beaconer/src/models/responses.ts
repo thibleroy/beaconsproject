@@ -1,4 +1,4 @@
-import {IBeacon,IClient,IContent} from '../../../back/src/entities/interfaces';
+import {IBeacon,IClient,IContent} from './interfaces';
 export interface ClientsResponse {
     value: IClient[];
 }
