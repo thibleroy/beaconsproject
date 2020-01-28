@@ -13,6 +13,9 @@ export class ContentPage implements OnInit {
   contents : IContent[]
   id_client:string;
   id_beacon:string;
+  markdown : string
+
+
 
   constructor(
     private httpService : HttpService,
@@ -26,6 +29,7 @@ export class ContentPage implements OnInit {
     this.httpService.getContents(this.id_client,this.id_beacon)
     .subscribe(cc =>{
       this.contents = cc.value
+      this.markdown = this.contents[0].content
     })
   }
 

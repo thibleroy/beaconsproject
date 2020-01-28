@@ -8,12 +8,15 @@ import { ContentPageRoutingModule } from './content-routing.module';
 
 import { ContentPage } from './content.page';
 
+import { MarkdownModule } from 'ngx-markdown';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ContentPageRoutingModule
+    ContentPageRoutingModule,
+    MarkdownModule.forRoot()
   ],
   declarations: [ContentPage]
 })
