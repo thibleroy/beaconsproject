@@ -7,7 +7,6 @@ const BeaconSchema: Schema = new Schema({
     },
     name: {
         type: String,
-        required: true
     },
     uuid: {
         type: String,
