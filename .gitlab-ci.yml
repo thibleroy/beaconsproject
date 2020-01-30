@@ -1,29 +1,81 @@
-.test:
-  before_script:
-    - cd back
-    - npm install
-  stage: test
-  tags:
-    - activiot-mac
-  only:
-    - dev
+variables:
+  NOMAD_ADDR: http://hashi1.example.com:4646
+  docker_registry: hub.docker.com
+  docker_image: example/project
+
+stages:
+  - build
+  - test
+  - deploy
+
 .build:
   before_script:
-    - cd back
+    - cd back/lib
     - npm install
+    - npm run build
+    - cd ../microservices/lib
+    - npm install
+    - cd ../src
   stage: build
   tags:
     - activiot-mac
   only:
     - dev
-test_api:
-  extends: .test
-  script:
-    - npm run ci
 
-
-build_api:
+build_auth:
   extends: .build
   script:
+    - cd auth
+    - npm install
     - npm run build
 
+build_beacon:
+  extends: .build
+  script:
+    - cd beacon
+    - npm install
+    - npm run build
+
+build_client:
+  extends: .build
+  script:
+    - cd client
+    - npm install
+    - npm run build
+
+build_logger:
+  extends: .build
+  script:
+    - cd logger
+    - npm install
+    - npm run build
+
+build_webserver:
+  extends: .build
+  script:
+    - cd webserver
+    - npm install
+    - npm run build
+
+build:
+  stage: build
+  image: ${docker_registry}/public/alpine:3
+  script:
+    - tag=${docker_registry}/${docker_image}:${CI_COMMIT_SHORT_SHA}
+    - echo "building and pushing tag $tag"
+    - docker build --pull -t ${tag} -f Dockerfile .
+    - docker push ${tag}
+
+deploy:
+  stage: deploy
+  image: registry.example.com/public/nomad-deployer:latest
+  script:
+    - envsubst '${CI_COMMIT_SHORT_SHA}' < project.nomad > job.nomad
+    - cat job.nomad
+    - nomad validate job.nomad
+    - nomad plan job.nomad || if [ $? -eq 255 ]; then exit 255; else echo "success"; fi
+    - nomad run job.nomad
+  environment:
+    name: production
+  allow_failure: false
+  when: manual
