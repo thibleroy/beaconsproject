@@ -28,7 +28,7 @@ export class ContentPage implements OnInit {
   ngOnInit() {
     this.httpService.getContents(this.id_client,this.id_beacon)
     .subscribe(cc =>{
-      this.contents = cc.value
+      this.contents = cc.value.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
       this.markdown = this.contents[0].content
     })
   }

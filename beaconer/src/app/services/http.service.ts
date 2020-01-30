@@ -3,7 +3,7 @@ import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { Observable,throwError } from 'rxjs';
 import { catchError,retry } from "rxjs/operators";
 import {environment} from '../../environments/environment';
-import { ClientResponse,ClientsResponse,BeaconResponse,BeaconsResponse} from '../../models/responses';
+import { ClientResponse,ClientsResponse,BeaconResponse,BeaconsResponse, ContentResponse,ContentsResponse} from '../../models/responses';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'})
@@ -45,15 +45,15 @@ return this.http.get<BeaconResponse>(`${environment.ip}/clients/${clientId}/beac
 );
 }
 
-getContents(clientId: string,beaconId:string): Observable<BeaconsResponse> {
-  return this.http.get<BeaconsResponse>(`${environment.ip}/clients/${clientId}/beacons/${beaconId}/contents`,httpOptions).pipe(
+getContents(clientId: string,beaconId:string): Observable<ContentsResponse> {
+  return this.http.get<ContentsResponse>(`${environment.ip}/clients/${clientId}/beacons/${beaconId}/contents`,httpOptions).pipe(
     retry(1),
     catchError(this.handleError)
   );
 }
 
-getContent(clientId: string,beaconId:string,contentId:string): Observable<BeaconResponse> {
-return this.http.get<BeaconResponse>(`${environment.ip}/clients/${clientId}/beacons/${beaconId}/contents/${contentId}`,httpOptions).pipe(
+getContent(clientId: string,beaconId:string,contentId:string): Observable<ContentResponse> {
+return this.http.get<ContentResponse>(`${environment.ip}/clients/${clientId}/beacons/${beaconId}/contents/${contentId}`,httpOptions).pipe(
   retry(1),
   catchError(this.handleError)
 );
