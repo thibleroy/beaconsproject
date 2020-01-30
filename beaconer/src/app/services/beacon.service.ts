@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import {Events, Platform} from '@ionic/angular';
 import {Platform} from '@ionic/angular';
 import {IBeacon, IBeaconDelegate, IBeaconPluginResult, BeaconRegion} from '@ionic-native/ibeacon/ngx';
 import {Subject} from 'rxjs';
@@ -17,7 +16,6 @@ export class BeaconService {
   constructor(
       public platform: Platform,
       private iBeacon: IBeacon,
-      //public events: Events,
   ) { 
     if (this.platform.is('cordova')) {
       this.iBeacon.requestAlwaysAuthorization();
@@ -36,7 +34,6 @@ initialise(uuid:string): Promise<boolean> {
 
           /* Subscribe to some of the delegate's event handlers */
           this.delegate.didRangeBeaconsInRegion().subscribe(data => {
-                  //this.events.publish('didRangeBeaconsInRegion', data);
                   this.myObservable.next(data)
               }
           );

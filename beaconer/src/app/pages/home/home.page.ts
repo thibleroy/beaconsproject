@@ -37,13 +37,12 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.httpService.getBeacons(this.id_client)
     .subscribe(cb =>{
-      this.beacons = cb.value
-      this.handleBeacon()
+      this.handleBeacon(cb.value)
     })
   }
 
-  handleBeacon(){
-    this.ShowToast('1')
+  handleBeacon(beacons:IBeacon[]){
+    this.beacons = beacons
     if (this.platform.is('cordova') && Array.isArray(this.beacons) && this.beacons.length) {
         this.zone = new NgZone({ enableLongStackTrace: false });
         let uuid = this.beacons[0].uuid
@@ -53,24 +52,12 @@ export class HomePage implements OnInit {
                 let beacon_id : string = this.get_beacon_id(this.get_nearest_beacon(data.beacons))
                 if(beacon_id){
                   if(beacon_id !=this.nearest_beacon_id){
+                    this.nearest_beacon_id = beacon_id
                     this.ShowToast(beacon_id)
                   }
                 }
               });
             })
-            /*this.events.subscribe('didRangeBeaconsInRegion', (data) => {
-                this.zone.run(() => {
-
-                  let beacon_id : string = this.get_beacon_id(this.get_nearest_beacon(data.beacons))
-
-                  if(beacon_id){
-                    if(beacon_id !=this.nearest_beacon_id){
-                      this.ShowToast()
-                    }
-                  }
-
-                });
-            });*/
         });
       }
   }
@@ -113,6 +100,7 @@ export class HomePage implements OnInit {
     header: 'Notification',
     message: "Vous êtes à proximité du beacon "+beacon_id,
     position: 'top',
+    duration: 20000,
     buttons: [
       {
         side: 'start',
