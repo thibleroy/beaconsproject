@@ -50,12 +50,4 @@ stopRanging(): Promise<void> {
   return this.iBeacon.stopRangingBeaconsInRegion(this.iBeacon.BeaconRegion('thib', '12345678-9101-1121-3141-516171819203'));
 }
 
-
-/*startRanging(): Promise<void> {
-    return this.iBeacon.startRangingBeaconsInRegion(this.iBeacon.BeaconRegion('thib', '12345678-9101-1121-3141-516171819203'));
-}
-getBeacons(): Observable<IBeaconPluginResult> {
-    return this.delegate.didRangeBeaconsInRegion();
-}*/
-
 }

@@ -3,7 +3,6 @@ import {Router,ActivatedRoute } from '@angular/router';
 import {BeaconService} from '../../services/beacon.service';
 import {HttpService} from '../../services/http.service';
 import {Platform} from '@ionic/angular';
-//import {Events, Platform} from '@ionic/angular';
 import {Beacon} from '@ionic-native/ibeacon/ngx';
 import {IBeacon} from '../../../models/interfaces';
 import {ToastController} from "@ionic/angular";
@@ -28,7 +27,6 @@ export class HomePage implements OnInit {
     private beaconService: BeaconService,
     private httpService : HttpService,
     public platform: Platform,
-    //private events: Events,
     public toastController: ToastController
     ) {
     this.id_client = this.route.snapshot.queryParams["id_client"];
