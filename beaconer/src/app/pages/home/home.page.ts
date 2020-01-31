@@ -18,7 +18,6 @@ export class HomePage implements OnInit {
   id_client:string;
   zone: NgZone;
   nearest_beacon_id : string
-
   subscription:Subscription
 
   constructor(
@@ -47,11 +46,11 @@ export class HomePage implements OnInit {
         this.beaconService.initialise(uuid).then(() => {
             this.subscription = this.beaconService.currentBeacons.subscribe(data=>{
               this.zone.run(() => {
-                let beacon_id : string = this.get_beacon_id(this.get_nearest_beacon(data.beacons))
-                if(beacon_id){
-                  if(beacon_id !=this.nearest_beacon_id){
-                    this.nearest_beacon_id = beacon_id
-                    this.ShowToast(beacon_id)
+                let beacon : IBeacon = this.get_ibeacon(this.get_nearest_beacon(data.beacons))
+                if(beacon){
+                  if(beacon.id_beacon !=this.nearest_beacon_id){
+                    this.nearest_beacon_id = beacon.id_beacon
+                    this.ShowToast(beacon)
                   }
                 }
               });
@@ -60,7 +59,7 @@ export class HomePage implements OnInit {
       }
   }
 
-  get_beacon_id(beacon:Beacon) : string {
+  get_ibeacon(beacon:Beacon) : IBeacon {
     for (var i = 0; i <= this.beacons.length; i ++) {
       if(i < this.beacons.length){
           if(
@@ -68,7 +67,7 @@ export class HomePage implements OnInit {
             beacon.major == this.beacons[i].major &&
             beacon.minor == this.beacons[i].minor
             ){
-              return this.beacons[i].id_beacon
+              return this.beacons[i]
           }
       }else{
           return undefined
@@ -93,10 +92,10 @@ export class HomePage implements OnInit {
     }
   }
 
-  async ShowToast(beacon_id:string) {
+  async ShowToast(beacon:IBeacon) {
   const toast = await this.toastController.create({
     header: 'Notification',
-    message: "Vous êtes à proximité du beacon "+beacon_id,
+    message: "Vous êtes à proximité du beacon "+beacon.name,
     position: 'top',
     duration: 20000,
     buttons: [
@@ -105,7 +104,7 @@ export class HomePage implements OnInit {
         icon: 'star',
         text: 'Voir',
         handler: () => {
-          this.router.navigate(['/content'], { queryParams: { id_client: this.id_client , id_beacon:beacon_id} });
+          this.router.navigate(['/content'], { queryParams: { id_client: this.id_client , id_beacon:beacon.id_beacon} });
         }
       }, {
         text: 'Retour',
@@ -120,8 +119,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnDestroy() {
-    if (this.platform.is('cordova')) {
-      this.beaconService.stopRanging();
+    if (this.platform.is('cordova') && Array.isArray(this.beacons) && this.beacons.length) {
+      let uuid = this.beacons[0].uuid
+      this.beaconService.stopRanging(uuid);
       this.subscription.unsubscribe()
     }
   }

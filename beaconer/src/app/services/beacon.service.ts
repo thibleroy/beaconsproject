@@ -46,8 +46,8 @@ initialise(uuid:string): Promise<boolean> {
     }));
 }
 
-stopRanging(): Promise<void> {
-  return this.iBeacon.stopRangingBeaconsInRegion(this.iBeacon.BeaconRegion('thib', '12345678-9101-1121-3141-516171819203'));
+stopRanging(uuid:string): Promise<void> {
+  return this.iBeacon.stopRangingBeaconsInRegion(this.iBeacon.BeaconRegion('activiot', uuid));
 }
 
 }
