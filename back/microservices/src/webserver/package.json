@@ -11,15 +11,6 @@
     "ci": "node_modules/.bin/start-server-and-test start http://localhost:3000/ test",
     "build": "node_modules/.bin/tsc"
   },
-  "_moduleAliases": {
-    "@constants": "dist/src/constants",
-    "@documentation": "dist/src/documentation",
-    "@entities": "dist/src/entities",
-    "@functions": "dist/src/functions",
-    "@helpers": "dist/src/helpers",
-    "@routes": "dist/src/routes",
-    "@src": "dist/src"
-  },
   "_moduleAliasIgnoreWarning": true,
   "keywords": [],
   "author": "",

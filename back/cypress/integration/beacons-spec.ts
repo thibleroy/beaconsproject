@@ -1,5 +1,5 @@
 import {addBeacon, deleteBeacon, getBeacons} from "../requests/beacon";
-import {IBeacon} from "@entities/interfaces";
+import {IBeacon} from "../../lib/index";
 const testBeacon: IBeacon = {uuid: 'uuidtest2',minor:  123,major: 456,id_client: 'idtest',name: 'nametest'};
 
 describe('add beacon', function() {
