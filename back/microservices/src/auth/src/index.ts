@@ -3,6 +3,9 @@ import {Consumer, ConsumerOptions, Message} from 'msconnector/node_modules/kafka
 import {ENV} from 'lib';
 import {AuthMessage} from 'msconnector/IMessage';
 import {IUser} from 'lib';
+const { check, validationResult} = require("express-validator/check");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer: Consumer = new Consumer(kafkaClient, ['' + ENV.kafka_topic_auth], consumerOptions);
 authConsumer.on('message', (message: Message) => {
