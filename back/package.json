@@ -12,6 +12,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:lib": "cd lib && npm install && tsc",
     "install:microservices": "cd microservices/lib && npm install && tsc",
+    "install:auth": "cd microservices/src/auth && npm install && tsc",
+    "install:beacon": "cd microservices/src/beacon && npm install && tsc",
+    "install:client": "cd microservices/src/client && npm install && tsc",
+    "install:content": "cd microservices/src/content && npm install && tsc",
+    "install:logger": "cd microservices/src/logger && npm install && tsc",
     "install:webserver": "cd microservices/src/webserver && npm install && tsc"
   },
   "author": "activiot",
