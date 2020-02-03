@@ -1,4 +1,4 @@
-import {IBeacon} from "@entities/interfaces";
+import {IBeacon} from "../../lib/index";
 export const addBeacon: any = (beacon: IBeacon) => {
     return cy.request({
         url: 'localhost:3000/beacons/',
