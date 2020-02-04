@@ -41,6 +41,7 @@ export interface IUser {
     email?: string;
     username?: string;
     password?: string;
+    id_client?: string;
 }
 
 export interface IContent {

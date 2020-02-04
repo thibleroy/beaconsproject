@@ -21,12 +21,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "kafka-node": "^5.0.0",
-    "module-alias": "^2.2.2",
-    "lib": "file:../../lib/"
+    "lib": "file:../../lib/",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
-    "typescript": "^3.7.3",
-    "@types/node": "^13.5.0"
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.5.0",
+    "typescript": "^3.7.3"
   }
 }
