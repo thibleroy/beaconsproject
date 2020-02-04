@@ -13,11 +13,19 @@ authConsumer.on('message', async (message: Message) => {
             switch (data.action) {
                 case 'create':
                     try {
-                        const user = new UserModel(data.value)
-                        await user.save()
-                        const token = await user.generateAuthToken()
-
+                        let create_user = new UserModel(data.value)
+                        await create_user.save()
+                        let create_token = await create_user.generateAuthToken()
+                        let create_msg = {
+                            type : 'res',
+                            value : create_token,
+                            action : data.action,
+                            res : data.res,
+                            req : data.req
+                        }
+                        //TODO : send kafka msg 
                     } catch (error) {
+                        //data.res.status()
                     }
 
                     break;

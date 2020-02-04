@@ -2,7 +2,6 @@ import {Schema, model} from 'mongoose';
 import {IUser} from 'lib';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const JWT_KEY = 'blabla'
 const UserSchema: Schema = new Schema({
     id_user: {
         type: String,
@@ -43,13 +42,13 @@ UserSchema.methods.generateAuthToken = async function() {
     return token
 }
 
-UserSchema.pre<any>('save', async function (next) {
+UserSchema.pre<any>('save', async function () {
     // Hash the password before saving the user model
     const user = this
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
     }
-    next()
+    return true
 })
 
 UserSchema.statics.findByCredentials = async function (email:string, password:string){

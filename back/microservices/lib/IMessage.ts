@@ -1,4 +1,5 @@
 import {IBeacon, IClient, IContent, IUser} from 'lib';
+import { Request, Response } from 'express';
 
 interface DefaultMessage {
     type: 'req'|'res',
