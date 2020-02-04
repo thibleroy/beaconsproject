@@ -11,8 +11,8 @@ export interface AuthMessage extends DefaultMessage{
     value: IUser
 }
 export interface BeaconMessage extends ResourceMessage{
-    value?: IBeacon
+    value: IBeacon
 }
 export interface ClientMessage extends ResourceMessage{
-    value?: IClient
+    value: IClient
 }
