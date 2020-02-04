@@ -35,11 +35,18 @@ authConsumer.on('message', async (message: Message) => {
                     });
                     sendKafkaResponse('', 'create')
                     break;
+<<<<<<< HEAD
 
                 case 'get':
                     BeaconModel.find({ id_client: data.value.id_client, id_beacon: data.value }, function (err: any, docs: IBeacon) {
                         sendKafkaResponse(docs, 'get')
                     });
+=======
+                case 'list':
+
+                    break;
+                case 'read':
+>>>>>>> dev
                     break;
 
                 case 'delete':

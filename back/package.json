@@ -19,8 +19,13 @@
     "install:client": "cd microservices/src/client && npm install && tsc",
     "install:content": "cd microservices/src/content && npm install && tsc",
     "install:logger": "cd microservices/src/logger && npm install && tsc",
-    "install:webserver": "cd microservices/src/webserver && npm install && tsc"
+    "install:webserver": "cd microservices/src/webserver && npm install && tsc",
+    "clear:modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
+    "clear:dist": "find . -name 'dist' -type d -prune -print -exec rm -rf '{}' \\;",
+    "clear:package-lock": "find . -name 'package-lock.json' -type d -prune -print -exec rm '{}' \\;",
+    "clear:all": "npm run clear:modules && npm run clear:dist && npm run clear:package-lock"
   },
   "author": "activiot",
   "license": "ISC"
 }
+

@@ -2,22 +2,29 @@ import {Schema, model} from 'mongoose';
 import {IClient} from 'lib';
 
 const ClientSchema: Schema = new Schema({
-    username: {
+    id_client: {
+        type: String,
+        default: ''
+    },
+    name: {
         type: String,
         required: true
     },
-    email: {
+    address: {
         type: String,
-        required: true
     },
-    password: {
+    url: {
         type: String,
-        required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    }
+    img: {
+        type: String,
+    },
+    lat: {
+        type: Number,
+    },
+    lng: {
+        type: Number,
+    },
 });
 ClientSchema.methods.fullName = function(): string {
     return (this.firstName.trim() + " " + this.lastName.trim());
