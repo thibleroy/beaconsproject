@@ -4,15 +4,17 @@ interface DefaultMessage {
     type: 'req'|'res'
 }
 interface ResourceMessage extends DefaultMessage {
-    action: 'create'|'update'|'get'|'delete' | 'list'
+    action: 'create'|'update'|'read'|'delete' | 'list',
+    req: any;
+    res: any;
 }
 export interface AuthMessage extends DefaultMessage{
     action: 'login'|'logout',
-    value: IUser
+    value?: IUser
 }
 export interface BeaconMessage extends ResourceMessage{
-    value: IBeacon
+    value?: IBeacon
 }
 export interface ClientMessage extends ResourceMessage{
-    value: IClient
+    value?: IClient
 }

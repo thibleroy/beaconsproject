@@ -1,4 +1,5 @@
-import * as instances from "msconnector";
+//import * as instances from "msconnector";
+import {kafkaClient} from 'msconnector';
 import { Consumer, ConsumerOptions, Message } from "msconnector/node_modules/kafka-node";
 import { ENV } from "lib";
 import { BeaconMessage } from 'msconnector/IMessage';
@@ -7,11 +8,12 @@ import { BeaconModel } from "@src/beacon/src/Beacon";
 import mongoose from 'mongoose';
 const consumerOptions: ConsumerOptions = { fromOffset: false };
 
-const authConsumer: Consumer = new Consumer(instances.kafkaClient, ['' + ENV.kafka_topic_beacon], consumerOptions);
+
+const authConsumer: Consumer = new Consumer(kafkaClient, ['' + ENV.kafka_topic_beacon], consumerOptions);
 
 authConsumer.on('message', async (message: Message) => {
     const data: BeaconMessage = JSON.parse(message.value.toString());
-
+    
     switch (data.type) {
 
         case ('req'):
@@ -25,10 +27,9 @@ authConsumer.on('message', async (message: Message) => {
                     break;
 
                 case 'create':
-                    let id_client: number = data.value.id_client;
                     let beacon = new BeaconModel(data.value);
 
-                    beacon.save(function (err: any, beacon: IBeacon) {
+                    beacon.save( {}, (err: any, product: any) => {
                         if (err) return console.error(err);
                         console.log(" saved to bookstore collection.");
                     });
@@ -42,7 +43,7 @@ authConsumer.on('message', async (message: Message) => {
                     break;
 
                 case 'delete':
-                    BeaconModel.deleteOne({ id_client: data.value.id_client }, function (err: any) {
+                    BeaconModel.deleteOne({ id_client: data.value.id_client}, function (err: any) {
 
                     });
                     sendKafkaResponse('', 'delete')
@@ -59,8 +60,8 @@ authConsumer.on('message', async (message: Message) => {
     }
 });
 
-function sendKafkaResponse(val: any, action: String) {
-    const messageValue: BeaconMessage = { type: "res", action: action, value: val };
+function sendKafkaResponse(val: any, actionVal : String) {
+    const messageValue: BeaconMessage = { type: "res", action: '' + actionVal, value: val };
 
     instances.apiProducer.send([{ topic: '' + ENV.kafka_topic_beacon, messages: messageValue }], (err: Error, data: any) => {
         console.log('send producer clients - get all beacons-', data);

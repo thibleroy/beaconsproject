@@ -12,7 +12,14 @@ export interface Environnement {
     kafka_topic_beacon?: string,
     kafka_topic_client?: string,
     kafka_topic_documentation?: string,
-    kafka_topic_logger?: string
+    kafka_topic_logger?: string,
+    kafka_request?: string,
+    kafka_response?: string,
+    kafka_action_list?: string,
+    kafka_action_get?: string,
+    kafka_action_update?: string,
+    kafka_action_delete?: string,
+    kafka_action_create?: string,
 }
 
 export interface IBeacon {
@@ -51,5 +58,12 @@ export const ENV: Environnement = {
     kafka_topic_beacon: 'beacon',
     kafka_topic_client: 'client',
     kafka_topic_documentation: 'doc',
-    kafka_topic_logger: 'logger'
+    kafka_topic_logger: 'logger',
+    kafka_request: 'req',
+    kafka_response: 'res',
+    kafka_action_list: 'list',
+    kafka_action_get: 'get',
+    kafka_action_update: 'update',
+    kafka_action_delete: 'delete',
+    kafka_action_create: 'create',
 };
