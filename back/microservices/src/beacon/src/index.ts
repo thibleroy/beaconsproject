@@ -22,7 +22,10 @@ authConsumer.on('message', async (message: Message) => {
                 case 'delete':
 
                     break;
-                case 'get':
+                case 'list':
+
+                    break;
+                case 'read':
                     break;
                 case 'update':
 

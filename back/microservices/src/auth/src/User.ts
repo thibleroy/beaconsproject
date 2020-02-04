@@ -1,9 +1,9 @@
 import {Schema, model} from 'mongoose';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const JWT_KEY = 'blabla'
 const UserSchema: Schema = new Schema({
-    id_beacon: {
+    id_user: {
         type: String,
         default: ''
     },

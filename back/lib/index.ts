@@ -11,6 +11,7 @@ export interface Environnement {
     kafka_topic_auth?: string,
     kafka_topic_beacon?: string,
     kafka_topic_client?: string,
+    kafka_topic_content?:string,
     kafka_topic_documentation?: string,
     kafka_topic_logger?: string
 }
@@ -28,13 +29,25 @@ export interface IBeacon {
 export interface IClient {
     id_client?: string;
     name?: string;
+    url?:string;
+    img?:string;
+    lat?:number;
+    lng:number;
+    address:string;
 }
 
 export interface IUser {
+    id_user?: string;
     email?: string;
-    username?: string
+    username?: string;
     password?: string;
-    createdAt?: Date;
+}
+
+export interface IContent {
+    id_content?: string;
+    content?: string;
+    id_beacon?: string;
+    timestamp?: number;
 }
 
 export const ENV: Environnement = {
@@ -50,6 +63,7 @@ export const ENV: Environnement = {
     kafka_topic_auth: 'auth',
     kafka_topic_beacon: 'beacon',
     kafka_topic_client: 'client',
+    kafka_topic_content: 'content',
     kafka_topic_documentation: 'doc',
     kafka_topic_logger: 'logger'
 };
