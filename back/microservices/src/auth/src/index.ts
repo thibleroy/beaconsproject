@@ -12,6 +12,13 @@ authConsumer.on('message', async (message: Message) => {
         case ('req'):
             switch (data.action) {
                 case 'create':
+                    try {
+                        const user = new UserModel(data.value)
+                        await user.save()
+                        const token = await user.generateAuthToken()
+
+                    } catch (error) {
+                    }
 
                     break;
                 case 'login':
