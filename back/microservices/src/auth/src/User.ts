@@ -1,14 +1,14 @@
 import {IUserDocument,IUserModel} from './document';
-import {Schema, model} from 'mongoose';
 import {ENV} from 'lib';
-import {sign} from 'jsonwebtoken'
-import {compare,hash} from 'bcryptjs'
+import {InitiateMongoServer} from 'msconnector/mongo.helper';
+import {sign} from 'jsonwebtoken';
+import {Schema, model} from 'mongoose';
+import {compare,hash} from 'bcryptjs';
+import {IUser} from 'lib';
+
+InitiateMongoServer(ENV.db_url+':'+ENV.db_port)
+
 const UserSchema: Schema = new Schema({
-    id_user: {
-        type: String,
-        default: '',
-        required : true
-    },
     name: {
         type: String,
         required: true
@@ -64,6 +64,16 @@ UserSchema.statics.findByCredentials = async function (email:string, password:st
         throw new Error('Invalid login credentials')
     }
     return user
+}
+
+UserSchema.methods.convert = function() : IUser {
+    return {
+        id_user : this._id,
+        email : this.email,
+        name : this.name,
+        password : this.password,
+        id_client : this.id_client
+      }
 }
 
 export const UserModel = model<IUserDocument, IUserModel>('user', UserSchema);

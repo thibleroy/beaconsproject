@@ -4,7 +4,7 @@ import {ENV} from 'lib';
 import {AuthMessage} from 'msconnector/IMessage';
 import {verify} from 'jsonwebtoken';
 import {UserModel} from './User';
-import {convert,IUserDocument} from './document'
+import {IUserDocument} from './document'
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer: Consumer = new Consumer(kafkaClient, ['' + ENV.kafka_topic_auth], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
@@ -69,7 +69,7 @@ authConsumer.on('message', async (message: Message) => {
                     auth(data.res,data.req,function(user:IUserDocument,token:string){
                     let msg = {
                             type : 'res',
-                            value : convert(user),
+                            value : user.convert(),
                             action : data.action,
                             res : data.res,
                             req : data.req
