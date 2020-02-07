@@ -6,7 +6,7 @@
     "target": "esnext",
     "strict": true,
     "types": [],
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
       "@constants/*": ["./../../constants/*"],
