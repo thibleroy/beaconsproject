@@ -29,7 +29,7 @@
     "@ionic-native/status-bar": "^5.20.0",
     "@ionic/angular": "^4.11.10",
     "com.unarin.cordova.beacon": "^3.8.1",
-    "cordova-ios": "^5.1.1",
+    "cordova-ios": "5.1.1",
     "cordova-plugin-googlemaps": "^2.6.2",
     "cordova-plugin-ibeacon": "^3.8.1",
     "core-js": "^2.5.4",
