@@ -45,6 +45,7 @@ authConsumer.on('message', async (message: Message) => {
                             throw new Error('Login failed! Check authentication credentials')
                         }
                         let token = await user.generateAuthToken()
+                        data.res.status(200)
                         let msg = {
                             type : 'res',
                             value : token,
@@ -67,6 +68,7 @@ authConsumer.on('message', async (message: Message) => {
                     break;
                 case 'read':
                     auth(data.res,data.req,function(user:IUserDocument,token:string){
+                    data.res.status(200)
                     let msg = {
                             type : 'res',
                             value : user.convert(),
@@ -82,6 +84,7 @@ authConsumer.on('message', async (message: Message) => {
                         try {
                             user.tokens.splice(0, user.tokens.length)
                             await user.save()
+                            data.res.status(200)
                             let msg = {
                                 type : 'res',
                                 value : true,
