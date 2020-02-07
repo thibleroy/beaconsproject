@@ -7,25 +7,25 @@
     "lib": "lib"
   },
   "dependencies": {
-    "cypress": "^3.8.3"
+    "cypress": "^3.8.3",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:lib": "cd lib && npm install && tsc",
-    "install:microservices": "cd microservices/lib && npm install && tsc",
-    "install:auth": "cd microservices/src/auth && npm install && tsc",
-    "install:beacon": "cd microservices/src/beacon && npm install && tsc",
-    "install:client": "cd microservices/src/client && npm install && tsc",
-    "install:content": "cd microservices/src/content && npm install && tsc",
-    "install:logger": "cd microservices/src/logger && npm install && tsc",
-    "install:webserver": "cd microservices/src/webserver && npm install && tsc",
+    "install:microservices": "cd microservices/lib && npm install && node_modules/.bin/tsc",
+    "install:auth": "cd microservices/src/auth && npm install && node_modules/.bin/tsc",
+    "install:beacon": "cd microservices/src/beacon && npm install && node_modules/.bin/tsc",
+    "install:client": "cd microservices/src/client && npm install && node_modules/.bin/tsc",
+    "install:content": "cd microservices/src/content && npm install && node_modules/.bin/tsc",
+    "install:logger": "cd microservices/src/logger && npm install && node_modules/.bin/tsc",
+    "install:webserver": "cd microservices/src/webserver && npm install && node_modules/.bin/tsc",
     "clear:modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
     "clear:dist": "find . -name 'dist' -type d -prune -print -exec rm -rf '{}' \\;",
-    "clear:package-lock": "find . -name 'package-lock.json' -type d -prune -print -exec rm '{}' \\;",
+    "clear:package-lock": "find . -name 'package-lock.json' -delete",
     "clear:all": "npm run clear:modules && npm run clear:dist && npm run clear:package-lock"
   },
   "author": "activiot",
   "license": "ISC"
 }
-

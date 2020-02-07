@@ -16,13 +16,12 @@ authConsumer.on('message', async (message: Message) => {
             switch (data.action) {
 
                 case 'create':
-                    const log: IBeacon = data.value;
                     break;
 
                 case 'delete':
 
                     break;
-                case 'get':
+                case 'read':
                     break;
                 case 'update':
 

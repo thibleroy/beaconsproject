@@ -1,11 +1,11 @@
+import {IContentDocument} from './document'
+import {ENV, IContent} from 'lib';
+import {InitiateMongoServer} from 'msconnector/mongo.helper';
 import {Schema, model} from 'mongoose';
-import {IContent} from 'lib';
+
+InitiateMongoServer(ENV.db_url+':'+ENV.db_port)
 
 const ContentSchema: Schema = new Schema({
-    id_content: {
-        type: String,
-        default: ''
-    },
     content: {
         type: String,
     },
@@ -17,9 +17,13 @@ const ContentSchema: Schema = new Schema({
     },
 });
 
-ContentSchema.methods.fullName = function(): string {
-    return (this.firstName.trim() + " " + this.lastName.trim());
-};
+ContentSchema.methods.convert = function() : IContent {
+    return {
+        id_content : this._id,
+        content : this.content,
+        id_beacon : this.id_beacon,
+        timestamp : this.timestamp
+      }
+}
 
-
-export const ContentModel = model('content', ContentSchema);
+export const ContentModel = model<IContentDocument>('content', ContentSchema);
