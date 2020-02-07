@@ -1,6 +1,6 @@
 import {IUserDocument,IUserModel} from './document';
 import {ENV} from 'lib';
-import {InitiateMongoServer} from 'msconnector/mongo.helper';
+import {InitiateMongoServer} from 'msconnector/helpers/mongo.helper';
 import {sign} from 'jsonwebtoken';
 import {Schema, model} from 'mongoose';
 import {compare,hash} from 'bcryptjs';

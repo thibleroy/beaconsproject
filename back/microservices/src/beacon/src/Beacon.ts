@@ -1,5 +1,5 @@
 import {ENV, IBeacon} from 'lib';
-import {InitiateMongoServer} from 'msconnector/mongo.helper';
+import {InitiateMongoServer} from 'msconnector/helpers/mongo.helper';
 import {IBeaconDocument} from './document';
 import {Schema, model} from 'mongoose';
 

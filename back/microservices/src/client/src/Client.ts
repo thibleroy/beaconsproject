@@ -1,6 +1,6 @@
 import {IClientDocument} from './document';
 import {ENV,IClient} from 'lib';
-import {InitiateMongoServer} from 'msconnector/mongo.helper';
+import {InitiateMongoServer} from 'msconnector/helpers/mongo.helper';
 import {Schema, model} from 'mongoose';
 
 InitiateMongoServer(ENV.db_url+':'+ENV.db_port)
