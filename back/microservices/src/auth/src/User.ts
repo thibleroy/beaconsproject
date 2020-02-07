@@ -1,12 +1,14 @@
+import {IUserDocument,IUserModel} from './document';
+import {ENV} from 'lib';
+import {InitiateMongoServer} from 'msconnector/mongo.helper';
+import {sign} from 'jsonwebtoken';
 import {Schema, model} from 'mongoose';
+import {compare,hash} from 'bcryptjs';
 import {IUser} from 'lib';
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+
+InitiateMongoServer(ENV.db_url+':'+ENV.db_port)
+
 const UserSchema: Schema = new Schema({
-    id_user: {
-        type: String,
-        default: ''
-    },
     name: {
         type: String,
         required: true
@@ -33,35 +35,45 @@ const UserSchema: Schema = new Schema({
     }]
 });
 
-UserSchema.methods.generateAuthToken = async function() {
+UserSchema.methods.generateAuthToken = async function() : Promise<string> {
     // Generate an auth token for the user
     const user = this
-    const token = jwt.sign({_id: user._id}, process.env.JWT_KEY)
+    const token = sign({_id: user._id}, ENV.jwt_key)
     user.tokens = user.tokens.concat({token})
     await user.save()
     return token
 }
 
-UserSchema.pre<any>('save', async function () {
+UserSchema.pre<IUserDocument>('save', async function () {
     // Hash the password before saving the user model
     const user = this
     if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
+        user.password = await hash(user.password, 8)
     }
     return true
 })
 
-UserSchema.statics.findByCredentials = async function (email:string, password:string){
+UserSchema.statics.findByCredentials = async function (email:string, password:string):Promise<IUserDocument>{
     // Search for a user by email and password.
-    const user = await UserModel.findOne(email)
+    const user = await UserModel.findOne({email})
     if (!user) {
         throw new Error('Invalid login credentials')
     }
-    const isPasswordMatch = await bcrypt.compare(password, user.password)
+    const isPasswordMatch = await compare(password, user.password)
     if (!isPasswordMatch) {
         throw new Error('Invalid login credentials')
     }
     return user
 }
 
-export const UserModel = model<any>('user', UserSchema);
+UserSchema.methods.convert = function() : IUser {
+    return {
+        id_user : this._id,
+        email : this.email,
+        name : this.name,
+        password : this.password,
+        id_client : this.id_client
+      }
+}
+
+export const UserModel = model<IUserDocument, IUserModel>('user', UserSchema);
