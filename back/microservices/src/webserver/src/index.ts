@@ -1,5 +1,4 @@
 import {app} from "./express.helper";
-import * as http from 'http';
 import {ENV} from "lib";
 import {Router,Request, Response} from "express";
 import {MainRouter} from './routes/route';
@@ -13,6 +12,6 @@ def.get('/', (req: Request, res: Response) => {
 app.use('/clients',MainRouter)
 app.use('/hello',def)
 
-
-const server = http.createServer(app);
-server.listen(ENV.api_port);
+app.listen(ENV.api_port, function () {
+    console.log('App listening on port '+ENV.api_port);
+});

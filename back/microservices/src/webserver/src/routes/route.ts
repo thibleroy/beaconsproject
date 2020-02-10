@@ -2,11 +2,10 @@ import * as express from "express";
 import { Router } from "express";
 import { Request, Response } from "express";
 import { BeaconMessage, ClientMessage, ContentMessage, AuthMessage } from "msconnector/IMessage";
-import {kafkaClient } from 'msconnector';
-import { sendKafkaMessage } from 'msconnector/utils/kafka';
+import {kafkaClient ,sendKafkaMessage} from 'msconnector';
 import { ENV } from "lib";
 import { IBeacon, IClient, IContent, IUser } from "lib";
-import { Message, Producer } from "msconnector/node_modules/kafka-node";
+import { Message, Producer } from "kafka-node";
 const router: Router = express.Router();
 
 const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 })

@@ -1,6 +1,5 @@
 import 'module-alias/register';
-import {ENV} from "lib";
-import {Producer} from '../node_modules/kafka-node'
+import {Producer} from 'kafka-node'
 import { BeaconMessage, ClientMessage, AuthMessage, ContentMessage } from "../IMessage";
 
 export const sendKafkaMessage = ( prod: Producer, topicVal: string, msg: BeaconMessage | ClientMessage | AuthMessage | ContentMessage  ) => {

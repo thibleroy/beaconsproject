@@ -1,7 +1,6 @@
-import {kafkaClient} from 'msconnector';
-import {Consumer, ConsumerOptions, Message} from 'msconnector/node_modules/kafka-node';
+import {kafkaClient,AuthMessage} from 'msconnector';
+import {Consumer, ConsumerOptions, Message} from 'kafka-node';
 import {ENV} from 'lib';
-import {AuthMessage} from 'msconnector/IMessage';
 import {verify} from 'jsonwebtoken';
 import {UserModel} from './User';
 import {IUserDocument} from './document'

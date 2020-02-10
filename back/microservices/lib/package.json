@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "start": "node_modules/.bin/tsc && node dist/microservices/lib/index.js",
+    "start": "node_modules/.bin/tsc && node dist/index.js",
     "build": "node_modules/.bin/tsc"
   },
   "_moduleAliases": {
