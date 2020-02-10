@@ -1,12 +1,28 @@
-import * as express from "express";
-import { Router } from "express";
-import { Request, Response } from "express";
-import { BeaconMessage, ClientMessage, ContentMessage, AuthMessage } from "msconnector/IMessage";
-import {kafkaClient ,sendKafkaMessage} from 'msconnector';
+import { Router, Request, Response } from "express";
+import {kafkaClient ,sendKafkaMessage,ResourceMessage, BeaconMessage, ClientMessage, ContentMessage, AuthMessage } from "msconnector";
 import { ENV } from "lib";
 import { IBeacon, IClient, IContent, IUser } from "lib";
-import { Message, Producer } from "kafka-node";
-const router: Router = express.Router();
+import {Consumer, ConsumerOptions, Message, Producer } from "kafka-node";
+
+const consumerOptions: ConsumerOptions = {fromOffset: false};
+const authConsumer: Consumer = new Consumer(kafkaClient, 
+    [
+        { topic:'' + ENV.kafka_topic_auth, partition:1},
+        { topic:'' + ENV.kafka_topic_beacon,partition:1},
+        { topic:'' + ENV.kafka_topic_client,partition:1},
+        { topic:'' + ENV.kafka_topic_content,partition:1},
+    ], consumerOptions);
+authConsumer.on('message', async (message: Message) => {
+    const data: ResourceMessage  = JSON.parse(message.value.toString());
+    switch (data.type) {
+        case ('res'):
+
+            break;
+        default: break;
+    }
+})     
+const router: Router = Router();
+
 
 const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 })
 
@@ -85,33 +101,33 @@ router.put('/:clientId/beacons/:beaconId', async (request: Request, response: Re
 router.get('/:clientId/beacons/:beaconId/contents', async (request: Request, response: Response) => {
     const contentMsg: ContentMessage = { type: ENV.kafka_request, action: ENV.kafka_action_list, value: { id_client: request.params.clientId, id_beacon : request.params.beaconId }, req: request, res: response };
 
-    sendKafkaMessage(producer, ENV.kafka_topic_beacon, contentMsg);
+    sendKafkaMessage(producer, ENV.kafka_topic_content, contentMsg);
 });
 
 router.post('/:clientId/beacons/:beaconId/contents', async (request: Request, response: Response) => {
     const currentBeacon: IContent = request.body;
     const contentMsg: ContentMessage = { type: ENV.kafka_request, action: ENV.kafka_action_create, value: currentBeacon , req: request, res: response};
 
-    sendKafkaMessage(producer, ENV.kafka_topic_beacon, contentMsg);
+    sendKafkaMessage(producer, ENV.kafka_topic_content, contentMsg);
 });
 
 router.get('/:clientId/beacons/:beaconId/contents/:contentId', async (request: Request, response: Response) => {
     const contentMsg: ContentMessage = { type: ENV.kafka_request, action: ENV.kafka_action_get, value: {id_client : request.params.clientId, id_beacon : request.params.beaconId, id_content :request.params.contentId }, req: request, res: response };
 
-    sendKafkaMessage(producer, ENV.kafka_topic_beacon, contentMsg);
+    sendKafkaMessage(producer, ENV.kafka_topic_content, contentMsg);
 });
 
 router.delete('/:clientId/beacons/:beaconId/contents/:contentId', async (request: Request, response: Response) => {
     const contentMsg: ContentMessage = { type: ENV.kafka_request, action: ENV.kafka_action_delete, value: { id_client: request.params.clientId, id_beacon : request.params.beaconId, id_content :request.params.contentId }, req: request, res: response };
 
-    sendKafkaMessage(producer, ENV.kafka_topic_beacon, contentMsg);
+    sendKafkaMessage(producer, ENV.kafka_topic_content, contentMsg);
 });
 
 router.put('/:clientId/beacons/:beaconId/contents/:contentId', async (request: Request, response: Response) => {
     const currentContent: IContent = request.body;
     const contentMsg: ContentMessage = { type: ENV.kafka_request, action: ENV.kafka_action_update, value: currentContent, req: request, res: response};
 
-    sendKafkaMessage(producer, ENV.kafka_topic_beacon, contentMsg);
+    sendKafkaMessage(producer, ENV.kafka_topic_content, contentMsg);
 });
 
 

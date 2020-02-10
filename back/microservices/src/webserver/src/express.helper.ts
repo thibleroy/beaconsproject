@@ -9,5 +9,4 @@ app.use(function (req: any, res: any, next: any) {
     next();
 });
 app.use(bodyparser.json());
-//require('@documentation/index')(app);
 

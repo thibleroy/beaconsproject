@@ -9,6 +9,6 @@ export const kafkaClient: KafkaClient = new KafkaClient(clientOptions);
 
 export {sendKafkaMessage} from './utils/kafka'
 
-export {AuthMessage,BeaconMessage,ClientMessage,ContentMessage} from './IMessage'
+export {ResourceMessage,AuthMessage,BeaconMessage,ClientMessage,ContentMessage} from './IMessage'
 
 export {InitiateMongoServer,disconnectFromDB} from './helpers/mongo.helper'

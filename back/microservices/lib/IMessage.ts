@@ -1,15 +1,14 @@
 import {IBeacon, IClient, IContent, IUser} from 'lib';
 import { Request, Response } from 'express';
 
-interface DefaultMessage {
+export interface DefaultMessage {
     type: string | 'req'|'res',
     res: Response,
     req: Request
 }
-interface ResourceMessage extends DefaultMessage {
+export interface ResourceMessage extends DefaultMessage {
     action: string | 'create'|'update'|'read'|'delete' | 'list',
-    req: any;
-    res: any;
+    value : any
 }
 
 export interface AuthMessage extends DefaultMessage{

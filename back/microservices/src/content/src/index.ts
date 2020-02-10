@@ -5,7 +5,7 @@ import {IContent} from "lib";
 import {ContentModel} from './Content'
 import {IContentDocument} from './document'
 const consumerOptions: ConsumerOptions = {fromOffset: false};
-const authConsumer: Consumer = new Consumer(kafkaClient, ['' + ENV.kafka_topic_content], consumerOptions);
+const authConsumer: Consumer = new Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_content,partition:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
     const data: ContentMessage  = JSON.parse(message.value.toString());
 

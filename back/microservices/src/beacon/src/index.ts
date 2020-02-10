@@ -5,7 +5,7 @@ import {IBeacon} from "lib";
 import {BeaconModel} from "./Beacon";
 import {IBeaconDocument} from './document';
 const consumerOptions: ConsumerOptions = {fromOffset: false};
-const authConsumer: Consumer = new Consumer(kafkaClient, ['' + ENV.kafka_topic_beacon], consumerOptions);
+const authConsumer: Consumer = new Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_beacon,partition:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
     const data: BeaconMessage  = JSON.parse(message.value.toString());
 
