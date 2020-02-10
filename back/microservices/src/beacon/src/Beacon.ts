@@ -4,7 +4,7 @@ import {IBeaconDocument} from './document';
 import {Schema, model} from 'mongoose';
 
 
-InitiateMongoServer(ENV.db_url+':'+ENV.db_port)
+InitiateMongoServer(ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name)
 
 const BeaconSchema: Schema = new Schema({
     name: {

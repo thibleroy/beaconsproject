@@ -28,7 +28,7 @@ const authConsumer = new kafka.Consumer(kafkaClient,
         { topic:'' + ENV.kafka_topic_content,partitions:1},
     ], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
-    const data: ResourceMessage  = JSON.parse(message.value.toString());
+    const data: ResourceMessage  = JSON.parse(JSON.stringify(message.value));
     switch (data.type) {
         case ('res'):
             data.res.send({value:data.value})

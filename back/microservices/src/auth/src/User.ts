@@ -6,7 +6,7 @@ import {Schema, model} from 'mongoose';
 import {compare,hash} from 'bcryptjs';
 import {IUser} from 'lib';
 
-InitiateMongoServer(ENV.db_url+':'+ENV.db_port)
+InitiateMongoServer(ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name)
 
 const UserSchema: Schema = new Schema({
     name: {

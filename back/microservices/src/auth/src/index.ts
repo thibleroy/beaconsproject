@@ -6,7 +6,7 @@ import {verify} from 'jsonwebtoken';
 import {UserModel} from './User';
 import {IUserDocument} from './document'
 const consumerOptions: ConsumerOptions = {fromOffset: false};
-const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_auth,partition:1}], consumerOptions);
+const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_auth,partitions:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
     const data: AuthMessage  = JSON.parse(message.value.toString());
     switch (data.type) {

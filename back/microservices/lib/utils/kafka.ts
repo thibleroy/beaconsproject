@@ -4,7 +4,7 @@ import { BeaconMessage, ClientMessage, AuthMessage, ContentMessage } from "../IM
 
 export const sendKafkaMessage = ( prod: Producer, topicVal: string, msg: BeaconMessage | ClientMessage | AuthMessage | ContentMessage  ) => {
     
-       prod.send([{ topic: topicVal, messages: msg }], (err: Error, data: any) => {
-            console.log('send producer', topicVal, msg.type, msg.action, msg.value);
+       prod.send([{ topic: topicVal, messages: JSON.stringify(msg) }], (err: Error, data: any) => {
+            console.log('send producer', topicVal, msg.type, msg.action, msg.value,msg.res);
         });
     }

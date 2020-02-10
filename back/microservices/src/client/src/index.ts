@@ -8,7 +8,8 @@ import {IClientDocument} from './document';
 const consumerOptions : ConsumerOptions = {fromOffset: false};
 const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_client,partitions:1}], consumerOptions);
 authConsumer.on('message', async(message: Message) => {
-    const data: ClientMessage  = JSON.parse(message.value.toString());
+    const data : ClientMessage  = JSON.parse(JSON.stringify(message.value))
+    console.log('HAAAAA',data.res)
 
     switch (data.type) {
 

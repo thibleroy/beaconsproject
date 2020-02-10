@@ -3,7 +3,7 @@ const kafka = require('kafka-node')
 import {Message,ConsumerOptions} from "kafka-node";
 import {ENV} from "lib";
 const consumerOptions: ConsumerOptions = {fromOffset: false};
-const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_logger,partition:1}], consumerOptions);
+const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_logger,partitions:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
     const data: any  = JSON.parse(message.value.toString());
 
