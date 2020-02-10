@@ -2,7 +2,8 @@ import {app} from "./express.helper";
 import {ENV} from "lib";
 import {Router,Request, Response} from "express";
 import {MainRouter} from './routes/route';
-import {Consumer, ConsumerOptions, Message} from "kafka-node";
+import {ConsumerOptions, Message} from "kafka-node";
+const kafka = require('kafka-node')
 import {kafkaClient ,ResourceMessage} from "msconnector";
 
 const def = Router();
@@ -19,12 +20,12 @@ app.listen(ENV.api_port, function () {
 });
 
 const consumerOptions: ConsumerOptions = {fromOffset: false};
-const authConsumer: Consumer = new Consumer(kafkaClient, 
+const authConsumer = new kafka.Consumer(kafkaClient, 
     [
-        { topic:'' + ENV.kafka_topic_auth, partition:1},
-        { topic:'' + ENV.kafka_topic_beacon,partition:1},
-        { topic:'' + ENV.kafka_topic_client,partition:1},
-        { topic:'' + ENV.kafka_topic_content,partition:1},
+        { topic:'' + ENV.kafka_topic_auth, partitions:1},
+        { topic:'' + ENV.kafka_topic_beacon,partitions:1},
+        { topic:'' + ENV.kafka_topic_client,partitions:1},
+        { topic:'' + ENV.kafka_topic_content,partitions:1},
     ], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
     const data: ResourceMessage  = JSON.parse(message.value.toString());

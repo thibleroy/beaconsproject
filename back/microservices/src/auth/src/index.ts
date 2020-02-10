@@ -1,11 +1,12 @@
 import {kafkaClient,AuthMessage} from 'msconnector';
-import {Consumer, ConsumerOptions, Message} from 'kafka-node';
+const kafka = require('kafka-node')
+import {Message,ConsumerOptions} from "kafka-node";
 import {ENV} from 'lib';
 import {verify} from 'jsonwebtoken';
 import {UserModel} from './User';
 import {IUserDocument} from './document'
 const consumerOptions: ConsumerOptions = {fromOffset: false};
-const authConsumer: Consumer = new Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_auth,partition:1}], consumerOptions);
+const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_auth,partition:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
     const data: AuthMessage  = JSON.parse(message.value.toString());
     switch (data.type) {
