@@ -2,25 +2,9 @@ import { Router, Request, Response } from "express";
 import {kafkaClient ,sendKafkaMessage,ResourceMessage, BeaconMessage, ClientMessage, ContentMessage, AuthMessage } from "msconnector";
 import { ENV } from "lib";
 import { IBeacon, IClient, IContent, IUser } from "lib";
-import {Consumer, ConsumerOptions, Message, Producer } from "kafka-node";
+import {Producer } from "kafka-node";
 
-const consumerOptions: ConsumerOptions = {fromOffset: false};
-const authConsumer: Consumer = new Consumer(kafkaClient, 
-    [
-        { topic:'' + ENV.kafka_topic_auth, partition:1},
-        { topic:'' + ENV.kafka_topic_beacon,partition:1},
-        { topic:'' + ENV.kafka_topic_client,partition:1},
-        { topic:'' + ENV.kafka_topic_content,partition:1},
-    ], consumerOptions);
-authConsumer.on('message', async (message: Message) => {
-    const data: ResourceMessage  = JSON.parse(message.value.toString());
-    switch (data.type) {
-        case ('res'):
-
-            break;
-        default: break;
-    }
-})     
+     
 const router: Router = Router();
 
 
