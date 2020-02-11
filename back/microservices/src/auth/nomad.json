@@ -3,7 +3,7 @@
     "Stop": false,
     "Region": null,
     "Namespace": null,
-    "ID": "thib_test_paas",
+    "ID": "activiot_auth",
     "ParentID": null,
     "Name": "activiot_auth",
     "Type": null,
@@ -26,16 +26,7 @@
             "Driver": "docker",
             "User": "",
             "Config": {
-              "args": [
-                "",
-                "app"
-              ],
-              "image": "activiot/auth:latest",
-              "port_map": [
-                {
-                  "http": 1337
-                }
-              ]
+              "image": "activiot/auth:latest"
             },
             "Constraints": null,
             "Affinities": null,
@@ -52,12 +43,7 @@
                   "CIDR": "",
                   "IP": "",
                   "MBits": 200,
-                  "ReservedPorts": null,
-                  "DynamicPorts": [
-                    {
-                      "Label": "http"
-                    }
-                  ]
+                  "ReservedPorts": null
                 }
               ],
               "Devices": null,

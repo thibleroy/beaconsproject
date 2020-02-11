@@ -3,7 +3,7 @@
     "Stop": false,
     "Region": null,
     "Namespace": null,
-    "ID": "thib_test_paas",
+    "ID": "activiot_webserver",
     "ParentID": null,
     "Name": "activiot_webserver",
     "Type": null,
@@ -26,14 +26,7 @@
             "Driver": "docker",
             "User": "",
             "Config": {
-              "args": [
-              ],
-              "image": "activiot/logger:latest",
-              "port_map": [
-                {
-                  "http": 1337
-                }
-              ]
+              "image": "activiot/logger:latest"
             },
             "Constraints": null,
             "Affinities": null,
@@ -50,12 +43,7 @@
                   "CIDR": "",
                   "IP": "",
                   "MBits": 200,
-                  "ReservedPorts": null,
-                  "DynamicPorts": [
-                    {
-                      "Label": "http"
-                    }
-                  ]
+                  "ReservedPorts": null
                 }
               ],
               "Devices": null,
