@@ -1,3 +1,5 @@
+variables:
+  HEADER: 'Content-Type: application/json'
 stages:
   - build
   - deploy
@@ -62,29 +64,29 @@ deploy_auth:
   extends: .deploy
   script:
     - cd auth
-    - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
 
 
 deploy_beacon:
   extends: .deploy
   script:
     - cd beacon
-    - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
 
 deploy_client:
   extends: .deploy
   script:
     - cd client
-    - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
 
 deploy_logger:
   extends: .deploy
   script:
     - cd logger
-    - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
 
 deploy_webserver:
   extends: .deploy
   script:
     - cd webserver
-    - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
