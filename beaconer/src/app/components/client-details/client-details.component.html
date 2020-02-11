@@ -1,5 +1,8 @@
 <ion-content *ngIf="done">
     <img [src]=client.img>
     <ion-button expand="block" [href]="client.url">Lien vers le site</ion-button>
-    <app-maps [name]="client.name" [lat]="client.lat" [lng]="client.lng" [address]="client.address"   ></app-maps>
+    <app-maps [name]="client.name" [lat]="client.lat" [lng]="client.lng" [address]="client.address"></app-maps>
+    <ion-text color="primary">
+        <h1 class = 'consigne' >Déplacez-vous à l'intérieur du bâtiment pour être notifié !</h1>
+      </ion-text>
 </ion-content>

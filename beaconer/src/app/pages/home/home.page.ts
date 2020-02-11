@@ -19,7 +19,6 @@ export class HomePage implements OnInit {
   zone: NgZone;
   nearest_beacon_id : string
   subscription:Subscription
-  ready:boolean = true
 
   constructor(
     private router : Router,
@@ -47,16 +46,13 @@ export class HomePage implements OnInit {
         this.beaconService.initialise(uuid).then(() => {
             this.subscription = this.beaconService.currentBeacons.subscribe(data=>{
               this.zone.run(() => {
-                if(this.ready){
                   let beacon : IBeacon = this.get_beacon(this.get_nearest_beacon(data.beacons))
-                  console.log('IBEACON',beacon.major,beacon.minor)
                   if(beacon){
                     if(beacon.id_beacon !== this.nearest_beacon_id){
                       this.nearest_beacon_id = beacon.id_beacon
                       this.ShowToast(beacon)
                     }
                   }
-                }
               });
             })
         });
@@ -73,7 +69,6 @@ export class HomePage implements OnInit {
             beacon.major == this.beacons[i].major &&
             beacon.minor == this.beacons[i].minor
             ){
-              console.log("BEEEEEA",this.beacons[i])
               return this.beacons[i]
           }
       }
@@ -84,7 +79,6 @@ export class HomePage implements OnInit {
     let res : Beacon = undefined
     for (let i = 0; i <= beacons.length; i ++) {
       if(i == beacons.length){
-        console.log('NEAR',res.major,res.minor)
         return res
       }else{
         if(res){
@@ -99,12 +93,10 @@ export class HomePage implements OnInit {
   }
 
   async ShowToast(beacon:IBeacon) {
-    this.handleToast()
     const toast = await this.toastController.create({
       header: 'Notification',
       message: "Vous êtes à proximité du beacon "+beacon.name,
       position: 'top',
-      duration: 10000,
       buttons: [
         {
           side: 'start',
@@ -130,13 +122,6 @@ export class HomePage implements OnInit {
       this.beaconService.stopRanging();
       this.subscription.unsubscribe()
     }
-  }
-
-  handleToast(){
-    this.ready = false
-    setTimeout(function(){
-      this.ready = true
-    },10000)
   }
 
   ngOnDestroy() {

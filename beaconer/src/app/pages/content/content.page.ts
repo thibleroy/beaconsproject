@@ -10,7 +10,7 @@ import {IContent} from '../../../models/interfaces';
 })
 export class ContentPage implements OnInit {
 
-  contents : IContent[]
+  contents : IContent[] = []
   id_client:string;
   id_beacon:string;
   markdown : string;
@@ -39,6 +39,13 @@ export class ContentPage implements OnInit {
       this.index ++
       this.markdown = this.contents[this.index].content
     }
+  }
+
+  getDate() : string {
+    if(this.contents.length>0){
+      let date = new Date(this.contents[this.index].timestamp)
+      return date.toLocaleDateString("fr-FR")
+    }else return ""
   }
 
 }
