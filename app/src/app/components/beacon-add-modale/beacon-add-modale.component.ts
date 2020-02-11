@@ -31,8 +31,14 @@ export class BeaconAddModaleComponent implements OnInit {
     if (this.action === 'Ajouter') {
       this.addBeacon();
     } else {
-      this.updateBeacon({uuid: this.uuid, major: this.major,
-          minor: this.minor, name: this.name, id_beacon: this.router.url.split('/beacon/')[1], id_client: environment.ip});
+      this.updateBeacon({
+        uuid: this.uuid,
+        major: this.major,
+        minor: this.minor,
+        name: this.name,
+        id_beacon: this.router.url.split('/beacon/')[1],
+        id_client: localStorage.getItem('clientId')
+      });
     }
   }
   async closeModal() {
@@ -40,13 +46,13 @@ export class BeaconAddModaleComponent implements OnInit {
   }
 
   addBeacon() {
-    this.httpService.addBeacon({
+    this.httpService.addBeacon(localStorage.getItem('clientId'), {
       uuid: this.uuid,
       major: this.major,
       minor: this.minor,
       name: this.name,
       id_beacon: this.router.url.split('/beacon/')[1],
-      id_client: environment.ip
+      id_client: localStorage.getItem('clientId'),
     }).subscribe(async (res: AddBeaconResponse) => {
       if (res.status) {
         this.dataService.loadedBeaconsSubject.next([...this.dataService.loadedBeaconsSubject.getValue(), res.beacon]);
@@ -59,7 +65,14 @@ export class BeaconAddModaleComponent implements OnInit {
     });
   }
   updateBeacon(beacon: IBeacon) {
-    this.httpService.updateBeacon(beacon).subscribe(async (res: AddBeaconResponse) => {
+    this.httpService.updateBeacon(localStorage.getItem('clientId'), {
+      uuid: this.uuid,
+      major: this.major,
+      minor: this.minor,
+      name: this.name,
+      id_beacon: this.router.url.split('/beacon/')[1],
+      id_client: localStorage.getItem('clientId')})
+        .subscribe(async (res: AddBeaconResponse) => {
       if (res.status) {
         await this.modalController.dismiss();
         this.dataService.currentBeaconSubject.next(beacon);

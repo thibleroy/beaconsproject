@@ -21,7 +21,7 @@ export class BeaconListComponent implements OnInit, OnDestroy {
         this.sub = this.dataService.loadedBeaconsSubject.subscribe((b: IBeacon[]) => {
             this.beacons = b;
         });
-        this.httpService.getBeacons().subscribe((resp) => {
+        this.httpService.getBeacons(localStorage.getItem('clientId')).subscribe((resp) => {
             this.dataService.loadedBeaconsSubject.next(resp.beacons);
         });
     }

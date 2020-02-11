@@ -27,7 +27,7 @@ export class BeaconPage implements OnInit {
     this.dataService.currentBeaconSubject.subscribe((b: IBeacon) => {
       this.beacon = b;
     });
-    this.httpService.getBeacon(this.router.url.split('/beacon/')[1]).subscribe((b) => {
+    this.httpService.getBeacon(localStorage.getItem('clientId'), this.router.url.split('/beacon/')[1]).subscribe((b) => {
       this.dataService.currentBeaconSubject.next(b);
     });
   }
@@ -57,7 +57,7 @@ export class BeaconPage implements OnInit {
           }, {
             text: 'Supprimer',
             handler: () => {
-              this.httpService.deleteBeacon(currendId).subscribe(async (res: AddBeaconResponse) => {
+              this.httpService.deleteBeacon(localStorage.getItem('clientId'), currendId).subscribe(async (res: AddBeaconResponse) => {
                 if (res.status) {
                   this.toastController.presentToast(wording.beacon.deleteAck);
                   this.dataService.loadedBeaconsSubject.next(this.dataService.loadedBeaconsSubject.getValue().filter(( obj ) => {

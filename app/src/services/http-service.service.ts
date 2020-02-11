@@ -7,6 +7,7 @@ import {retry} from 'rxjs/operators';
 import {IBeacon} from '../../../back/lib';
 import {environment} from '../environments/environment';
 import {AddBeaconResponse, BeaconResponse, BeaconsResponse} from '../models/responses';
+import {ClientsResponse} from "../../../beaconer/src/models/responses";
 
 
 const httpOptions = {
@@ -22,6 +23,13 @@ const httpOptions = {
 export class HttpServiceService {
   constructor(private http: HttpClient) {
   }
+
+    getClients(): Observable<ClientsResponse> {
+        return this.http.get<ClientsResponse>(environment.ip + '/clients',httpOptions).pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+    }
 
 
   getBeacons(clientId: string): Observable<BeaconsResponse> {
@@ -61,8 +69,12 @@ export class HttpServiceService {
         );
   }
 
-
-
+    createUser(username, password, clientId): Observable<any> {
+        return this.http.post<any>(`${environment.ip}/users`, {username, password, clientId}).pipe(
+            retry(1),
+            catchError(this.handleError)
+        );
+    }
 
 
     /**
