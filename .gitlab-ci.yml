@@ -1,5 +1,5 @@
 variables:
-  HEADER: 'Content-Type: application/json'
+  HEADER: 'Content-Type: application/JSON'
 stages:
   - build
   - deploy
