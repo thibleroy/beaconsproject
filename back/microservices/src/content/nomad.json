@@ -42,7 +42,7 @@
                   "Device": "",
                   "CIDR": "",
                   "IP": "",
-                  "MBits": 200,
+                  "MBits": 30,
                   "ReservedPorts": null
                 }
               ],
