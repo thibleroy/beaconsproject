@@ -1,18 +1,26 @@
-import {IBeacon, IClient, IUser} from 'lib';
+import {IBeacon, IClient, IContent, IUser} from 'lib';
 
-interface DefaultMessage {
-    type: 'req'|'res'
+export interface DefaultMessage {
+    type: string | 'req'|'res',
+    id : string,
+    status : number
 }
-interface ResourceMessage extends DefaultMessage {
-    action: 'create'|'update'|'get'|'delete'
+export interface ResourceMessage extends DefaultMessage {
+    action: string | 'create'|'update'|'read'|'delete' | 'list',
+    value : any
 }
+
 export interface AuthMessage extends DefaultMessage{
-    action: 'login'|'logout',
-    value: IUser
+    action:string | 'login'|'logout'|'create'|'read',
+    value: IUser|any,
+    token : string
 }
 export interface BeaconMessage extends ResourceMessage{
-    value: IBeacon
+    value: IBeacon|any
 }
 export interface ClientMessage extends ResourceMessage{
-    value: IClient
+    value: IClient|any
+}
+export interface ContentMessage extends ResourceMessage{
+    value: IContent|any
 }

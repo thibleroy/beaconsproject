@@ -1,5 +1,5 @@
 import {addClient, deleteClient, getClients} from "../requests/client";
-import {IClient} from '@entities/interfaces';
+import {IClient} from "../../lib/index"
 const testClient: IClient = {name: 'testname'};
 
 describe('add client', function() {

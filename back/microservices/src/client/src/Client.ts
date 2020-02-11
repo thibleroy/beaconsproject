@@ -1,11 +1,11 @@
+import {IClientDocument} from './document';
+import {ENV,IClient} from 'lib';
+import {InitiateMongoServer} from 'msconnector';
 import {Schema, model} from 'mongoose';
-import {IClient} from 'lib';
+
+InitiateMongoServer(ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name)
 
 const ClientSchema: Schema = new Schema({
-    id_client: {
-        type: String,
-        default: ''
-    },
     name: {
         type: String,
         required: true
@@ -26,9 +26,18 @@ const ClientSchema: Schema = new Schema({
         type: Number,
     },
 });
-ClientSchema.methods.fullName = function(): string {
-    return (this.firstName.trim() + " " + this.lastName.trim());
-};
+
+ClientSchema.methods.convert = function() : IClient {
+    return {
+        id_client : this._id,
+        name : this.name,
+        url : this.url,
+        img : this.img,
+        lat : this.lat,
+        lng: this.lng,
+        address : this.address
+      }
+}
 
 
-export const ClientModel = model('client', ClientSchema);
+export const ClientModel = model<IClientDocument>('client', ClientSchema);

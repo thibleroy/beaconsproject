@@ -1,0 +1,7 @@
+{
+  "name": "beaconer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

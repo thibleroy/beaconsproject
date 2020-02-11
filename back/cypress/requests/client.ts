@@ -1,4 +1,4 @@
-import {IClient} from "../../src/entities/interfaces";
+import {IClient} from "../../lib/index";
 export const addClient: any = (client: IClient) => {
     return cy.request({
         url: 'localhost:3000/clients/',

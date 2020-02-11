@@ -1,11 +1,18 @@
-import 'module-alias/register';
-import {InitiateMongoServer} from '@src/microservices/mongo.helper';
-import {app} from "@helpers/express.helper";
-import * as http from 'http';
-import {ENV} from "./env";
-const server = http.createServer(app);
-server.listen(ENV.api_port);
-server.on('listening', async () => {
-        await InitiateMongoServer(`mongodb://${ENV.db_url}:${ENV.db_port}/${ENV.db_name}`);
+import {app} from "./express.helper";
+import {ENV} from "lib";
+import {Router,Request, Response} from "express";
+import {MainRouter} from './routes/route';
+import {kafkaClient ,ResourceMessage} from "msconnector";
+
+const def = Router();
+
+def.get('/', (req: Request, res: Response) => {
+    res.json({hello: 'cc !'});
 });
 
+app.use('/clients',MainRouter)
+app.use('/hello',def)
+
+app.listen(ENV.api_port, function () {
+    console.log('App listening on port '+ENV.api_port);
+});
