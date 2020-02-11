@@ -38,7 +38,7 @@ router.post('/', async (request: Request, response: Response) => {
 router.get('/:clientId', async (request: Request, response: Response) => {
     let id : string = uniqid.default()
     map[id] = response
-    const ClientMsg: ClientMessage = { type: ENV.kafka_request, action: ENV.kafka_action_get, value: { id_client: request.params.clientId } , id:id, status:0};
+    const ClientMsg: ClientMessage = { type: ENV.kafka_request, action: ENV.kafka_action_read, value: { id_client: request.params.clientId } , id:id, status:0};
 
     sendKafkaMessage(producer, ENV.kafka_topic_client, ClientMsg);
 });
@@ -82,7 +82,7 @@ router.post('/:clientId/beacons/:beaconId', async (request: Request, response: R
 router.get('/:clientId/beacons/:beaconId', async (request: Request, response: Response) => {
     let id : string = uniqid.default()
     map[id] = response
-    const beaconMsg: BeaconMessage = { type: ENV.kafka_request, action: ENV.kafka_action_get, value: {id_client : request.params.clientId, id_beacon : request.params.beaconId}, id:id, status:0};
+    const beaconMsg: BeaconMessage = { type: ENV.kafka_request, action: ENV.kafka_action_read, value: {id_client : request.params.clientId, id_beacon : request.params.beaconId}, id:id, status:0};
 
     sendKafkaMessage(producer, ENV.kafka_topic_beacon, beaconMsg);
 });
@@ -126,7 +126,7 @@ router.post('/:clientId/beacons/:beaconId/contents', async (request: Request, re
 router.get('/:clientId/beacons/:beaconId/contents/:contentId', async (request: Request, response: Response) => {
     let id : string = uniqid.default()
     map[id] = response
-    const contentMsg: ContentMessage = { type: ENV.kafka_request, action: ENV.kafka_action_get, value: {id_client : request.params.clientId, id_beacon : request.params.beaconId, id_content :request.params.contentId }, id:id, status:0};
+    const contentMsg: ContentMessage = { type: ENV.kafka_request, action: ENV.kafka_action_read, value: {id_client : request.params.clientId, id_beacon : request.params.beaconId, id_content :request.params.contentId }, id:id, status:0};
 
     sendKafkaMessage(producer, ENV.kafka_topic_content, contentMsg);
 });
@@ -158,10 +158,12 @@ const authConsumer = new kafka.Consumer(kafkaClient,
         { topic:'' + ENV.kafka_topic_content,partitions:1},
     ], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
-    const data: ResourceMessage  = JSON.parse(JSON.stringify(message.value));
+    const data: ResourceMessage  = JSON.parse(message.value.toString());
     switch (data.type) {
         case ('res'):
-            //data.res.send({value:data.value})
+            let response : Response = map[data.id]
+            response.status(data.status).send({value:data.value})
+            delete map[data.id]
             break;
         default: break;
     }
