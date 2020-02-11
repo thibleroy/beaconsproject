@@ -1,10 +1,13 @@
-import {BeaconMessage,kafkaClient} from "msconnector";
+import {BeaconMessage,kafkaClient,sendKafkaMessage} from "msconnector";
 const kafka = require('kafka-node')
-import {Message,ConsumerOptions} from "kafka-node";
+import {Producer,Message,ConsumerOptions} from "kafka-node";
 import {ENV} from "lib";
 import {IBeacon} from "lib";
 import {BeaconModel} from "./Beacon";
 import {IBeaconDocument} from './document';
+
+const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 })
+
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_beacon,partitions:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
@@ -17,132 +20,33 @@ authConsumer.on('message', async (message: Message) => {
             switch (data.action) {
 
                 case 'create':
-                    let newBeacon = new BeaconModel(data.value)
-                    await newBeacon.save()
-                    data.status = 200
-                    let msg = {
-                        type : 'res',
-                        value : newBeacon.convert(),
-                        action : data.action,
-                        id : data.id,
-                        status : data.status
-                    }
-                    //TODO : send kafka msg 
-                    break;
+                    create(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                    })
+                break;
 
                 case 'list':
-                 let beacons : IBeaconDocument[] = await BeaconModel.find({id_client :data.value.id_client})
-                 let value : IBeacon[] = []
-                 let beaconsProcessed = 0;
-                 beacons.forEach(beacon =>{
-                    value.push(beacon.convert())
-                    beaconsProcessed ++
-                    if(beaconsProcessed == beacons.length){
-                        data.status = 200
-                        let msg = {
-                            type : 'res',
-                            value : value,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                    }
-                 })
+                    list(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                    })
+                break;
 
-                    break;
                 case 'read':
-                try {
-                let beaconRead = await BeaconModel.findOne({_id:data.value.id_beacon})
-                if(!beaconRead){
-                    throw new Error("Ressource not found")
-                }
-                data.status = 200
-                let msg = {
-                    type : 'res',
-                    value : beaconRead.convert(),
-                    action : data.action,
-                    id : data.id,
-                    status : data.status
-                }
-                //TODO : send kafka msg
-
-                } catch (error) {
-                data.status = 404
-                let msg = {
-                    type : 'res',
-                    value : error,
-                    action : data.action,
-                    id : data.id,
-                    status : data.status
-                }
-                //TODO : send kafka msg 
-                }
-                    break;
+                    read(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                    })
+                break;
                 case 'delete':
-                    try {
-                        let result = await BeaconModel.deleteOne({_id:data.value.id_beacon})
-                        if (result.deletedCount == 0){
-                            throw new Error("Ressource not found")
-                        }
-                        data.status = 200
-                        let msg = {
-                            type : 'res',
-                            value : data.value,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                        
-                        } catch (error) {
-                        data.status = 404
-                        let msg = {
-                            type : 'res',
-                            value : error,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                    }
-                        //TODO : send kafka msg
+                    remove(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                    })
+
                     break;
                 case 'update':
-                    try {
-                        let update = {
-                            uuid: data.value.uuid,
-                            minor: data.value.minor,
-                            major: data.value.major,
-                            name: data.value.name,
-                            id_client: data.value.id_client,
-                            id_content: data.value.id_content
-                        }
-                        let result = await BeaconModel.updateOne({_id:data.value.id_beacon},update)
-                        if (result.nModified == 0){
-                            throw new Error("Ressource not found")
-                        }
-                        data.status = 200
-                        let msg = {
-                            type : 'res',
-                            value : data.value,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                        
-                        } catch (error) {
-                        data.status = 404
-                        let msg = {
-                            type : 'res',
-                            value : error,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                    }
-                    break;
+                    update(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                    })
+                break;
                 default: break;
             }
             break;
@@ -151,3 +55,167 @@ authConsumer.on('message', async (message: Message) => {
 
     }
 });
+
+const list = (data:BeaconMessage): Promise<BeaconMessage> =>{
+    return new Promise((res) => {
+        BeaconModel.find({id_client : data.value.id_client},function(err, beacons) {
+            if(err){
+                res({
+                    type : 'res',
+                    value : err.message,
+                    action : data.action,
+                    id : data.id,
+                    status : 404
+                })
+            }else{
+                let value : IBeacon[] = []
+                for(let i = 0; i <= beacons.length ; i++){
+                    if(i == beacons.length){
+                        res({
+                            type : 'res',
+                            value : value,
+                            action : data.action,
+                            id : data.id,
+                            status : 200
+                        })
+                    }else{
+                        value.push(beacons[i].convert())
+                    }
+                }
+            }
+        });
+    });
+}
+
+const create = (data: BeaconMessage) : Promise<BeaconMessage> =>{
+    return new Promise((res) => {
+      let  newBeacon = new BeaconModel(data.value)
+      newBeacon.save(function(err, beacon) {
+        if(err){
+            res({
+                type : 'res',
+                value : err.message,
+                action : data.action,
+                id : data.id,
+                status : 404
+            })
+        }else{
+        res({
+          type : 'res',
+          value : beacon.convert(),
+          action : data.action,
+          id : data.id,
+          status : 200
+          })
+        }
+      })
+    });
+}
+
+const read = (data:BeaconMessage) : Promise <BeaconMessage> => {
+    return new Promise((res) => {
+        BeaconModel.findById({_id:data.value.id_beacon},function(err, beacon) {
+            if (err){
+                res({
+                        type : 'res',
+                        value : err.message,
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                })
+            }else{
+                if(beacon){
+                    res({
+                        type : 'res',
+                        value : beacon.convert(),
+                        action : data.action,
+                        id : data.id,
+                        status : 200
+                    })
+                }else{
+                    res({
+                        type : 'res',
+                        value : "Ressource not found",
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                    })
+                }
+            }
+        });
+    });
+}
+
+const remove = (data:BeaconMessage) : Promise <BeaconMessage> => {
+    return new Promise((res) => {
+        BeaconModel.findByIdAndRemove({_id:data.value.id_beacon},function(err, beacon) {
+            if (err){
+                res({
+                        type : 'res',
+                        value : err.message,
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                })
+            }else{
+                if(beacon){
+                    res({
+                        type : 'res',
+                        value : beacon.convert(),
+                        action : data.action,
+                        id : data.id,
+                        status : 200
+                    })
+                }else{
+                    res({
+                        type : 'res',
+                        value : "Ressource not found",
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                    })
+                }
+            }
+        });
+    });
+}
+
+const update = (data:BeaconMessage) : Promise <BeaconMessage> => {
+    let update = {
+        uuid: data.value.uuid,
+        minor: data.value.minor,
+        major: data.value.major,
+        name: data.value.name
+      }
+    return new Promise((res) => {
+        BeaconModel.updateOne({_id:data.value.id_beacon},update,function(err, result) {
+            if (err){
+                res({
+                        type : 'res',
+                        value : err.message,
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                })
+            }else{
+                if(result.nModified == 0){
+                    res({
+                        type : 'res',
+                        value : "Ressource not found",
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                    })
+                }else{
+                    res({
+                        type : 'res',
+                        value : data.value,
+                        action : data.action,
+                        id : data.id,
+                        status : 200
+                    })
+                }
+            }
+        });
+    });
+}

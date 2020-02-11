@@ -1,9 +1,11 @@
-import {IContentDocument} from './document'
-import {ENV, IContent} from 'lib';
-import {InitiateMongoServer} from 'msconnector';
-import {Schema, model} from 'mongoose';
+import {IContentDocument} from './document';
+import {ENV,IContent} from 'lib';
+import {Schema, model,connect} from 'mongoose';
 
-InitiateMongoServer(ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name)
+const url = ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name
+connect(url,{useUnifiedTopology: true, useNewUrlParser: true,})
+.then(() => console.log('DB Connected!'))
+.catch(err => {console.log(`DB Connection Error:${err.message}`);});
 
 const ContentSchema: Schema = new Schema({
     content: {

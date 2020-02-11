@@ -1,31 +1,27 @@
-import {ENV, IBeacon} from 'lib';
-import {InitiateMongoServer} from 'msconnector';
 import {IBeaconDocument} from './document';
-import {Schema, model} from 'mongoose';
+import {ENV,IBeacon} from 'lib';
+import {Schema, model,connect} from 'mongoose';
 
-
-InitiateMongoServer(ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name)
+const url = ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name
+connect(url,{useUnifiedTopology: true, useNewUrlParser: true,})
+.then(() => console.log('DB Connected!'))
+.catch(err => {console.log(`DB Connection Error:${err.message}`);});
 
 const BeaconSchema: Schema = new Schema({
     name: {
         type: String,
+        required: true
     },
     uuid: {
-        type: String,
-        required: true
-    },
-    minor: {
-        type: Number,
-        required: true
-    },
-    major: {
-        type: Number,
-        required: true
-    },
-    id_client: {
         type: String
     },
-    id_content: {
+    minor: {
+        type: Number
+    },
+    major: {
+        type: Number
+    },
+    id_client: {
         type: String
     }
 });
@@ -37,8 +33,7 @@ BeaconSchema.methods.convert = function() : IBeacon {
         minor: this.minor,
         major: this.major,
         name: this.name,
-        id_client: this.id_client,
-        id_content: this.id_content
+        id_client: this.id_client
       }
 }
 
