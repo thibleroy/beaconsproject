@@ -3,7 +3,7 @@
     "Stop": false,
     "Region": null,
     "Namespace": null,
-    "ID": "thib_test_paas",
+    "ID": "activiot_client",
     "ParentID": null,
     "Name": "activiot_client",
     "Type": null,
@@ -16,7 +16,7 @@
     "Affinities": null,
     "TaskGroups": [
       {
-        "Name": "thib_group",
+        "Name": "group",
         "Count": 1,
         "Constraints": null,
         "Affinities": null,
@@ -26,11 +26,7 @@
             "Driver": "docker",
             "User": "",
             "Config": {
-              "args": [
-                "",
-                "app"
-              ],
-              "image": "thibleroy/mynode:latest",
+              "image": "activiot/client:latest",
               "port_map": [
                 {
                   "http": 1337
@@ -52,12 +48,7 @@
                   "CIDR": "",
                   "IP": "",
                   "MBits": 200,
-                  "ReservedPorts": null,
-                  "DynamicPorts": [
-                    {
-                      "Label": "http"
-                    }
-                  ]
+                  "ReservedPorts": null
                 }
               ],
               "Devices": null,

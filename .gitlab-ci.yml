@@ -1,81 +1,80 @@
 variables:
-  NOMAD_ADDR: http://hashi1.example.com:4646
-  docker_registry: hub.docker.com
-  docker_image: example/project
-
+  HEADER: 'Content-Type: application/JSON'
 stages:
   - build
-  - test
   - deploy
 
 .build:
   before_script:
-    - cd back/lib
-    - npm install
-    - npm run build
-    - cd ../microservices/lib
-    - npm install
-    - cd ../src
+    - cd back/microservices/src
+    - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
   stage: build
   tags:
-    - activiot-mac
+    - activiot
   only:
-    - dev
+    - master
+  when: on_success
+
+.deploy:
+  before_script:
+    - cd back/microservices/src
+  stage: deploy
+  tags:
+    - activiot
+  only:
+    - master
+  when: on_success
 
 build_auth:
   extends: .build
   script:
     - cd auth
-    - npm install
-    - npm run build
+    - docker build -t activiot/logger:latest .
+    - docker push activiot/logger:latest
 
 build_beacon:
   extends: .build
   script:
     - cd beacon
-    - npm install
-    - npm run build
+    - docker build -t activiot/beacon:latest .
+    - docker push activiot/beacon:latest
 
 build_client:
   extends: .build
   script:
     - cd client
-    - npm install
-    - npm run build
-
-build_logger:
-  extends: .build
-  script:
-    - cd logger
-    - npm install
-    - npm run build
+    - docker build -t activiot/client:latest .
+    - docker push activiot/client:latest
 
 build_webserver:
   extends: .build
   script:
     - cd webserver
-    - npm install
-    - npm run build
+    - docker build -t activiot/webserver:latest .
+    - docker push activiot/webserver:latest
 
-build:
-  stage: build
-  image: ${docker_registry}/public/alpine:3
+deploy_auth:
+  extends: .deploy
   script:
-    - tag=${docker_registry}/${docker_image}:${CI_COMMIT_SHORT_SHA}
-    - echo "building and pushing tag $tag"
-    - docker build --pull -t ${tag} -f Dockerfile .
-    - docker push ${tag}
+    - cd auth
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
 
-deploy:
-  stage: deploy
-  image: registry.example.com/public/nomad-deployer:latest
+
+deploy_beacon:
+  extends: .deploy
   script:
-    - envsubst '${CI_COMMIT_SHORT_SHA}' < project.nomad > job.nomad
-    - cat job.nomad
-    - nomad validate job.nomad
-    - nomad plan job.nomad || if [ $? -eq 255 ]; then exit 255; else echo "success"; fi
-    - nomad run job.nomad
-  environment:
-    name: production
-  allow_failure: false
-  when: manual
+    - cd beacon
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
+
+deploy_client:
+  extends: .deploy
+  script:
+    - cd client
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
+
+
+deploy_webserver:
+  extends: .deploy
+  script:
+    - cd webserver
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
