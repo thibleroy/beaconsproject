@@ -30,7 +30,7 @@
                 "",
                 "app"
               ],
-              "image": "thibleroy/mynode:latest",
+              "image": "activiot/auth:latest",
               "port_map": [
                 {
                   "http": 1337

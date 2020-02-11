@@ -27,10 +27,8 @@
             "User": "",
             "Config": {
               "args": [
-                "git@gitlab.istic.univ-rennes1.fr:activiot/beaconsproject.git",
-                "back/src/microservices"
               ],
-              "image": "thibleroy/mynode:latest",
+              "image": "activiot/logger:latest",
               "port_map": [
                 {
                   "http": 1337
