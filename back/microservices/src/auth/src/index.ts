@@ -17,23 +17,23 @@ authConsumer.on('message', async (message: Message) => {
                         let user = new UserModel(data.value)
                         await user.save()
                         let token = await user.generateAuthToken()
-                        data.res.status(200)
+                        data.status = 200
                         let msg = {
                             type : 'res',
                             value : token,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg 
                     } catch (error) {
-                        data.res.status(400)
+                        data.status = 400
                         let msg = {
                             type : 'res',
                             value : error,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg 
                     }
@@ -45,62 +45,62 @@ authConsumer.on('message', async (message: Message) => {
                             throw new Error('Login failed! Check authentication credentials')
                         }
                         let token = await user.generateAuthToken()
-                        data.res.status(200)
+                        data.status = 200
                         let msg = {
                             type : 'res',
                             value : token,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg 
                     } catch (error) {
-                        data.res.status(400)
+                        data.status = 400
                         let msg = {
                             type : 'res',
                             value : error,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg 
                     }
                     break;
                 case 'read':
-                    auth(data.res,data.req,function(user:IUserDocument,token:string){
-                    data.res.status(200)
+                    auth(data,function(user:IUserDocument,token:string){
+                    data.status = 200
                     let msg = {
                             type : 'res',
                             value : user.convert(),
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                     //TODO : send kafka msg 
                     })
                     break;
                 case 'logout':
-                    auth(data.res,data.req,async function(user:IUserDocument,token:string){
+                    auth(data,async function(user:IUserDocument,token:string){
                         try {
                             user.tokens.splice(0, user.tokens.length)
                             await user.save()
-                            data.res.status(200)
+                            data.status = 200
                             let msg = {
                                 type : 'res',
                                 value : true,
                                 action : data.action,
-                                res : data.res,
-                                req : data.req
+                                id : data.id,
+                                status : data.status
                             }
                             //TODO : send kafka msg 
                         } catch (error) {
-                            data.res.status(500)
+                            data.status = 500
                             let msg = {
                                 type : 'res',
                                 value : error,
                                 action : data.action,
-                                res : data.res,
-                                req : data.req
+                                id : data.id,
+                                status : data.status
                             }
                             //TODO : send kafka msg 
                         }
@@ -114,8 +114,8 @@ authConsumer.on('message', async (message: Message) => {
 });
 
 
-async function auth(res: any, req : any, next:any) {
-    const token : string = req.header('Authorization').replace('Bearer ', '')
+async function auth(msg : any, next:any) {
+    const token : string = msg.token
     const data : any = verify(token, ENV.jwt_key)
     try {
         const user = await UserModel.findOne({ _id: data._id, 'tokens.token': token })
@@ -124,13 +124,12 @@ async function auth(res: any, req : any, next:any) {
         }
         next(user,token)
     } catch (error) {
-        res.status(401)
-        let msg = {
+        let erorrmsg = {
             type : 'res',
             value : error,
-            action : data.action,
-            res : data.res,
-            req : data.req
+            action : msg.action,
+            id : msg.id,
+            status : 401
         }
         //TODO : send kafka msg 
     }

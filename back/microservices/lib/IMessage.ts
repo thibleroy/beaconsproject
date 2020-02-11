@@ -1,10 +1,9 @@
 import {IBeacon, IClient, IContent, IUser} from 'lib';
-import { Request, Response } from 'express';
 
 export interface DefaultMessage {
     type: string | 'req'|'res',
-    res: Response,
-    req: Request
+    id : string,
+    status : number
 }
 export interface ResourceMessage extends DefaultMessage {
     action: string | 'create'|'update'|'read'|'delete' | 'list',
@@ -13,7 +12,8 @@ export interface ResourceMessage extends DefaultMessage {
 
 export interface AuthMessage extends DefaultMessage{
     action:string | 'login'|'logout'|'create'|'read',
-    value: IUser|any
+    value: IUser|any,
+    token : string
 }
 export interface BeaconMessage extends ResourceMessage{
     value: IBeacon|any

@@ -19,13 +19,13 @@ authConsumer.on('message', async (message: Message) => {
                 case 'create':
                     let newBeacon = new BeaconModel(data.value)
                     await newBeacon.save()
-                    data.res.status(200)
+                    data.status = 200
                     let msg = {
                         type : 'res',
                         value : newBeacon.convert(),
                         action : data.action,
-                        res : data.res,
-                        req : data.req
+                        id : data.id,
+                        status : data.status
                     }
                     //TODO : send kafka msg 
                     break;
@@ -38,13 +38,13 @@ authConsumer.on('message', async (message: Message) => {
                     value.push(beacon.convert())
                     beaconsProcessed ++
                     if(beaconsProcessed == beacons.length){
-                        data.res.status(200)
+                        data.status = 200
                         let msg = {
                             type : 'res',
                             value : value,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg
                     }
@@ -57,24 +57,24 @@ authConsumer.on('message', async (message: Message) => {
                 if(!beaconRead){
                     throw new Error("Ressource not found")
                 }
-                data.res.status(200)
+                data.status = 200
                 let msg = {
                     type : 'res',
                     value : beaconRead.convert(),
                     action : data.action,
-                    res : data.res,
-                    req : data.req
+                    id : data.id,
+                    status : data.status
                 }
                 //TODO : send kafka msg
 
                 } catch (error) {
-                data.res.status(404)
+                data.status = 404
                 let msg = {
                     type : 'res',
                     value : error,
                     action : data.action,
-                    res : data.res,
-                    req : data.req
+                    id : data.id,
+                    status : data.status
                 }
                 //TODO : send kafka msg 
                 }
@@ -85,24 +85,24 @@ authConsumer.on('message', async (message: Message) => {
                         if (result.deletedCount == 0){
                             throw new Error("Ressource not found")
                         }
-                        data.res.status(200)
+                        data.status = 200
                         let msg = {
                             type : 'res',
                             value : data.value,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg
                         
                         } catch (error) {
-                        data.res.status(404)
+                        data.status = 404
                         let msg = {
                             type : 'res',
                             value : error,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                     }
                         //TODO : send kafka msg
@@ -121,24 +121,24 @@ authConsumer.on('message', async (message: Message) => {
                         if (result.nModified == 0){
                             throw new Error("Ressource not found")
                         }
-                        data.res.status(200)
+                        data.status = 200
                         let msg = {
                             type : 'res',
                             value : data.value,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg
                         
                         } catch (error) {
-                        data.res.status(404)
+                        data.status = 404
                         let msg = {
                             type : 'res',
                             value : error,
                             action : data.action,
-                            res : data.res,
-                            req : data.req
+                            id : data.id,
+                            status : data.status
                         }
                         //TODO : send kafka msg
                     }
