@@ -7,7 +7,6 @@ import {ContentModel} from "./Content";
 import {IContentDocument} from './document';
 
 const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 });
-
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_content,partitions:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
