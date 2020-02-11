@@ -10,8 +10,7 @@ stages:
     - activiot
   only:
     - master
-  rules:
-    - when: on_success
+  when: on_success
 
 .deploy:
   before_script:
