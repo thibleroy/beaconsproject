@@ -18,8 +18,8 @@ export class HomePage implements OnInit {
   id_client:string;
   zone: NgZone;
   nearest_beacon_id : string
-
   subscription:Subscription
+  ready:boolean = true
 
   constructor(
     private router : Router,
@@ -47,11 +47,14 @@ export class HomePage implements OnInit {
         this.beaconService.initialise(uuid).then(() => {
             this.subscription = this.beaconService.currentBeacons.subscribe(data=>{
               this.zone.run(() => {
-                let beacon_id : string = this.get_beacon_id(this.get_nearest_beacon(data.beacons))
-                if(beacon_id){
-                  if(beacon_id !=this.nearest_beacon_id){
-                    this.nearest_beacon_id = beacon_id
-                    this.ShowToast(beacon_id)
+                if(this.ready){
+                  let beacon : IBeacon = this.get_beacon(this.get_nearest_beacon(data.beacons))
+                  console.log('IBEACON',beacon.major,beacon.minor)
+                  if(beacon){
+                    if(beacon.id_beacon !== this.nearest_beacon_id){
+                      this.nearest_beacon_id = beacon.id_beacon
+                      this.ShowToast(beacon)
+                    }
                   }
                 }
               });
@@ -60,70 +63,84 @@ export class HomePage implements OnInit {
       }
   }
 
-  get_beacon_id(beacon:Beacon) : string {
-    for (var i = 0; i <= this.beacons.length; i ++) {
-      if(i < this.beacons.length){
+  get_beacon(beacon:Beacon) : IBeacon {
+    for (let i = 0; i <= this.beacons.length; i ++) {
+      if(i == this.beacons.length){
+        return undefined
+      }else{
           if(
             beacon.uuid == this.beacons[i].uuid &&
             beacon.major == this.beacons[i].major &&
             beacon.minor == this.beacons[i].minor
             ){
-              return this.beacons[i].id_beacon
+              console.log("BEEEEEA",this.beacons[i])
+              return this.beacons[i]
           }
-      }else{
-          return undefined
       }
     }
   }
 
   get_nearest_beacon(beacons:Beacon[]) : Beacon{
-    let res : Beacon
-    for (var i = 0; i <= beacons.length; i ++) {
-      if(i < beacons.length){
+    let res : Beacon = undefined
+    for (let i = 0; i <= beacons.length; i ++) {
+      if(i == beacons.length){
+        console.log('NEAR',res.major,res.minor)
+        return res
+      }else{
         if(res){
-          if(beacons[i].rssi>res.rssi){
+          if(beacons[i].rssi<res.rssi){
             res = beacons[i]
           }
         }else{
           res = beacons[i]
         }
-      }else{
-        return res
       }
     }
   }
 
-  async ShowToast(beacon_id:string) {
-  const toast = await this.toastController.create({
-    header: 'Notification',
-    message: "Vous êtes à proximité du beacon "+beacon_id,
-    position: 'top',
-    duration: 20000,
-    buttons: [
-      {
-        side: 'start',
-        icon: 'star',
-        text: 'Voir',
-        handler: () => {
-          this.router.navigate(['/content'], { queryParams: { id_client: this.id_client , id_beacon:beacon_id} });
-        }
-      }, {
-        text: 'Retour',
-        role: 'cancel',
-        handler: () => {
+  async ShowToast(beacon:IBeacon) {
+    this.handleToast()
+    const toast = await this.toastController.create({
+      header: 'Notification',
+      message: "Vous êtes à proximité du beacon "+beacon.name,
+      position: 'top',
+      duration: 10000,
+      buttons: [
+        {
+          side: 'start',
+          icon: 'star',
+          text: 'Voir',
+          handler: () => {
+            this.router.navigate(['/content'], { queryParams: { id_client: this.id_client , id_beacon:beacon.id_beacon} });
+          }
+        }, {
+          text: 'Retour',
+          role: 'cancel',
+          handler: () => {
           console.log('Cancel clicked');
+          }
         }
-      }
-    ]
-  });
-  toast.present();
+      ]
+    });
+    toast.present();
   }
 
-  ngOnDestroy() {
+  stopRanging(){
     if (this.platform.is('cordova')) {
       this.beaconService.stopRanging();
       this.subscription.unsubscribe()
     }
+  }
+
+  handleToast(){
+    this.ready = false
+    setTimeout(function(){
+      this.ready = true
+    },10000)
+  }
+
+  ngOnDestroy() {
+    this.stopRanging()
   }
 
 }
