@@ -45,12 +45,6 @@ build_client:
     - cd client
     - docker build -t activiot/client:latest .
     - docker push activiot/client:latest
-build_logger:
-  extends: .build
-  script:
-    - cd logger
-    - docker build -t activiot/logger:latest .
-    - docker push activiot/logger:latest
 
 build_webserver:
   extends: .build
@@ -78,11 +72,6 @@ deploy_client:
     - cd client
     - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
 
-deploy_logger:
-  extends: .deploy
-  script:
-    - cd logger
-    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
 
 deploy_webserver:
   extends: .deploy
