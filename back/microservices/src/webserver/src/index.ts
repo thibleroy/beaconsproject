@@ -3,7 +3,6 @@ import {ENV} from "lib";
 import {Router,Request, Response} from "express";
 import {MainRouter} from './routes/route';
 import {kafkaClient ,ResourceMessage} from "msconnector";
-
 const def = Router();
 
 def.get('/', (req: Request, res: Response) => {

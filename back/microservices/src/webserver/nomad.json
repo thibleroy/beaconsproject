@@ -26,7 +26,12 @@
             "Driver": "docker",
             "User": "",
             "Config": {
-              "image": "activiot/logger:latest"
+              "image": "activiot/webserver:latest",
+              "port_map": [
+                {
+                  "express_server": 3000
+                }
+              ]
             },
             "Constraints": null,
             "Affinities": null,
