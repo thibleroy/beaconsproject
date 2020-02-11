@@ -1,10 +1,12 @@
+import {ENV, IBeacon} from 'lib';
+import {InitiateMongoServer} from 'msconnector';
+import {IBeaconDocument} from './document';
 import {Schema, model} from 'mongoose';
 
+
+InitiateMongoServer(ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name)
+
 const BeaconSchema: Schema = new Schema({
-    id_beacon: {
-        type: String,
-        default: ''
-    },
     name: {
         type: String,
     },
@@ -28,4 +30,16 @@ const BeaconSchema: Schema = new Schema({
     }
 });
 
-export const BeaconModel = model('beacon', BeaconSchema);
+BeaconSchema.methods.convert = function() : IBeacon {
+    return {
+        id_beacon: this._id,
+        uuid: this.uuid,
+        minor: this.minor,
+        major: this.major,
+        name: this.name,
+        id_client: this.id_client,
+        id_content: this.id_content
+      }
+}
+
+export const BeaconModel = model<IBeaconDocument>('beacon', BeaconSchema);
