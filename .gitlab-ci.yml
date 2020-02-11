@@ -59,32 +59,32 @@ build_webserver:
     - docker push activiot/webserver:latest
 
 deploy_auth:
-  stage: deploy
+  extends: .deploy
   script:
     - cd auth
     - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
 
 
 deploy_beacon:
-  stage: deploy
+  extends: .deploy
   script:
     - cd beacon
     - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
 
 deploy_client:
-  stage: deploy
+  extends: .deploy
   script:
     - cd client
     - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
 
 deploy_logger:
-  stage: deploy
+  extends: .deploy
   script:
     - cd logger
     - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
 
 deploy_webserver:
-  stage: deploy
+  extends: .deploy
   script:
     - cd webserver
     - curl -v --header "Content-Type: application/json" --request POST -d nomad.json $NOMAD_API
