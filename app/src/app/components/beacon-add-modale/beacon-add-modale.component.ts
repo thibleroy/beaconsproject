@@ -5,8 +5,9 @@ import {ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {DataService} from '../../../services/data.service';
 import {wording} from '../../../models/wording';
-import {IBeacon} from '../../../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../../../back/lib';
 import {ToastService} from '../../../services/toast.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-beacon-add-modale',
@@ -31,7 +32,7 @@ export class BeaconAddModaleComponent implements OnInit {
       this.addBeacon();
     } else {
       this.updateBeacon({uuid: this.uuid, major: this.major,
-          minor: this.minor, name: this.name, id_beacon: this.router.url.split('/beacon/')[1]});
+          minor: this.minor, name: this.name, id_beacon: this.router.url.split('/beacon/')[1], id_client: environment.ip});
     }
   }
   async closeModal() {
@@ -43,7 +44,9 @@ export class BeaconAddModaleComponent implements OnInit {
       uuid: this.uuid,
       major: this.major,
       minor: this.minor,
-      name: this.name
+      name: this.name,
+      id_beacon: this.router.url.split('/beacon/')[1],
+      id_client: environment.ip
     }).subscribe(async (res: AddBeaconResponse) => {
       if (res.status) {
         this.dataService.loadedBeaconsSubject.next([...this.dataService.loadedBeaconsSubject.getValue(), res.beacon]);

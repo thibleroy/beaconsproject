@@ -7,7 +7,7 @@ import { ModalController, AlertController} from '@ionic/angular';
 import {BeaconAddModaleComponent} from '../../components/beacon-add-modale/beacon-add-modale.component';
 import {wording} from '../../../models/wording';
 import {ToastService} from '../../../services/toast.service';
-import {IBeacon} from '../../../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../../../back/lib';
 @Component({
   selector: 'app-beacon',
   templateUrl: './beacon.page.html',

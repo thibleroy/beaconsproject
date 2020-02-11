@@ -1,4 +1,4 @@
-import {IBeacon} from '../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../back/lib';
 export interface BeaconsResponse {
     status: boolean;
     beacons: IBeacon[];
