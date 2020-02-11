@@ -114,7 +114,7 @@ authConsumer.on('message', async (message: Message) => {
 });
 
 
-async function auth(msg : AuthMessage, next:any) {
+async function auth(msg : any, next:any) {
     const token : string = msg.token
     const data : any = verify(token, ENV.jwt_key)
     try {
@@ -124,13 +124,12 @@ async function auth(msg : AuthMessage, next:any) {
         }
         next(user,token)
     } catch (error) {
-        //msg.status = 401
-        let msg = {
+        let erorrmsg = {
             type : 'res',
             value : error,
-            action : data.action,
-            res : data.res,
-            req : data.req
+            action : msg.action,
+            id : msg.id,
+            status : 401
         }
         //TODO : send kafka msg 
     }
