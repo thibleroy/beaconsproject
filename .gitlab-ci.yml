@@ -42,8 +42,6 @@ build_client:
   extends: .build
   script:
     - cd client
-    - npm install
-    - npm run build
     - docker build -t activiot/client:latest .
     - docker push activiot/client:latest
 build_logger:
