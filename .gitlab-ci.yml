@@ -21,8 +21,7 @@ stages:
     - activiot
   only:
     - master
-  rules:
-    - when: on_success
+  when: on_success
 
 build_auth:
   extends: .build
