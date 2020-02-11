@@ -57,24 +57,24 @@ deploy_auth:
   extends: .deploy
   script:
     - cd auth
-    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API/activiot_auth
 
 
 deploy_beacon:
   extends: .deploy
   script:
     - cd beacon
-    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API/activiot_beacon
 
 deploy_client:
   extends: .deploy
   script:
     - cd client
-    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API/activiot_client
 
 
 deploy_webserver:
   extends: .deploy
   script:
     - cd webserver
-    - curl -v --header "$HEADER" --request POST -d nomad.json $NOMAD_API
+    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API/activiot_webserver
