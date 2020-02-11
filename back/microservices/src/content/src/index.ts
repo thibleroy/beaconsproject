@@ -1,10 +1,13 @@
+import {ContentMessage,kafkaClient,sendKafkaMessage} from "msconnector";
 const kafka = require('kafka-node')
-import {Message,ConsumerOptions} from "kafka-node";
+import {Producer,Message,ConsumerOptions} from "kafka-node";
 import {ENV} from "lib";
-import {ContentMessage,kafkaClient} from "msconnector";
 import {IContent} from "lib";
-import {ContentModel} from './Content'
-import {IContentDocument} from './document'
+import {ContentModel} from "./Content";
+import {IContentDocument} from './document';
+
+const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 })
+
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_content,partitions:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
@@ -17,132 +20,33 @@ authConsumer.on('message', async (message: Message) => {
             switch (data.action) {
 
                 case 'create':
-                    let newContent = new ContentModel(data.value)
-                    await newContent.save()
-                    data.status = 200
-                    let msg = {
-                        type : 'res',
-                        value : newContent.convert(),
-                        action : data.action,
-                        id : data.id,
-                        status : data.status
-                    }
-                    //TODO : send kafka msg 
-
-                    break;
+                    create(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                    })
+                break;
 
                 case 'list':
-                    let contents : IContentDocument[] = await ContentModel.find({id_beacon :data.value.id_beacon})
-                 let value : IContent[] = []
-                 let beaconsProcessed = 0;
-                 contents.forEach(content =>{
-                    value.push(content.convert())
-                    beaconsProcessed ++
-                    if(beaconsProcessed == contents.length){
-                        data.status = 200
-                        let msg = {
-                            type : 'res',
-                            value : value,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                    }
-                 })
-                    break;
+                    list(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                    })
+                break;
 
                 case 'read':
-                    try {
-                        let contentRead = await ContentModel.findOne({_id:data.value.id_content})
-                        if(!contentRead){
-                            throw new Error("Ressource not found")
-                        }
-                        data.status = 200
-                        let msg = {
-                            type : 'res',
-                            value : contentRead.convert(),
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-        
-                        } catch (error) {
-                        data.status = 404
-                        let msg = {
-                            type : 'res',
-                            value : error,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg 
-                        }
-
-                    break;
+                    read(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                    })
+                break;
                 case 'delete':
-                    try {
-                        let result = await ContentModel.deleteOne({_id:data.value.id_content})
-                        if (result.deletedCount == 0){
-                            throw new Error("Ressource not found")
-                        }
-                        data.status = 200
-                        let msg = {
-                            type : 'res',
-                            value : data.value,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                        
-                        } catch (error) {
-                        data.status = 404
-                        let msg = {
-                            type : 'res',
-                            value : error,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                    }
-                        //TODO : send kafka msg
+                    remove(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                    })
 
                     break;
                 case 'update':
-                    try {
-                        let update = {
-                            content : data.value.content,
-                            id_beacon : data.value.id_beacon,
-                            timestamp:data.value.timestamp
-                        }
-                        let result = await ContentModel.updateOne({_id:data.value.id_beacon},update)
-                        if (result.nModified == 0){
-                            throw new Error("Ressource not found")
-                        }
-                        data.status = 200
-                        let msg = {
-                            type : 'res',
-                            value : data.value,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                        
-                        } catch (error) {
-                        data.status = 404
-                        let msg = {
-                            type : 'res',
-                            value : error,
-                            action : data.action,
-                            id : data.id,
-                            status : data.status
-                        }
-                        //TODO : send kafka msg
-                    }
-                    break;
+                    update(data).then(msg =>{
+                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                    })
+                break;
                 default: break;
             }
             break;
@@ -151,3 +55,166 @@ authConsumer.on('message', async (message: Message) => {
 
     }
 });
+
+const list = (data:ContentMessage): Promise<ContentMessage> =>{
+    return new Promise((res) => {
+        ContentModel.find({id_beacon : data.value.id_beacon},function(err, contents) {
+            if(err){
+                res({
+                    type : 'res',
+                    value : err.message,
+                    action : data.action,
+                    id : data.id,
+                    status : 404
+                })
+            }else{
+                let value : IContent[] = []
+                for(let i = 0; i <= contents.length ; i++){
+                    if(i == contents.length){
+                        res({
+                            type : 'res',
+                            value : value,
+                            action : data.action,
+                            id : data.id,
+                            status : 200
+                        })
+                    }else{
+                        value.push(contents[i].convert())
+                    }
+                }
+            }
+        });
+    });
+}
+
+const create = (data: ContentMessage) : Promise<ContentMessage> =>{
+    return new Promise((res) => {
+      data.value.timestamp = new Date().getTime()
+      let  newContent = new ContentModel(data.value)
+      newContent.save(function(err, content) {
+        if(err){
+            res({
+                type : 'res',
+                value : err.message,
+                action : data.action,
+                id : data.id,
+                status : 404
+            })
+        }else{
+        res({
+          type : 'res',
+          value : content.convert(),
+          action : data.action,
+          id : data.id,
+          status : 200
+          })
+        }
+      })
+    });
+}
+
+const read = (data:ContentMessage) : Promise <ContentMessage> => {
+    return new Promise((res) => {
+        ContentModel.findById({_id:data.value.id_content},function(err, content) {
+            if (err){
+                res({
+                        type : 'res',
+                        value : err.message,
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                })
+            }else{
+                if(content){
+                    res({
+                        type : 'res',
+                        value : content.convert(),
+                        action : data.action,
+                        id : data.id,
+                        status : 200
+                    })
+                }else{
+                    res({
+                        type : 'res',
+                        value : "Ressource not found",
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                    })
+                }
+            }
+        });
+    });
+}
+
+const remove = (data:ContentMessage) : Promise <ContentMessage> => {
+    return new Promise((res) => {
+        ContentModel.findByIdAndRemove({_id:data.value.id_content},function(err, content) {
+            if (err){
+                res({
+                        type : 'res',
+                        value : err.message,
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                })
+            }else{
+                if(content){
+                    res({
+                        type : 'res',
+                        value : content.convert(),
+                        action : data.action,
+                        id : data.id,
+                        status : 200
+                    })
+                }else{
+                    res({
+                        type : 'res',
+                        value : "Ressource not found",
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                    })
+                }
+            }
+        });
+    });
+}
+
+const update = (data:ContentMessage) : Promise <ContentMessage> => {
+    let update = {
+        content: data.value.content,
+        timestamp: new Date().getTime()
+      }
+    return new Promise((res) => {
+        ContentModel.updateOne({_id:data.value.id_content},update,function(err, result) {
+            if (err){
+                res({
+                        type : 'res',
+                        value : err.message,
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                })
+            }else{
+                if(result.nModified == 0){
+                    res({
+                        type : 'res',
+                        value : "Ressource not found",
+                        action : data.action,
+                        id : data.id,
+                        status : 404
+                    })
+                }else{
+                    res({
+                        type : 'res',
+                        value : data.value,
+                        action : data.action,
+                        id : data.id,
+                        status : 200
+                    })
+                }
+            }
+        });
+    });
+}
