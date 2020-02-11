@@ -7,6 +7,7 @@ stages:
 .build:
   before_script:
     - cd back/microservices/src
+    - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
   stage: build
   tags:
     - activiot
