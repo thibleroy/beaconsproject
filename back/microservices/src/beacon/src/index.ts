@@ -1,4 +1,4 @@
-import {BeaconMessage,kafkaClient,sendKafkaMessage} from "msconnector";
+import {BeaconMessage,kafkaClient,sendKafkaMessage, fetchLastOffsets} from "msconnector";
 const kafka = require('kafka-node')
 import {Producer,Message,ConsumerOptions} from "kafka-node";
 import {ENV} from "lib";
@@ -6,54 +6,56 @@ import {IBeacon} from "lib";
 import {BeaconModel} from "./Beacon";
 import {IBeaconDocument} from './document';
 
-const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 })
+const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 });
 
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_beacon,partitions:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
-    const data: BeaconMessage  = JSON.parse(message.value.toString());
+    fetchLastOffsets(['' + ENV.kafka_topic_beacon]).then(() => {
+        const data: BeaconMessage  = JSON.parse(message.value.toString());
 
-    switch (data.type) {
+        switch (data.type) {
 
-        case ('req'):
+            case ('req'):
 
-            switch (data.action) {
+                switch (data.action) {
 
-                case 'create':
-                    create(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
-                    })
+                    case 'create':
+                        create(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                        });
+                        break;
+
+                    case 'list':
+                        list(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                        });
+                        break;
+
+                    case 'read':
+                        read(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                        });
+                        break;
+                    case 'delete':
+                        remove(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                        });
+
+                        break;
+                    case 'update':
+                        update(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
+                        });
+                        break;
+                    default: break;
+                }
                 break;
 
-                case 'list':
-                    list(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
-                    })
-                break;
+            default: break;
 
-                case 'read':
-                    read(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
-                    })
-                break;
-                case 'delete':
-                    remove(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
-                    })
-
-                    break;
-                case 'update':
-                    update(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_beacon, msg);
-                    })
-                break;
-                default: break;
-            }
-            break;
-
-        default: break;
-
-    }
+        }
+    });
 });
 
 const list = (data:BeaconMessage): Promise<BeaconMessage> =>{
@@ -68,7 +70,7 @@ const list = (data:BeaconMessage): Promise<BeaconMessage> =>{
                     status : 404
                 })
             }else{
-                let value : IBeacon[] = []
+                let value : IBeacon[] = [];
                 for(let i = 0; i <= beacons.length ; i++){
                     if(i == beacons.length){
                         res({

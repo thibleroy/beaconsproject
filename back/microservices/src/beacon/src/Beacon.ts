@@ -2,7 +2,7 @@ import {IBeaconDocument} from './document';
 import {ENV,IBeacon} from 'lib';
 import {Schema, model,connect} from 'mongoose';
 
-const url = ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name
+const url = ENV.db_url+':'+ENV.db_port+'/'+ENV.db_name;
 connect(url,{useUnifiedTopology: true, useNewUrlParser: true,})
 .then(() => console.log('DB Connected!'))
 .catch(err => {console.log(`DB Connection Error:${err.message}`);});
@@ -35,6 +35,6 @@ BeaconSchema.methods.convert = function() : IBeacon {
         name: this.name,
         id_client: this.id_client
       }
-}
+};
 
 export const BeaconModel = model<IBeaconDocument>('beacon', BeaconSchema);

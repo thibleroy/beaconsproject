@@ -1,4 +1,4 @@
-import {ClientMessage,kafkaClient,sendKafkaMessage} from "msconnector";
+import {ClientMessage,kafkaClient,sendKafkaMessage, fetchLastOffsets} from "msconnector";
 const kafka = require('kafka-node')
 import {Producer,Message,ConsumerOptions} from "kafka-node";
 import {ENV} from "lib";
@@ -11,50 +11,49 @@ const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 })
 const consumerOptions : ConsumerOptions = {fromOffset: false};
 const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_client,partitions:1}], consumerOptions);
 authConsumer.on('message', (message: Message) => {
-    const data : ClientMessage  = JSON.parse(message.value.toString())
-    console.log(data)
+    fetchLastOffsets(['' + ENV.kafka_topic_client]).then(() => {
+        const data : ClientMessage  = JSON.parse(message.value.toString());
+        console.log(data);
+        switch (data.type) {
 
-    switch (data.type) {
+            case ('req'):
 
-        case ('req'):
+                switch (data.action) {
 
-            switch (data.action) {
+                    case 'create':
+                        create(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
+                        });
+                        break;
 
-                case 'create':
-                    create(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
-                    })
+                    case 'list':
+                        list(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
+                        });
+                        break;
+
+                    case 'read':
+                        read(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
+                        });
+                        break;
+                    case 'delete':
+                        remove(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
+                        });
+
+                        break;
+                    case 'update':
+                        update(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
+                        });
+                        break;
+                    default: break;
+                }
                 break;
-
-                case 'list':
-                    list(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
-                    })
-                break;
-
-                case 'read':
-                    read(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
-                    })
-                break;
-                case 'delete':
-                    remove(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
-                    })
-
-                    break;
-                case 'update':
-                    update(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_client, msg);
-                    })
-                break;
-                default: break;
-            }
-            break;
-
-        default: break;
-
-    }
+            default: break;
+        }
+    });
 });
 
 const list = (data:ClientMessage): Promise<ClientMessage> =>{

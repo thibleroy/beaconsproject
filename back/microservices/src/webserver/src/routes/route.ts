@@ -184,7 +184,6 @@ authConsumer.on('message', async (message: Message) => {
                 let response: Response = map[data.id];
                 response.status(data.status).send({value: data.value});
                 delete map[data.id];
-
             }
         }
     });

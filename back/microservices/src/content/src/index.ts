@@ -1,4 +1,4 @@
-import {ContentMessage,kafkaClient,sendKafkaMessage} from "msconnector";
+import {ContentMessage,kafkaClient,sendKafkaMessage, fetchLastOffsets} from "msconnector";
 const kafka = require('kafka-node')
 import {Producer,Message,ConsumerOptions} from "kafka-node";
 import {ENV} from "lib";
@@ -6,54 +6,56 @@ import {IContent} from "lib";
 import {ContentModel} from "./Content";
 import {IContentDocument} from './document';
 
-const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 })
+const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 });
 
 const consumerOptions: ConsumerOptions = {fromOffset: false};
 const authConsumer = new kafka.Consumer(kafkaClient, [{ topic:'' + ENV.kafka_topic_content,partitions:1}], consumerOptions);
 authConsumer.on('message', async (message: Message) => {
-    const data: ContentMessage  = JSON.parse(message.value.toString());
+    fetchLastOffsets(['' + ENV.kafka_topic_content]).then(() => {
+        const data: ContentMessage  = JSON.parse(message.value.toString());
 
-    switch (data.type) {
+        switch (data.type) {
 
-        case ('req'):
+            case ('req'):
 
-            switch (data.action) {
+                switch (data.action) {
 
-                case 'create':
-                    create(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
-                    })
+                    case 'create':
+                        create(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                        });
+                        break;
+
+                    case 'list':
+                        list(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                        });
+                        break;
+
+                    case 'read':
+                        read(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                        });
+                        break;
+                    case 'delete':
+                        remove(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                        });
+
+                        break;
+                    case 'update':
+                        update(data).then(msg =>{
+                            sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
+                        });
+                        break;
+                    default: break;
+                }
                 break;
 
-                case 'list':
-                    list(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
-                    })
-                break;
+            default: break;
 
-                case 'read':
-                    read(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
-                    })
-                break;
-                case 'delete':
-                    remove(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
-                    })
-
-                    break;
-                case 'update':
-                    update(data).then(msg =>{
-                        sendKafkaMessage(producer, ENV.kafka_topic_content, msg);
-                    })
-                break;
-                default: break;
-            }
-            break;
-
-        default: break;
-
-    }
+        }
+    });
 });
 
 const list = (data:ContentMessage): Promise<ContentMessage> =>{
