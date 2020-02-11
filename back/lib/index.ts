@@ -78,7 +78,7 @@ export const ENV: Environnement = {
     kafka_request: 'req',
     kafka_response: 'res',
     kafka_action_list: 'list',
-    kafka_action_get: 'get',
+    kafka_action_get: 'get',cd
     kafka_action_update: 'update',
     kafka_action_delete: 'delete',
     kafka_action_create: 'create',
