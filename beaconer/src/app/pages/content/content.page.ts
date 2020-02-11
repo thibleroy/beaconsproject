@@ -13,7 +13,8 @@ export class ContentPage implements OnInit {
   contents : IContent[]
   id_client:string;
   id_beacon:string;
-  markdown : string
+  markdown : string;
+  index:number = 0
 
 
 
@@ -29,8 +30,15 @@ export class ContentPage implements OnInit {
     this.httpService.getContents(this.id_client,this.id_beacon)
     .subscribe(cc =>{
       this.contents = cc.value.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
-      this.markdown = this.contents[0].content
+      this.markdown = this.contents[this.index].content
     })
+  }
+
+  handleContent(){
+    if(this.index<this.contents.length){
+      this.index ++
+      this.markdown = this.contents[this.index].content
+    }
   }
 
 }
