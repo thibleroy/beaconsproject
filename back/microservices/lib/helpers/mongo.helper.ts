@@ -15,7 +15,7 @@ export const InitiateMongoServer = async (url: string) => {
 export const disconnectFromDB = async () => {
     try {
         await disconnect();
-        console.log('Disconnected from DB !');
+        console.log('Disconnected from DB!');
     } catch (e) {
         console.log(e);
         throw e;
