@@ -10,9 +10,11 @@
     "cypress": "^3.8.3",
     "bcryptjs": "^2.4.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "lib": "file:./lib"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cypress run",
     "install:lib": "cd lib && npm install && node_modules/.bin/tsc",
     "install:microservices": "cd microservices/lib && npm install && node_modules/.bin/tsc",
     "install:auth": "cd microservices/src/auth && npm install && node_modules/.bin/tsc",

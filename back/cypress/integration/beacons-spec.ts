@@ -1,6 +1,6 @@
 import {addBeacon, deleteBeacon, getBeacons} from "../requests/beacon";
-import {IBeacon} from "../../lib/index";
-const testBeacon: IBeacon = {uuid: 'uuidtest2',minor:  123,major: 456,id_client: 'idtest',name: 'nametest'};
+import {IBeacon} from "lib";
+const testBeacon: IBeacon = {uuid: 'uuidtest2',minor:  123,major: 456,id_client: 'idtest',name: 'nametest', id_beacon: 'erdafe'};
 
 describe('add beacon', function() {
     before(() => {

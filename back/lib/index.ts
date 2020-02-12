@@ -5,6 +5,7 @@ export interface Environnement {
     db_url: string;
     db_port: number;
     api_port: number,
+    api_url: string,
     db_name: string,
     kafka_url: string,
     kafka_port: number,
@@ -82,5 +83,6 @@ export const ENV: Environnement = {
     kafka_action_update: 'update',
     kafka_action_delete: 'delete',
     kafka_action_create: 'create',
-    jwt_key:'activkey'
+    jwt_key:'activkey',
+    api_url: 'ec2-3-91-15-133.compute-1.amazonaws.com'
 };

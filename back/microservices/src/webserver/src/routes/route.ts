@@ -81,7 +81,7 @@ router.get('/:clientId/beacons', async (request: Request, response: Response) =>
     sendKafkaMessage(producer, ENV.kafka_topic_beacon, beaconMsg);
 });
 
-router.post('/:clientId/beacons/:beaconId', async (request: Request, response: Response) => {
+router.post('/:clientId/beacons', async (request: Request, response: Response) => {
     let id : string = uniqid.default()
     map[id] = response
     const currentBeacon: IBeacon = request.body;
