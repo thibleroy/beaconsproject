@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {ENV} from '../../../back/src/env';
-import { IUser } from '../../../back/src/entities/interfaces';
+import { IUser } from '../../../back/lib';
 import {HttpServiceService} from './http-service.service';
 import {DataService} from './data.service';
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {HttpServiceService} from '../../../services/http-service.service';
 import {DataService} from '../../../services/data.service';
-import {IBeacon} from '../../../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../../../back/lib';
 import {Subscription} from 'rxjs';
 
 

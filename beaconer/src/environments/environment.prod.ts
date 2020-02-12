@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  ip:"http://52.91.214.113:3000"
+  ip:"http://ec2-3-91-15-133.compute-1.amazonaws.com:3000"
 };

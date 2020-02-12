@@ -10,10 +10,21 @@
 </ion-header>
 
 <ion-content>
-<ion-title>
-  <ion-label>
-    Bienvenue
-  </ion-label>
 
-</ion-title>
+  <div style="height:80%; width: 50%; float:left; text-align: center;margin-top: 1%;">
+      <ion-title>Content</ion-title>
+      <ion-textarea [(ngModel)]="markdown" rows="10000" cols="100" placeholder="Enter content here..."></ion-textarea>
+ </div>
+ 
+ <div style="height:80%; width: 50%; float:right; text-align: center;margin-top: 1%;">
+  <ion-title>Rendu</ion-title>
+    <markdown [data]="markdown"></markdown>
+ </div>
+
+ <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+  <ion-fab-button (click)=addContent()>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
 </ion-content>

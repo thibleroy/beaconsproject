@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {IBeacon} from '../../../back/src/entities/interfaces';
+import {IBeacon,IContent} from '../../../back/lib';
 import {environment} from '../environments/environment';
-import {AddBeaconResponse, BeaconResponse, BeaconsResponse} from '../models/responses';
+import {AddBeaconResponse, BeaconResponse, BeaconsResponse,ContentResponse} from '../models/responses';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +30,8 @@ export class HttpServiceService {
   userLogin(username, password): Observable<any> {
         return this.http.post<any>(`${environment.ip}/login`, {username, password});
   }
+
+  addContent(clientId: string,beaconId:string,content: IContent): Observable<ContentResponse> {
+    return this.http.post<ContentResponse>(`${environment.ip}/clients/${clientId}/beacons/${beaconId}/contents`, content);
+}
 }

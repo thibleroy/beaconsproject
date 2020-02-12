@@ -33,6 +33,7 @@
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-ibeacon": "^3.8.1",
     "core-js": "^2.6.11",
+    "ngx-markdown": "^8.2.2",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

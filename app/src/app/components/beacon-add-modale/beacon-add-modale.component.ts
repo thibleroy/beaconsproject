@@ -5,7 +5,7 @@ import {ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {DataService} from '../../../services/data.service';
 import {wording} from '../../../models/wording';
-import {IBeacon} from '../../../../../back/src/entities/interfaces';
+import {IBeacon} from '../../../../../back/lib';
 import {ToastService} from '../../../services/toast.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class BeaconAddModaleComponent implements OnInit {
   }
 
   addBeacon() {
-    this.httpService.addBeacon({
+    /*this.httpService.addBeacon({
       uuid: this.uuid,
       major: this.major,
       minor: this.minor,
@@ -53,9 +53,9 @@ export class BeaconAddModaleComponent implements OnInit {
       } else {
         this.toastService.presentToast(res.reason);
       }
-    });
+    });*/
   }
-  updateBeacon(beacon: IBeacon) {
+  updateBeacon(beacon: any) {
     this.httpService.updateBeacon(beacon).subscribe(async (res: AddBeaconResponse) => {
       if (res.status) {
         await this.modalController.dismiss();

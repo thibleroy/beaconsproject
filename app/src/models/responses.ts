@@ -1,4 +1,4 @@
-import {IBeacon} from '../../../back/src/entities/interfaces';
+import {IBeacon,IContent} from '../../../back/lib';
 export interface BeaconsResponse {
     status: boolean;
     beacons: IBeacon[];
@@ -18,4 +18,8 @@ export interface UpdateBeaconResponse {
     status: boolean;
     id_beacon: string;
     reason?: string;
+}
+
+export interface ContentResponse {
+    value: IContent;
 }

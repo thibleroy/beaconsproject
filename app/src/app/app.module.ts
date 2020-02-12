@@ -15,6 +15,9 @@ import {ToastService} from '../services/toast.service';
 import {BeaconScannerService} from '../services/beacon-scanner.service';
 import {IonicStorageModule} from '@ionic/storage';
 import {SplitPaneService} from '../services/split-pane.service';
+
+import { MarkdownModule } from 'ngx-markdown';
+
 @NgModule({
   declarations: [AppComponent, BeaconAddModaleComponent],
   entryComponents: [BeaconAddModaleComponent],
@@ -24,7 +27,8 @@ import {SplitPaneService} from '../services/split-pane.service';
     AppRoutingModule,
       HttpClientModule,
       FormsModule,
-    IonicStorageModule
+    IonicStorageModule,
+    MarkdownModule
   ],
   providers: [
     StatusBar,

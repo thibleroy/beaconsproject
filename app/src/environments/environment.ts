@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ip: 'http://127.0.0.1:3000'
+  ip: 'http://ec2-3-91-15-133.compute-1.amazonaws.com:3000'
 };
 
 /*
