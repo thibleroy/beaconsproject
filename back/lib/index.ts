@@ -68,7 +68,7 @@ export const ENV: Environnement = {
     api_port: 3000,
     db_name: 'activiot',
     kafka_url: 'kafka-docker_kafka_1',
-    kafka_port: 32768,
+    kafka_port: 32770,
     kafka_topic_auth: 'auth',
     kafka_topic_beacon: 'beacon',
     kafka_topic_client: 'client',

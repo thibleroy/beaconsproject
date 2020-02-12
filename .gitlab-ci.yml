@@ -56,25 +56,21 @@ build_webserver:
 deploy_auth:
   extends: .deploy
   script:
-    - cd auth
-    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
+    - docker run
 
 
 deploy_beacon:
   extends: .deploy
   script:
-    - cd beacon
-    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
+    -
 
 deploy_client:
   extends: .deploy
   script:
-    - cd client
-    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
+    -
 
 
 deploy_webserver:
   extends: .deploy
   script:
-    - cd webserver
-    - curl -v --header "$HEADER" --request POST --data @nomad.json $NOMAD_API
+    -
