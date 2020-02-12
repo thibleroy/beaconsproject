@@ -5,7 +5,6 @@ export interface IBeacon {
     major?: number;
     name?: string;
     id_client?: string;
-    id_content?: string;
 }
 export interface IClient {
     id_client?: string;
