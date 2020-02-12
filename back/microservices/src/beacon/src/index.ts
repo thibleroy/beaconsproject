@@ -1,11 +1,11 @@
 import {BeaconMessage,kafkaClient,sendKafkaMessage, fetchLastOffsets} from "msconnector";
-const kafka = require('kafka-node')
+const kafka = require('kafka-node');
 import {Producer,Message,ConsumerOptions} from "kafka-node";
 import {ENV} from "lib";
 import {IBeacon} from "lib";
 import {BeaconModel} from "./Beacon";
 import {IBeaconDocument} from './document';
-
+console.log('ENV', ENV);
 const producer: Producer = new Producer(kafkaClient, { requireAcks: 1 });
 
 const consumerOptions: ConsumerOptions = {fromOffset: false};
