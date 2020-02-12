@@ -3,5 +3,7 @@
   "chromeWebSecurity": false,
   "cypress-watch-and-reload": {
     "watch": "**/*.ts"
-  }
+  },
+  "pluginsFile": false,
+  "supportFile": false
 }

@@ -2,6 +2,7 @@ variables:
   HEADER: 'Content-Type: application/JSON'
 stages:
   - build
+  - test
   - deploy
 
 .build:
@@ -14,6 +15,22 @@ stages:
   only:
     - master
   when: on_success
+
+.test:
+  before_script:
+    - cd back
+    - npm run install:lib
+    - npm install
+
+test_beacon:
+  extends: .test
+  script:
+    - npm run test:beacon
+
+test_client:
+  extends: .test
+  script:
+    - npm run test:client
 
 .deploy:
   before_script:

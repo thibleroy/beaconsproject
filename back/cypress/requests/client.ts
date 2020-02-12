@@ -1,7 +1,8 @@
-import {IClient} from "../../lib/index";
+import {ENV, IClient} from "lib";
+const addr = `${ENV.api_url}:${ENV.api_port}`;
 export const addClient: any = (client: IClient) => {
     return cy.request({
-        url: 'localhost:3000/clients/',
+        url: `${ENV.api_url}:${ENV.api_port}/clients`,
         method: 'POST',
         body: client,
         headers: {
@@ -12,13 +13,13 @@ export const addClient: any = (client: IClient) => {
 };
 export const getClients: any = () => {
     return cy.request({
-        url: 'localhost:3000/clients/',
+        url: `${ENV.api_url}:${ENV.api_port}/clients`,
         method: 'GET'
     });
 };
-export const deleteClient: any = (id: string) => {
+export const deleteClient: any = (client: IClient) => {
     return cy.request({
-        url: 'localhost:3000/client/'+ id,
+        url: `${ENV.api_url}:${ENV.api_port}/clients/${client.id_client}`,
         method: 'DELETE',
         headers: {
             'accept': 'application/json',
