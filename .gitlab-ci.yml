@@ -17,6 +17,9 @@ stages:
   when: on_success
 
 .test:
+  tags:
+    - activiot
+  stage: test
   before_script:
     - cd back
     - npm run install:lib
