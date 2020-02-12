@@ -24,6 +24,7 @@ stages:
     - cd back
     - npm run install:lib
     - npm install
+  when: on_success
 
 test_beacon:
   extends: .test
