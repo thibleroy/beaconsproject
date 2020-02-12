@@ -42,7 +42,7 @@ authConsumer.on('message', async (message: Message) => {
                     try {
                         let user = await UserModel.findByCredentials(data.value.email,data.value.password)
                         if (!user) {
-                            throw new Error('Login failed! Check authentication credentials')
+                            throw new Error('Login failed! Check authentication crentials')
                         }
                         let token = await user.generateAuthToken()
                         data.status = 200
