@@ -22,18 +22,20 @@ stages:
   stage: test
   before_script:
     - cd back
-    - npm run install:lib
-    - npm install
   when: on_success
 
 test_beacon:
   extends: .test
   script:
+    - npm run install:lib
+    - npm install
     - npm run test:beacon
 
 test_client:
   extends: .test
   script:
+    - npm run install:lib
+    - npm install
     - npm run test:client
 
 .deploy:
