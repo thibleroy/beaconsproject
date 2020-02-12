@@ -70,11 +70,6 @@ build_webserver:
     - docker build -t activiot/webserver:latest .
     - docker push activiot/webserver:latest
 
-deploy_auth:
-  extends: .deploy
-  script:
-    - docker run -d activiot/auth:latest
-
 
 deploy_beacon:
   extends: .deploy
