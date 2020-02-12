@@ -56,21 +56,21 @@ build_webserver:
 deploy_auth:
   extends: .deploy
   script:
-    - docker run -d --network my-overlay-net activiot/auth:latest
+    - docker run -d activiot/auth:latest
 
 
 deploy_beacon:
   extends: .deploy
   script:
-    - docker run -d --network my-overlay-net activiot/beacon:latest
+    - docker run -d activiot/beacon:latest
 
 deploy_client:
   extends: .deploy
   script:
-    - docker run -d --network my-overlay-net activiot/client:latest
+    - docker run -d activiot/client:latest
 
 
 deploy_webserver:
   extends: .deploy
   script:
-    - docker run -d --network my-overlay-net activiot/webserver:latest
+    - docker run -d activiot/webserver:latest
